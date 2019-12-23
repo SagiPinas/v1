@@ -25,9 +25,7 @@ const Signup = () => {
           </svg>
         </div>
       </div>
-      {/* Page content */}
       <div className="container mt--9 pb-5">
-        {/* Table */}
         <div className="row justify-content-center">
           <div className="col-lg-6 col-md-8">
             <div className="card bg-secondary shadow border-0">

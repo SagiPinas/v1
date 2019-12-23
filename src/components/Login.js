@@ -17,7 +17,6 @@ const Login = () => {
           </svg>
         </div>
       </div>
-      {/* Page content */}
       <div className="container mt--8 pb-5">
         <div className="row justify-content-center">
           <div className="col-lg-5 col-md-7">
