@@ -1,20 +1,19 @@
 import React from 'react';
-
 import googleLogo from '../assets/google.svg'
 import Navbar from './Navbar'
 import Footer from './Footer'
+
 const Signup = () => {
   return (
     <div className="main-content">
       <Navbar active="register" />
-      {/* Header */}
       <div className="header bg-gradient-primary py-7 py-lg-8">
         <div className="container">
           <div className="header-body text-center mb-7">
             <div className="row justify-content-center">
               <div className="col-lg-5 col-md-6">
                 <h1 className="text-white">Welcome!</h1>
-                <p className="text-lead text-light">Use these awesome forms to login or create new account in your project for free.</p>
+                <p className="text-lead text-light">Create an account and become a responder today.</p>
               </div>
             </div>
           </div>

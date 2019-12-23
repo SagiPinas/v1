@@ -6,8 +6,7 @@ import Login from './components/Login'
 import Signup from './components/Signup'
 import Dashboard from './components/Dashboard'
 
-
-function App() {
+const App = () => {
   return (
     <Router>
       <div className="App">
@@ -18,8 +17,11 @@ function App() {
           <Route path="/register">
             <Signup />
           </Route>
-          <Route path="/">
+          <Route path="/dashboard">
             <Dashboard />
+          </Route>
+          <Route path="/">
+            <Login />
           </Route>
         </Switch>
       </div>

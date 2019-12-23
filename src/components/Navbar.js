@@ -10,11 +10,10 @@ const Navbar = (props) => {
         <a className="navbar-brand" href="/">
           <img src={logo} alt="logo" className="mr-1" /> Sagi<span>Pin</span>as
         </a>
-        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse-main" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button className="navbar-toggler" type="button" data-toggle="collapse">
           <span className="navbar-toggler-icon" />
         </button>
         <div className="collapse navbar-collapse" id="navbar-collapse-main">
-          {/* Collapse header */}
           <div className="navbar-collapse-header d-md-none">
             <div className="row">
               <div className="col-6 collapse-brand">
@@ -23,14 +22,13 @@ const Navbar = (props) => {
                   </a>
               </div>
               <div className="col-6 collapse-close">
-                <button type="button" className="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse-main" aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle sidenav">
+                <button type="button" className="navbar-toggler">
                   <span />
                   <span />
                 </button>
               </div>
             </div>
           </div>
-          {/* Navbar items */}
           <ul className="navbar-nav ml-auto">
             <li className="nav-item mr-3">
               <Link to="/login">
