@@ -1,1 +1,41 @@
 
+body {
+ background: #172b4d;
+}
+
+.bg-gradient-primary {
+  background: linear-gradient(90deg,rgba(52,22,199,.91),rgba(17,24,126,.18)),url(../assets/map.png) !important;
+  background-size: cover !important;
+}
+
+
+.navbar-horizontal .navbar-brand img {
+  height: 45px;
+}
+
+// .input-group-alternative{
+//   border: 1px solid;
+// }
+
+.navbar-brand{
+  text-transform: none !important;
+  font-size: 20px !important;
+  font-weight: 350 !important;
+  color: #fff !important;
+
+  img{
+    margin-top: -9px;
+  }
+
+  span{
+    color: rgb(233, 182, 17);
+  }
+}
+
+.nav-link{
+  border-radius: 0px !important;
+  padding: 9px 8px !important;
+  &.active{
+  border-bottom: 3px solid rgb(51, 236, 236) !important;
+  }
+}
