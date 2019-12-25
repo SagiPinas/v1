@@ -1,10 +1,16 @@
 import React from 'react';
+import '../styles/dashboard.scss'
+import Sidebar from './Sidebar';
+
 
 
 const Dashboard = () => {
   return (
     <div>
-      <h1>Dashboard</h1>
+      <Sidebar />
+
+      <div id="content-area">
+      </div>
     </div>
   )
 }

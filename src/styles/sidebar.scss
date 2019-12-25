@@ -1,0 +1,88 @@
+$default_bg:#fff;
+$active_color:rgb(85, 136, 233);
+
+#sidebar{
+  height: 101vh;
+  background: #fff;
+  width: 270px;
+  position: fixed;
+
+  .sidebar-title{
+    border-bottom: 0.1px solid #ddd;
+    padding: 10px 10px 4px;
+
+    strong{
+      margin-top: 2.3px;
+      margin-left: 3px;
+      position: absolute;
+    }
+  }
+
+  .tab-menu{
+    overflow: hidden;
+
+    ul{
+      list-style: none;
+      background: #fff;
+      padding: 9px;
+      box-shadow: 0 0 9px rgba(41, 169, 243, 0.67), 0 0 1px rgba(151, 205, 236, 0.65) !important;
+
+
+      li{
+        display: inline;
+        padding: 10px;
+        text-transform: uppercase;
+        font-size: 13px;
+        color: rgb(156, 154, 154);
+        cursor: pointer;
+
+        &.active{
+          color:  $active_color;
+          font-weight: 700;
+          border-bottom: 3px solid $active_color;
+          cursor: default;
+          background: transparent !important;
+        }
+      }
+    }
+  }
+
+}
+
+#gradient-loader{
+  background: linear-gradient(90deg,rgba(56, 24, 219, 0.91),rgb(7, 248, 228)) !important;
+  height: 5px;
+}
+
+#sidebar-logo{
+  height: 25px;
+  width: 25px;
+  border-radius: 100%;
+  display: inline-block;
+  background: linear-gradient(90deg,rgba(56, 24, 219, 0.91),rgb(248, 164, 7)) !important;
+
+  div{
+    background: #fff !important;
+    width: 19px;
+    height: 19px;
+    border-radius: 100%;
+    margin: 2.9px;
+  }
+}
+
+.live-feed{
+  height: 100vh;
+  overflow-y: auto;
+  padding-bottom: 200px !important;
+  margin-top: -12px;
+
+  .card{
+    background: #fff;
+    border-radius: 4px;
+    min-height: 120px;
+    margin-bottom: 10px;
+    box-shadow: 0 0 9px rgba(121, 127, 131, 0.246), 0 0 1px rgba(151, 205, 236, 0.65) !important;
+
+  }
+}
+

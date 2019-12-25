@@ -16,7 +16,7 @@ body {
 }
 
 // .input-group-alternative{
-//   border: 1px solid;
+//   border: 2px solid rgb(32, 29, 184);
 // }
 
 .navbar-brand{
@@ -35,12 +35,12 @@ body {
 }
 
 .nav-link{
-  li{
-    display: none !important;
-  }
+
+
   border-radius: 0px !important;
   padding: 9px 8px !important;
   &.active{
+  color:  rgb(51, 236, 236) !important;
   border-bottom: 3px solid rgb(51, 236, 236) !important;
   }
 }
