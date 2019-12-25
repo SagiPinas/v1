@@ -6,6 +6,8 @@ $active_color:rgb(85, 136, 233);
   background: #fff;
   width: 270px;
   position: fixed;
+  box-shadow: 0 0 9px rgba(121, 127, 131, 0.246), 0 0 1px rgba(151, 205, 236, 0.65) !important;
+
 
   .sidebar-title{
     border-bottom: 0.1px solid #ddd;
@@ -25,7 +27,8 @@ $active_color:rgb(85, 136, 233);
       list-style: none;
       background: #fff;
       padding: 9px;
-      box-shadow: 0 0 9px rgba(41, 169, 243, 0.67), 0 0 1px rgba(151, 205, 236, 0.65) !important;
+      // box-shadow: 0 0 9px rgba(41, 169, 243, 0.67), 0 0 1px rgba(151, 205, 236, 0.65) !important;
+      box-shadow: -1px 3px 13px 5px rgba(65, 160, 238, 0.24);
 
 
       li{

@@ -1,7 +1,7 @@
 import React from 'react';
 import '../styles/dashboard.scss'
 import Sidebar from './Sidebar';
-
+// import Profile from './Profile';
 
 
 const Dashboard = () => {
@@ -10,6 +10,7 @@ const Dashboard = () => {
       <Sidebar />
 
       <div id="content-area">
+        {/* <Profile /> */}
       </div>
     </div>
   )

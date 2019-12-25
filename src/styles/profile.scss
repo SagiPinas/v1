@@ -1,0 +1,20 @@
+
+.profile-header{
+  background: linear-gradient(90deg,rgba(29, 11, 122, 0.91),rgba(17,24,126,.18)),url(../assets/map.png) !important;
+  background-size: cover;
+  padding: 50px;
+}
+
+.profile-page{
+  background: rgb(240, 246, 255);
+}
+
+.profile-image{
+  border-radius: 5px !important;
+}
+
+.account-snippet{
+  color: rgb(0, 132, 255) !important;
+  padding-bottom: 5px;
+  // border-bottom: 2px solid blue;
+}
