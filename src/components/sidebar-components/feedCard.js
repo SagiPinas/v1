@@ -1,157 +1,49 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import axios from 'axios';
+import { coreURL } from '../Utilities'
+import moment from 'moment';
 
 const FeedCard = (props) => {
+
+  const [list, setList] = useState("loading")
+  const [listData, setListData] = useState([])
+
+  useEffect(() => {
+    axios.get(`${coreURL}/incidents`)
+      .then(res => {
+        setList("render")
+        setListData(res.data);
+        console.log(res.data)
+      })
+  }, [])
+
   return (
     <div>
-      <div className="card">
-        <span className="date">
-          2 days ago
-          </span>
-        <span
-          className="reviewers"
-          title="No. of responders reviewing this incident."
-        >10</span>
-        <span className="tag">Earthquake</span>
-        <hr />
-        <div className="body">
-          Help! please there are atleast
-          2 people stuck here! please send help.
-          </div>
-      </div>
-
-      <div className="card">
-        <span className="date">
-          2 days ago
-          </span>
-        <span
-          className="reviewers"
-          title="No. of responders reviewing this incident."
-        >0</span>
-        <span className="tag">Fire</span>
-        <hr />
-        <div className="body">
-          Help! please there are atleast
-          2 people stuck here! please send help.
-          </div>
-      </div>
-
-      <div className="card">
-        <span className="date">
-          2 days ago
-          </span>
-        <span
-          className="reviewers"
-          title="No. of responders reviewing this incident."
-        >0</span>
-        <span className="tag">Fire</span>
-        <hr />
-        <div className="body">
-          Help! please there are atleast
-          2 people stuck here! please send help.
-          </div>
-      </div>
-
-
-      <div className="card">
-        <span className="date">
-          2 days ago
-          </span>
-        <span
-          className="reviewers"
-          title="No. of responders reviewing this incident."
-        >0</span>
-        <span className="tag">Fire</span>
-        <hr />
-        <div className="body">
-          Help! please there are atleast
-          2 people stuck here! please send help.
-          </div>
-      </div>
-
-
-      <div className="card">
-        <span className="date">
-          2 days ago
-          </span>
-        <span
-          className="reviewers"
-          title="No. of responders reviewing this incident."
-        >0</span>
-        <span className="tag">Fire</span>
-        <hr />
-        <div className="body">
-          Help! please there are atleast
-          2 people stuck here! please send help.
-          </div>
-      </div>
-
-
-      <div className="card">
-        <span className="date">
-          2 days ago
-          </span>
-        <span
-          className="reviewers"
-          title="No. of responders reviewing this incident."
-        >0</span>
-        <span className="tag">Fire</span>
-        <hr />
-        <div className="body">
-          Help! please there are atleast
-          2 people stuck here! please send help.
-          </div>
-      </div>
-
-
-      <div className="card">
-        <span className="date">
-          2 days ago
-          </span>
-        <span
-          className="reviewers"
-          title="No. of responders reviewing this incident."
-        >0</span>
-        <span className="tag">Fire</span>
-        <hr />
-        <div className="body">
-          Help! please there are atleast
-          2 people stuck here! please send help.
-          </div>
-      </div>
-
-
-      <div className="card">
-        <span className="date">
-          2 days ago
-          </span>
-        <span
-          className="reviewers"
-          title="No. of responders reviewing this incident."
-        >0</span>
-        <span className="tag">Fire</span>
-        <hr />
-        <div className="body">
-          Help! please there are atleast
-          2 people stuck here! please send help.
-          </div>
-      </div>
-
-
-      <div className="card">
-        <span className="date">
-          2 days ago
-          </span>
-        <span
-          className="reviewers"
-          title="No. of responders reviewing this incident."
-        >0</span>
-        <span className="tag">Fire</span>
-        <hr />
-        <div className="body">
-          Help! please there are atleast
-          2 people stuck here! please send help.
-          </div>
-      </div>
+      {list === "render" ? (
+        listData.map(incident => {
+          return (
+            incident.status === "unverified" ? (
+              <div className="card">
+                <span className="date">
+                  {moment(incident.timestamp).fromNow()}
+                </span>
+                <span
+                  className="reviewers"
+                  title="No. of responders reviewing this incident."
+                >0</span>
+                <span className="tag">
+                  <i className="fa fa-bullseye text-danger mr-1"></i>
+                  {incident.type}
+                </span>
+                <hr />
+                <div className="body">
+                  {incident.details}
+                </div>
+              </div>
+            ) : ""
+          )
+        })
+      ) : ("")}
     </div>
   )
 }

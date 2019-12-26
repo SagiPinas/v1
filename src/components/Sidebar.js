@@ -26,6 +26,7 @@ const Sidebar = () => {
           <div></div>
         </div>
         <strong>SagiPinas</strong>
+        <span className="menu"><i className="fa fa-bars"></i></span>
       </div>
       <div className="tab-menu">
         <ul>
