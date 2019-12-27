@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import FeedCard from './sidebar-components/feedCard'
 import History from './sidebar-components/history'
 import Settings from './sidebar-components/settings'
-
-
 import '../styles/sidebar.scss';
+import InfoCard from './InfoCard';
 
 
 const Sidebar = () => {
@@ -55,6 +54,7 @@ const Sidebar = () => {
         {(tab === "history" ? <History /> : "")}
         {(tab === "settings" ? <Settings /> : "")}
       </div>
+      <InfoCard />
     </div>
   )
 }

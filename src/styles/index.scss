@@ -15,6 +15,13 @@ body {
   height: 45px;
 }
 
+.btn-group-sm>.btn, .btn-sm {
+  padding: .25rem .5rem;
+  font-size: .875rem;
+  line-height: 1.5;
+  border-radius: .155rem;
+}
+
 // .input-group-alternative{
 //   border: 2px solid rgb(32, 29, 184);
 // }

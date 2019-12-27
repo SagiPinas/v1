@@ -1,0 +1,41 @@
+
+.info-card{
+  position: fixed;
+  z-index: 999;
+  background: #fff;
+  height: 250px;
+  width: 450px;
+  bottom: 15px;
+  border-radius: 7px;
+  left: 290px;
+  display: none;
+  transition: 0.5s;
+  overflow: hidden;
+
+  &:hover{
+    height: 600px;
+    transition: 0.5s;
+  }
+
+  .info-title{
+    padding: 14px 15px 0px;
+  }
+
+
+  .status-bar{
+    width: 100%;
+    height: 8px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background: linear-gradient(to right, #cb2d3e, #efaa3a);
+
+    &.verified{
+      background: linear-gradient(to right, #11998e, #38ef7d);
+    }
+  }
+
+  .type-title{
+    box-shadow: -14px 11px 36px -14px #c2c1c1;
+  }
+}
