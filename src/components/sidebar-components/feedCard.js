@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { coreURL } from '../Utilities'
 import moment from 'moment';
+import CardSkeleton from './card-skeleton';
 
 const FeedCard = (props) => {
 
@@ -13,7 +14,6 @@ const FeedCard = (props) => {
       .then(res => {
         setList("render")
         setListData(res.data);
-        console.log(res.data)
       })
   }, [])
 
@@ -33,7 +33,7 @@ const FeedCard = (props) => {
                 >0</span>
                 <span className="tag">
                   <i className="fa fa-bullseye text-danger mr-1"></i>
-                  {incident.type}
+                  {incident.type === "others" ? "Incident" : incident.type}
                 </span>
                 <hr />
                 <div className="body">
@@ -43,7 +43,9 @@ const FeedCard = (props) => {
             ) : ""
           )
         })
-      ) : ("")}
+      ) : (
+          <CardSkeleton />
+        )}
     </div>
   )
 }
