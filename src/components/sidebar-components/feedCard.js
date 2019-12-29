@@ -3,11 +3,16 @@ import axios from 'axios';
 import { coreURL } from '../Utilities'
 import moment from 'moment';
 import CardSkeleton from './card-skeleton';
+import InfoCard from './InfoCard'
 
 const FeedCard = (props) => {
 
   const [list, setList] = useState("loading")
   const [listData, setListData] = useState([])
+  const [currentCard, setCurrentCard] = useState("")
+  const [incidentDetails, setDetails] = useState([])
+
+
 
   useEffect(() => {
     axios.get(`${coreURL}/incidents`)
@@ -17,13 +22,25 @@ const FeedCard = (props) => {
       })
   }, [])
 
+  const selectCard = (element, cardID, incidentInfo) => {
+    if (currentCard !== "") {
+      document.getElementsByClassName("active-card")[0].classList.remove("active-card")
+    }
+    element.currentTarget.classList.add("active-card")
+    setDetails(incidentInfo)
+    setCurrentCard(cardID)
+  }
+
   return (
     <div>
       {list === "render" ? (
         listData.map(incident => {
           return (
             incident.status === "unverified" ? (
-              <div className="card">
+              <div className="card fade-in-bottom"
+                onClick={(e) => {
+                  (selectCard(e, incident.uid, incident))
+                }}>
                 <span className="date">
                   {moment(incident.timestamp).fromNow()}
                 </span>
@@ -46,6 +63,9 @@ const FeedCard = (props) => {
       ) : (
           <CardSkeleton />
         )}
+
+      {currentCard !== "" ? <InfoCard data={incidentDetails} /> : ""}
+
     </div>
   )
 }
