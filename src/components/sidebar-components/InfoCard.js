@@ -7,8 +7,12 @@ import user from '../../assets/bryce.jpg'
 
 const InfoCard = (props) => {
 
+  const cancelReview = () => {
+    document.getElementById('deselectCard').click();
+  }
+
   return (
-    <div className="info-card fade-in-bottom">
+    <div className="info-card fade-in-bottom" id={`infocard-${props.data.uid}`}>
       <div className="status-bar"></div>
       <h3 className="info-title">
         <i className="fa fa-map-marker text-primary mr-2"></i>
@@ -46,6 +50,11 @@ const InfoCard = (props) => {
       <div className="info-footer">
         <button className="btn-verify"><i className="fa fa-check mr-1"></i>Verify</button>
         <button className="btn-dismiss"><i className="fa fa-times-circle mr-1"></i>Dismiss</button>
+        <button className="btn-cancel"
+          onClick={() => { cancelReview() }}
+        >
+          Cancel
+        </button>
       </div>
     </div >
   )
