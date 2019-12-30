@@ -35,16 +35,9 @@ const Settings = () => {
   }
 
 
-
-
   return (
     <div className="settings">
 
-      <div className="border rounded setting-card">
-        <span className="title"><i className="fa fa-user"></i> Profile</span>
-        <hr />
-        <button className="btn btn-sm btn-primary m-2">View user profile</button>
-      </div>
 
       <div className="border rounded setting-card">
         <span className="title"><i className="fa fa-bell"></i> Notifications</span>

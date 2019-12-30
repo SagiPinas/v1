@@ -11,6 +11,10 @@ const Sidebar = () => {
 
   const switchTab = (newTab) => {
     if (newTab !== tab) {
+      let isProfile = document.contains(document.getElementById('profile-page'))
+      if (newTab === "feed" && isProfile) {
+        document.getElementById('profileWidget').click();
+      }
       setTab(newTab);
     }
   }
@@ -43,6 +47,7 @@ const Sidebar = () => {
           <li
             className={tab === "settings" ? "active" : ""}
             onClick={() => { switchTab('settings') }}
+            id="settings-tab"
           >
             SETTINGS
           </li>

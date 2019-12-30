@@ -5,7 +5,7 @@ import user from '../assets/bryce.jpg'
 
 const Profile = (props) => {
   return (
-    <div className="profile-page">
+    <div className="profile-page" id="profile-page">
       <div className="container-fluid d-flex align-items-center profile-header">
         <div className="row">
           <div className="col-lg-7 col-md-10 py-5">
