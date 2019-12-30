@@ -1,4 +1,7 @@
 
+$active_color:rgb(85, 136, 233);
+
+
 .profile-header{
   background: linear-gradient(90deg,rgba(29, 11, 122, 0.91),rgba(17,24,126,.18)),url(https://www.meme-arsenal.com/memes/d065a12ca62f5b8052f2ae58a501fe61.jpg) !important;
   background-size: cover;
@@ -8,10 +11,12 @@
 .profile-page{
   background: rgb(240, 246, 255);
   margin-left: 270px;
+  min-height: 100vh !important;
 }
 
 .profile-image{
   border-radius: 5px !important;
+  width: 120px;
 }
 
 .account-snippet{
@@ -19,3 +24,52 @@
   padding-bottom: 5px;
   // border-bottom: 2px solid blue;
 }
+
+.account-tabs{
+  position: absolute;
+  right: 20px;
+  top: 13px;
+  list-style: none;
+
+  li{
+    display: inline;
+    margin-left: 20px;
+    padding: 5px 6px;
+    color: rgba(116, 115, 115, 0.822);
+    border-bottom: 4px solid transparent;
+    cursor: pointer;
+
+    &.active{
+      color: $active-color;
+      border-bottom: 4px solid $active_color;
+      cursor: default;
+    }
+  }
+
+}
+
+.loading-profile{
+ margin: 20px;
+ width: 50px;
+}
+
+.text-type{
+  text-transform: capitalize;
+}
+
+
+.search-bar{
+  width: 260px;
+  float: right;
+  padding: 5px 20px;
+  outline: none;
+  border: 2px solid #ddd;
+  border-radius: 50px;
+  margin-bottom: 20px;
+  transition: 0.3s;
+
+  &:focus{
+    border: 2px solid $active_color;
+  }
+}
+

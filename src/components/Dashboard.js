@@ -7,7 +7,7 @@ import Profile from './Profile';
 
 const Dashboard = () => {
 
-  const [profile, setProfile] = useState(false);
+  const [profile, setProfile] = useState(true);
 
   const toggleProfile = () => {
     if (profile) {
