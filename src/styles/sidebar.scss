@@ -172,14 +172,22 @@ $shine-gradient: linear-gradient(to right, rgba(238, 238, 238, 0.356),rgba(214, 
       padding: 5px 7px;
       position: absolute;
       bottom: 5px;
-      border-radius: 25px;
+      border-radius: 2px;
       right: 5px;
     }
+
+    .status{
+      font-size: 12px;
+      text-transform: uppercase;
+      color: rgba(40, 112, 68, 0.822);
+      background: rgb(203, 245, 238);
+      padding: 5px 7px;
+    }
+
+
+
   }
 
-  .history{
-    // TODO: history tab css goes here
-  }
 
   .settings{
     padding: 20px 5px;
@@ -295,6 +303,21 @@ $shine-gradient: linear-gradient(to right, rgba(238, 238, 238, 0.356),rgba(214, 
         background: $shine-gradient;
       }
     }
+  }
+}
+
+#sidebar-history-search{
+  margin-bottom: 10px;
+  padding: 5px 20px;
+  border-radius: 20px;
+  outline: none;
+  border: 2px solid #ddd;
+  width: 100%;
+  transition: 0.3s;
+
+  &:focus{
+    border: 2px solid $active_color;
+    transition: 0.3s;
   }
 }
 
