@@ -19,7 +19,7 @@ const App = () => {
             <Signup />
           </Route>
           <Route path="/dashboard">
-            <Dashboard />
+            {localStorage.user ? <Dashboard /> : <Login />}
           </Route>
           <Route path="/">
             <Login />

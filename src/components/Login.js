@@ -1,12 +1,66 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import "../styles/login.scss"
 
 import Navbar from "./Navbar";
 import googleLogo from '../assets/google.svg';
 import { Link } from 'react-router-dom';
 import Footer from './Footer'
+import axios from 'axios'
+import { coreURL } from './Utilities'
 
 const Login = () => {
+
+  const [isLoading, setLoading] = useState(false)
+  const [error, setError] = useState("")
+
+  const loginProccess = () => {
+    setLoading(true)
+    let email = document.getElementById('uemail').value;
+    let password = document.getElementById('upassword').value;
+
+    if (email.trim() === "" || password.trim() === "") {
+      setError("Error: Incomplete credentials!")
+      setLoading(false);
+    } else {
+      axios(
+        {
+          method: 'post',
+          url: `${coreURL}/login`,
+          data: {
+            email: email,
+            password: password,
+          }
+        }
+      )
+        .then(res => {
+          if (res.data.status === "success") {
+            localStorage.user = JSON.stringify(res.data.userData);
+            window.location.href = "/dashboard";
+          } else {
+            setError(res.data.message);
+            setLoading(false);
+          }
+        })
+
+        .catch(err => {
+          if (err) {
+            setError("Login failed! please try again later.");
+            setLoading(false);
+          }
+        })
+    }
+  }
+
+  useEffect(() => {
+    document.body.onkeyup = (e) => {
+      if (e.keyCode === 13) {
+        loginProccess()
+      }
+    }
+  }, [])
+
+
+
   return (
     <div className="main-content">
       <Navbar active="login" />
@@ -40,7 +94,7 @@ const Login = () => {
                     <div className="input-group-prepend">
                       <span className="input-group-text"><i className="ni ni-email-83" /></span>
                     </div>
-                    <input className="form-control" placeholder="Email" type="email" />
+                    <input className="form-control" id="uemail" placeholder="Email" type="email" />
                   </div>
                 </div>
                 <div className="form-group">
@@ -48,17 +102,18 @@ const Login = () => {
                     <div className="input-group-prepend">
                       <span className="input-group-text"><i className="ni ni-lock-circle-open" /></span>
                     </div>
-                    <input className="form-control" placeholder="Password" type="password" />
+                    <input className="form-control" id="upassword" placeholder="Password" type="password" />
                   </div>
+                  <p className="text-danger mt-3 text-center">{error}</p>
                 </div>
-                <div className="custom-control custom-control-alternative custom-checkbox">
-                  <input className="custom-control-input" id=" customCheckLogin" type="checkbox" />
-                  <label className="custom-control-label" htmlFor=" customCheckLogin">
-                    <span className="text-muted">Remember me</span>
-                  </label>
-                </div>
+
                 <div className="text-center">
-                  <button type="button" className="btn btn-primary my-4">Sign in</button>
+                  <button type="button" className="btn btn-primary my-4"
+                    onClick={() => { loginProccess() }}
+                  >
+                    {isLoading ? <i className="fa fa-spinner mr-1 spin" /> : ""}
+                    {isLoading ? "Signing in.." : "Sign in"}
+                  </button>
                 </div>
               </div>
             </div>

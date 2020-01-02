@@ -15,7 +15,8 @@ const Profile = (props) => {
 
   const loadHistory = () => {
     setProfileTab('loading')
-    axios.get(`${coreURL}/public/responder/?responderId=1`)
+    let user = JSON.parse(localStorage.user);
+    axios.get(`${coreURL}/public/responder/?responderId=${user.id}`)
       .then(res => {
         if (res.data.status === "success") {
           setProfileInfo(res.data.profile)

@@ -9,8 +9,10 @@ const History = () => {
   const [tabState, setTabState] = useState('loading');
   const [historyData, setHistoryData] = useState([]);
 
+
   useEffect(() => {
-    axios.get(`${coreURL}/public/responder/?responderId=1`)
+    let user = JSON.parse(localStorage.user);
+    axios.get(`${coreURL}/public/responder/?responderId=${user.id}`)
       .then(res => {
         setHistoryData(res.data.history)
         setTabState('render')

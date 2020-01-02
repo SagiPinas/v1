@@ -98,3 +98,19 @@
 	-webkit-animation: fade-out-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 	        animation: fade-out-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
+
+@keyframes spin {
+  from {
+      transform:rotate(0deg);
+  }
+  to {
+      transform:rotate(360deg);
+  }
+}
+
+.spin{
+  animation-name: spin;
+  animation-duration: 700ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
