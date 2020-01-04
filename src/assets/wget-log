@@ -1,0 +1,16 @@
+--2020-01-04 20:29:00--  https://avatar-cdn.atlassian.com/81422c31c892faee5aba82f7372bcfce?d=mm
+Resolving avatar-cdn.atlassian.com (avatar-cdn.atlassian.com)... 13.226.61.21, 13.226.61.67, 13.226.61.64, ...
+Connecting to avatar-cdn.atlassian.com (avatar-cdn.atlassian.com)|13.226.61.21|:443... connected.
+HTTP request sent, awaiting response... 302 Moved Temporarily
+Location: https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/default-avatar.png [following]
+--2020-01-04 20:29:00--  https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/default-avatar.png
+Resolving avatar-management--avatars.us-west-2.prod.public.atl-paas.net (avatar-management--avatars.us-west-2.prod.public.atl-paas.net)... 13.226.61.61, 13.226.61.90, 13.226.61.70, ...
+Connecting to avatar-management--avatars.us-west-2.prod.public.atl-paas.net (avatar-management--avatars.us-west-2.prod.public.atl-paas.net)|13.226.61.61|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 6314 (6.2K) [image/png]
+Saving to: ‘81422c31c892faee5aba82f7372bcfce?d=mm’
+
+              81422c31c892fa   0%[                                               ]       0  --.-KB/s               81422c31c892faee5aba82f7372b 100%[==============================================>]   6.17K  --.-KB/s    in 0s      
+
+2020-01-04 20:29:00 (120 MB/s) - ‘81422c31c892faee5aba82f7372bcfce?d=mm’ saved [6314/6314]
+
