@@ -3,19 +3,26 @@ import '../styles/profile.scss'
 import axios from 'axios';
 import { coreURL } from './Utilities';
 import moment from 'moment';
+import loader from '../assets/loading.gif'
+import defaultImg from '../assets/default-avatar.png'
 
-import user from '../assets/bryce.jpg'
 
 const Profile = (props) => {
 
   const [profileTab, setProfileTab] = useState("loading")
   const [profileInfo, setProfileInfo] = useState([])
   const [history, setHistory] = useState([])
+  const [editAccount, setEditing] = useState(false)
+  const [changePassword, setChangePass] = useState(false)
+
+
+  const userData = JSON.parse(localStorage.user)
+
 
 
   const loadHistory = () => {
-    setProfileTab('loading')
     let user = JSON.parse(localStorage.user);
+    setProfileTab('loading')
     axios.get(`${coreURL}/public/responder/?responderId=${user.id}`)
       .then(res => {
         if (res.data.status === "success") {
@@ -42,11 +49,33 @@ const Profile = (props) => {
     }
   }
 
+  const logout = () => {
+    localStorage.clear();
+    window.location.href = "/login";
+  }
+
+  const passwordEdit = () => {
+    if (!changePassword) {
+      setChangePass(true)
+      document.getElementById('old-password').click()
+    } else {
+      setChangePass(false)
+    }
+  }
+
+  const accountEdit = () => {
+    if (!editAccount) {
+      setEditing(true)
+    } else {
+      setEditing(false)
+    }
+  }
+
   const Loading = () => {
     return (
       <div>
         <center>
-          <img src="https://searchtv.novatours.eu/assets/img/loading.gif?20191120121128" alt="loading" className="loading-profile" />
+          <img src={loader} alt="loading" className="loading-profile" />
           <p className="mt-2">Loading Activity History...</p>
         </center>
       </div>
@@ -86,7 +115,7 @@ const Profile = (props) => {
                       </span></th>
                       <td>{moment(incident.timestamp).format('l')}</td>
                       <td>{"..."}</td>
-                      <td><strong className="text-success">{incident.status}</strong></td>
+                      <td><strong className="text-success text-uppercase">{incident.status}</strong></td>
                       <td><button className="btn btn-sm btn-outline-primary">
                         <i className="fa fa-ellipsis-h mr-1" /> Details
                   </button></td>
@@ -117,7 +146,7 @@ const Profile = (props) => {
             <div className="col-lg-6">
               <div className="form-group">
                 <label className="form-control-label" htmlFor="input-email">Email address</label>
-                <input type="email" id="input-email" className="form-control form-control-alternative" placeholder="jesse@example.com" disabled />
+                <input type="email" id="input-email" className="form-control form-control-alternative" placeholder={profileInfo.email} disabled />
               </div>
             </div>
             <div className="col-lg-6">
@@ -126,8 +155,19 @@ const Profile = (props) => {
                 <input type="text" id="input-city" className="form-control form-control-alternative" placeholder="City" defaultValue={profileInfo.city} />
               </div>
             </div>
+            <div className="col-lg-6">
+              <div className="form-group">
+                <label className="form-control-label" htmlFor="input-username">Profile picture</label>
+                <input type="text" id="input-image" className="form-control form-control-alternative" placeholder="Image Link" defaultValue={profileInfo.profileImage} />
+              </div>
+            </div>
           </div>
-          <button className="btn btn-dark">Edit</button>
+          <button
+            className={`btn ${editAccount ? "btn-info" : "btn-dark"}`}
+            onClick={() => { accountEdit() }}
+          >
+            {editAccount ? "Save Changes" : "Edit"}
+          </button>
           <hr />
           <h6 className="heading-small text-muted mb-4">Change Password</h6>
           <div className="row">
@@ -145,7 +185,12 @@ const Profile = (props) => {
               </div>
             </div>
           </div>
-          <button className="btn btn-dark">Update Password</button>
+          <button
+            className={`btn ${changePassword ? "btn-info" : "btn-dark"}`}
+            onClick={() => { passwordEdit() }}
+          >
+            {changePassword ? "Save Changes" : "Change Password"}
+          </button>
         </div>
       </div>
 
@@ -169,7 +214,8 @@ const Profile = (props) => {
               <div className="row justify-content-center">
                 <div className="col-lg-3 order-lg-2">
                   <div className="card-profile-image">
-                    <img src={user} alt="profile" className="profile-image" />
+                    <img src={userData.profileImg ? userData.profileImg : defaultImg}
+                      alt="profile" className="profile-image" />
                   </div>
                 </div>
               </div>
@@ -203,7 +249,11 @@ const Profile = (props) => {
                     <i className="ni business_briefcase-24 mr-2" />Responder
                   </div>
                   <hr className="my-4" />
-                  <button className="btn btn-dark">Log out</button>
+                  <button className="btn btn-dark"
+                    onClick={() => { logout() }}
+                  >
+                    Log out
+                  </button>
                 </div>
               </div>
             </div>

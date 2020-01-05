@@ -3,6 +3,18 @@ body {
  background: #172b4d;
 }
 
+*.unselectable {
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.card-profile-image img, .shadow {
+  box-shadow: none !important;
+}
+
 
 .bg-gradient-primary {
   background: linear-gradient(90deg,rgba(52,22,199,.91),rgba(17,24,126,.18)),url(../assets/map.png) !important;
@@ -127,3 +139,4 @@ body {
   0%   { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+

@@ -1,9 +1,77 @@
-import React from 'react';
+import React, { useState } from 'react';
 import googleLogo from '../assets/google.svg'
 import Navbar from './Navbar'
 import Footer from './Footer'
+import { coreURL } from './Utilities'
+import Nprogress from 'nprogress'
+import axios from 'axios'
 
 const Signup = () => {
+
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState("")
+
+
+  const registerError = (message) => {
+    Nprogress.done();
+    setLoading(false)
+    setError(message)
+  }
+
+  const register = () => {
+    Nprogress.start()
+    setLoading(true)
+    let email = document.getElementById("email").value.trim()
+    let name = document.getElementById("name").value.trim()
+    let city = document.getElementById("city").value.trim()
+    let confirmPassword = document.getElementById("confirmPass").value.trim()
+    let password = document.getElementById("password").value.trim()
+
+    if (email && name && city && confirmPassword && password) {
+      if (password !== confirmPassword) {
+        registerError("Passwords did not match!")
+      } else {
+        axios(
+          {
+            method: 'post',
+            url: `${coreURL}/signup`,
+            data: {
+              email: email,
+              name: name,
+              password: password,
+              city: city
+            }
+          }
+        )
+          .then(res => {
+            if (res.data.status === "success") {
+              localStorage.flag = "Account Created! Please login to you account."
+              window.location.href = "/login"
+            } else {
+              registerError(res.data.message)
+            }
+          })
+
+          .catch(err => {
+            registerError("Sign up failed. please try again later.")
+          })
+      }
+    } else {
+      registerError("Please complete the form to continue.")
+    }
+
+  }
+
+  window.onkeyup = (e) => {
+    if (e.keyCode === 13) {
+      if (window.location.href.includes("register")) {
+        register()
+      }
+    }
+  }
+
+
+
   return (
     <div className="main-content">
       <Navbar active="register" />
@@ -37,7 +105,7 @@ const Signup = () => {
                   </button>
                 </div>
               </div>
-              <div className="card-body px-lg-5 py-lg-5">
+              <div className="card-body px-lg-5 py-lg-4">
                 <div className="text-center text-muted mb-4">
                   <small>Or sign up with credentials</small>
                 </div>
@@ -46,7 +114,15 @@ const Signup = () => {
                     <div className="input-group-prepend">
                       <span className="input-group-text"><i className="ni ni-hat-3" /></span>
                     </div>
-                    <input className="form-control" placeholder="Name" type="text" />
+                    <input className="form-control" id="name" placeholder="Name" type="text" />
+                  </div>
+                </div>
+                <div className="form-group">
+                  <div className="input-group input-group-alternative mb-3">
+                    <div className="input-group-prepend">
+                      <span className="input-group-text"><i className="ni ni-hat-3" /></span>
+                    </div>
+                    <input className="form-control" id="city" placeholder="City Name" type="text" />
                   </div>
                 </div>
                 <div className="form-group">
@@ -54,7 +130,7 @@ const Signup = () => {
                     <div className="input-group-prepend">
                       <span className="input-group-text"><i className="ni ni-email-83" /></span>
                     </div>
-                    <input className="form-control" placeholder="Email" type="email" />
+                    <input className="form-control" id="email" placeholder="Email" type="email" />
                   </div>
                 </div>
                 <div className="form-group">
@@ -62,10 +138,20 @@ const Signup = () => {
                     <div className="input-group-prepend">
                       <span className="input-group-text"><i className="ni ni-lock-circle-open" /></span>
                     </div>
-                    <input className="form-control" placeholder="Password" type="password" />
+                    <input className="form-control" id="password" placeholder="Password" type="password" />
                   </div>
                 </div>
-                <div className="text-muted font-italic"><small>password strength: <span className="text-success font-weight-700">strong</span></small></div>
+                <div className="form-group">
+                  <div className="input-group input-group-alternative">
+                    <div className="input-group-prepend">
+                      <span className="input-group-text"><i className="ni ni-lock-circle-open" /></span>
+                    </div>
+                    <input className="form-control" id="confirmPass" placeholder="Confirm Password" type="password" />
+                  </div>
+                </div>
+                <div className="text-center text-danger"><small>
+                  {error}
+                </small></div>
                 <div className="row my-4">
                   <div className="col-12">
                     <div className="custom-control custom-control-alternative custom-checkbox">
@@ -77,7 +163,14 @@ const Signup = () => {
                   </div>
                 </div>
                 <div className="text-center">
-                  <button type="button" className="btn btn-primary mt-4">Create account</button>
+                  <button type="button" className="btn btn-primary mt-4"
+                    onClick={() => {
+                      register()
+                    }}
+                  >
+                    {loading ? <i className="fa fa-spinner spin mr-1" /> : ""}
+                    {loading ? "Signing up..." : "Create Account"}
+                  </button>
                 </div>
               </div>
             </div>

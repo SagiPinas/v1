@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { coreURL } from '../Utilities';
+import { coreURL, ellipsis } from '../Utilities';
 import axios from 'axios';
 import CardSkeleton from './card-skeleton'
 import moment from 'moment'
@@ -45,7 +45,7 @@ const History = () => {
                 </span>
                 <hr />
                 <div className="body">
-                  {history.details}
+                  {ellipsis(history.details, 30)}
                 </div>
               </div>
             )

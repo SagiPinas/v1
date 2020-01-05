@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import "../styles/login.scss"
 
 import Navbar from "./Navbar";
@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import Footer from './Footer'
 import axios from 'axios'
 import { coreURL } from './Utilities'
+import Nprogress from 'nprogress'
 
 const Login = () => {
 
@@ -22,6 +23,7 @@ const Login = () => {
       setError("Error: Incomplete credentials!")
       setLoading(false);
     } else {
+      Nprogress.start()
       axios(
         {
           method: 'post',
@@ -35,29 +37,35 @@ const Login = () => {
         .then(res => {
           if (res.data.status === "success") {
             localStorage.user = JSON.stringify(res.data.userData);
-            window.location.href = "/dashboard";
+            window.location.href = "/dashboard"
           } else {
             setError(res.data.message);
             setLoading(false);
           }
+          Nprogress.done()
         })
 
         .catch(err => {
           if (err) {
             setError("Login failed! please try again later.");
             setLoading(false);
+            Nprogress.done()
           }
         })
     }
   }
 
-  useEffect(() => {
-    document.body.onkeyup = (e) => {
-      if (e.keyCode === 13) {
+
+  document.body.onkeyup = (e) => {
+    if (e.keyCode === 13) {
+      if (window.location.href.includes("login") ||
+        window.location.href.includes("dashboard")
+      ) {
         loginProccess()
       }
     }
-  }, [])
+  }
+
 
 
 
@@ -85,9 +93,12 @@ const Login = () => {
                   </button>
                 </div>
               </div>
-              <div className="card-body px-lg-5 py-lg-5">
+              <div className="card-body px-lg-5 py-lg-4">
                 <div className="text-center text-muted mb-4">
                   <small>Or sign in with credentials</small>
+                  <p class="text-success small">
+                    {localStorage.flag}
+                  </p>
                 </div>
                 <div className="form-group mb-3">
                   <div className="input-group input-group-alternative">
@@ -104,7 +115,7 @@ const Login = () => {
                     </div>
                     <input className="form-control" id="upassword" placeholder="Password" type="password" />
                   </div>
-                  <p className="text-danger mt-3 text-center">{error}</p>
+                  <p className="text-danger small mt-3 text-center">{error}</p>
                 </div>
 
                 <div className="text-center">

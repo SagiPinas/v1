@@ -70,6 +70,12 @@ $shine-gradient: linear-gradient(to right, rgba(238, 238, 238, 0.356),rgba(214, 
         transition: 0.3s;
         cursor: pointer;
 
+        -moz-user-select: none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+
         &:hover{
           color: $active_color;
           transition: 0.4s;

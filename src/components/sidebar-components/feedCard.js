@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
-import { coreURL } from '../Utilities'
+import { coreURL, ellipsis } from '../Utilities'
 import moment from 'moment';
 import CardSkeleton from './card-skeleton';
 import InfoCard from './InfoCard'
@@ -67,7 +67,7 @@ const FeedCard = (props) => {
                 </span>
                 <hr />
                 <div className="body">
-                  {incident.details}
+                  {ellipsis(incident.details, 70)}
                 </div>
               </div>
             ) : ""
