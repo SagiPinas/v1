@@ -6,7 +6,7 @@ import googleLogo from '../assets/google.svg';
 import { Link } from 'react-router-dom';
 import Footer from './Footer'
 import axios from 'axios'
-import { coreURL } from './Utilities'
+import { coreURL, validateEmail } from './Utilities'
 import Nprogress from 'nprogress'
 
 const Login = () => {
@@ -19,39 +19,44 @@ const Login = () => {
     let email = document.getElementById('uemail').value;
     let password = document.getElementById('upassword').value;
 
-    if (email.trim() === "" || password.trim() === "") {
-      setError("Error: Incomplete credentials!")
-      setLoading(false);
-    } else {
-      Nprogress.start()
-      axios(
-        {
-          method: 'post',
-          url: `${coreURL}/login`,
-          data: {
-            email: email,
-            password: password,
+    if (validateEmail(email)) {
+      if (email.trim() === "" || password.trim() === "") {
+        setError("Error: Incomplete credentials!")
+        setLoading(false);
+      } else {
+        Nprogress.start()
+        axios(
+          {
+            method: 'post',
+            url: `${coreURL}/login`,
+            data: {
+              email: email,
+              password: password,
+            }
           }
-        }
-      )
-        .then(res => {
-          if (res.data.status === "success") {
-            localStorage.user = JSON.stringify(res.data.userData);
-            window.location.href = "/dashboard"
-          } else {
-            setError(res.data.message);
-            setLoading(false);
-          }
-          Nprogress.done()
-        })
-
-        .catch(err => {
-          if (err) {
-            setError("Login failed! please try again later.");
-            setLoading(false);
+        )
+          .then(res => {
+            if (res.data.status === "success") {
+              localStorage.user = JSON.stringify(res.data.userData);
+              window.location.href = "/dashboard"
+            } else {
+              setError(res.data.message);
+              setLoading(false);
+            }
             Nprogress.done()
-          }
-        })
+          })
+
+          .catch(err => {
+            if (err) {
+              setError("Login failed! please try again later.");
+              setLoading(false);
+              Nprogress.done()
+            }
+          })
+      }
+    } else {
+      setError('Please provide a valid email address.')
+      setLoading(false);
     }
   }
 

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import googleLogo from '../assets/google.svg'
 import Navbar from './Navbar'
 import Footer from './Footer'
-import { coreURL } from './Utilities'
+import { coreURL, validateEmail } from './Utilities'
 import Nprogress from 'nprogress'
 import axios from 'axios'
 
@@ -19,7 +19,6 @@ const Signup = () => {
   }
 
   const register = () => {
-    Nprogress.start()
     setLoading(true)
     let email = document.getElementById("email").value.trim()
     let name = document.getElementById("name").value.trim()
@@ -27,37 +26,44 @@ const Signup = () => {
     let confirmPassword = document.getElementById("confirmPass").value.trim()
     let password = document.getElementById("password").value.trim()
 
-    if (email && name && city && confirmPassword && password) {
-      if (password !== confirmPassword) {
-        registerError("Passwords did not match!")
-      } else {
-        axios(
-          {
-            method: 'post',
-            url: `${coreURL}/signup`,
-            data: {
-              email: email,
-              name: name,
-              password: password,
-              city: city
-            }
-          }
-        )
-          .then(res => {
-            if (res.data.status === "success") {
-              localStorage.flag = "Account Created! Please login to you account."
-              window.location.href = "/login"
-            } else {
-              registerError(res.data.message)
-            }
-          })
+    if (validateEmail(email)) {
 
-          .catch(err => {
-            registerError("Sign up failed. please try again later.")
-          })
+      if (email && name && city && confirmPassword && password) {
+        Nprogress.start()
+        if (password !== confirmPassword) {
+          registerError("Passwords did not match!")
+        } else {
+          axios(
+            {
+              method: 'post',
+              url: `${coreURL}/signup`,
+              data: {
+                email: email,
+                name: name,
+                password: password,
+                city: city
+              }
+            }
+          )
+            .then(res => {
+              if (res.data.status === "success") {
+                localStorage.flag = "Account Created! Please login to you account."
+                window.location.href = "/login"
+              } else {
+                registerError(res.data.message)
+              }
+            })
+
+            .catch(err => {
+              registerError("Sign up failed. please try again later.")
+            })
+        }
+      } else {
+        registerError("Please complete the form to continue.")
       }
     } else {
-      registerError("Please complete the form to continue.")
+      registerError("Please provide a proper email address.")
+      setLoading(false)
     }
 
   }
