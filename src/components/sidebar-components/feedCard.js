@@ -4,6 +4,7 @@ import { coreURL, ellipsis } from '../Utilities'
 import moment from 'moment';
 import CardSkeleton from './card-skeleton';
 import InfoCard from './InfoCard'
+import Trophy from '../../assets/award.svg'
 
 const FeedCard = (props) => {
 
@@ -12,6 +13,24 @@ const FeedCard = (props) => {
   const [currentCard, setCurrentCard] = useState("")
   const [incidentDetails, setDetails] = useState([])
 
+  const EmptyFeed = () => {
+    return (
+      <div className="fade-in-bottom">
+        <center>
+          <img src={Trophy} alt="award" className="trophy" />
+          <p className="ml-2">
+            <strong>
+              Hooray. No Incidents!
+          </strong>
+          </p>
+          <small className="text-muted">
+            All incidents are either reviewed or responded to.
+            Good Job!
+          </small>
+        </center>
+      </div>
+    )
+  }
 
 
   useEffect(() => {
@@ -47,32 +66,34 @@ const FeedCard = (props) => {
     <div>
       <button className="d-none" id="deselectCard" onClick={() => { deSelectCard() }} />
       {list === "render" ? (
-        listData.map(incident => {
-          return (
-            incident.status === "unverified" ? (
-              <div className="card fade-in-bottom"
-                onClick={(e) => {
-                  (selectCard(e, incident.uid, incident))
-                }}>
-                <span className="date">
-                  {moment(incident.timestamp).fromNow()}
-                </span>
-                <span
-                  className="reviewers"
-                  title="No. of responders reviewing this incident."
-                >0</span>
-                <span className="tag">
-                  <i className="fa fa-bullseye text-danger mr-1"></i>
-                  {incident.type}
-                </span>
-                <hr />
-                <div className="body">
-                  {ellipsis(incident.details, 70)}
+        listData.length !== 0 ? (
+          listData.map(incident => {
+            return (
+              incident.status === "unverified" ? (
+                <div className="card fade-in-bottom"
+                  onClick={(e) => {
+                    (selectCard(e, incident.uid, incident))
+                  }}>
+                  <span className="date">
+                    {moment(incident.timestamp).fromNow()}
+                  </span>
+                  <span
+                    className="reviewers"
+                    title="No. of responders reviewing this incident."
+                  >0</span>
+                  <span className="tag">
+                    <i className="fa fa-bullseye text-danger mr-1"></i>
+                    {incident.type}
+                  </span>
+                  <hr />
+                  <div className="body">
+                    {ellipsis(incident.details, 70)}
+                  </div>
                 </div>
-              </div>
-            ) : ""
-          )
-        })
+              ) : ""
+            )
+          })
+        ) : (<EmptyFeed />)
       ) : (
           <CardSkeleton count={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]} />
         )}

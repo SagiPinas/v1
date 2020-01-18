@@ -5,6 +5,7 @@ import { coreURL } from './Utilities';
 import moment from 'moment';
 import loader from '../assets/loading.gif'
 import defaultImg from '../assets/default-avatar.png'
+import noHistory from '../assets/2081871.svg'
 
 
 const Profile = (props) => {
@@ -129,6 +130,16 @@ const Profile = (props) => {
         </div>
       </div>
     )
+  }
+
+  const EmptyProfile = () => {
+    return (
+      <div className="no-history fade-in-bottom">
+        <center>
+          <img src={noHistory} alt="no-data" />
+          <p className="mt-3">No data to show.</p>
+        </center>
+      </div>)
   }
 
   const AccountSettings = () => {
@@ -285,8 +296,9 @@ const Profile = (props) => {
               </div>
               <div className="card-body">
                 {profileTab === "loading" ? <Loading /> : ""}
-                {profileTab === "history" ? <ActivityHistory /> : ""}
+                {profileTab === "history" && history.length !== 0 ? <ActivityHistory /> : ""}
                 {profileTab === "settings" ? <AccountSettings /> : ""}
+                {profileTab === "history" && history.length === 0 ? <EmptyProfile /> : ""}
               </div>
             </div>
           </div>

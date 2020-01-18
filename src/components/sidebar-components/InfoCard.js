@@ -38,13 +38,19 @@ const InfoCard = (props) => {
 
         <hr className="my-3" />
 
-        <p className="detail-title">
-          <i className="fa fa-circle mr-1"></i>Report Details
+        <div className="mb-3">
+          <p className="detail-title">
+            <i className="fa fa-circle mr-1"></i>Report Details
         </p>
-
-        <div className="report-div">
-          {props.data.details}
+          <div className="report-div">
+            {props.data.details}
+          </div>
         </div>
+
+
+
+
+
 
       </div>
       <div className="info-footer">

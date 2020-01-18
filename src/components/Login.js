@@ -64,7 +64,8 @@ const Login = () => {
   document.body.onkeyup = (e) => {
     if (e.keyCode === 13) {
       if (window.location.href.includes("login") ||
-        window.location.href.includes("dashboard")
+        window.location.href.includes("dashboard") ||
+        window.location.pathname === "/"
       ) {
         loginProccess()
       }

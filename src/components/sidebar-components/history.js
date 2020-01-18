@@ -20,6 +20,13 @@ const History = () => {
   }, [])
 
 
+  const EmptyHistory = () => {
+    return (
+      <p className="ml-2 text-muted">Nothing to show.</p>
+    )
+  }
+
+
   return (
     <div className="history">
       <input placeholder="Search History" id="sidebar-history-search" />
@@ -28,28 +35,30 @@ const History = () => {
       {
 
         tabState === "render" ? (
-          historyData.map(history => {
-            return (
-              <div className="card fade-in-bottom"
-                onClick={(e) => {
-                }}>
-                <span className="date">
-                  {moment(history.timestamp).format('l')}
-                </span>
-                <span className="status">
-                  <i className="fa fa-circle mr-1" />{history.status}
-                </span>
-                <span className="tag">
-                  <i className="fa fa-bars text-primary mr-1"></i>
-                  {history.type}
-                </span>
-                <hr />
-                <div className="body">
-                  {ellipsis(history.details, 30)}
+          historyData.length !== 0 ? (
+            historyData.map(history => {
+              return (
+                <div className="card fade-in-bottom"
+                  onClick={(e) => {
+                  }}>
+                  <span className="date">
+                    {moment(history.timestamp).format('l')}
+                  </span>
+                  <span className="status">
+                    <i className="fa fa-circle mr-1" />{history.status}
+                  </span>
+                  <span className="tag">
+                    <i className="fa fa-bars text-primary mr-1"></i>
+                    {history.type}
+                  </span>
+                  <hr />
+                  <div className="body">
+                    {ellipsis(history.details, 30)}
+                  </div>
                 </div>
-              </div>
-            )
-          })
+              )
+            })
+          ) : (<EmptyHistory />)
 
 
         ) : (
