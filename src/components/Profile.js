@@ -15,6 +15,7 @@ const Profile = (props) => {
   const [history, setHistory] = useState([])
   const [editAccount, setEditing] = useState(false)
   const [changePassword, setChangePass] = useState(false)
+  const [passError, setPassError] = useState("");
 
 
   const userData = JSON.parse(localStorage.user)
@@ -58,9 +59,16 @@ const Profile = (props) => {
   const passwordEdit = () => {
     if (!changePassword) {
       setChangePass(true)
-      document.getElementById('old-password').click()
     } else {
       setChangePass(false)
+      let oldPass = document.getElementById('old-password');
+      let confirmPassword = document.getElementById('confirm-password')
+      if (oldPass.value !== confirmPassword.value) {
+        setPassError("Password did not match");
+      } else {
+        setPassError("")
+        // TODO: save password.
+      }
     }
   }
 
@@ -151,7 +159,7 @@ const Profile = (props) => {
             <div className="col-lg-6">
               <div className="form-group">
                 <label className="form-control-label" htmlFor="input-username">Full Name</label>
-                <input type="text" id="input-username" className="form-control form-control-alternative" placeholder="Username" defaultValue={profileInfo.name} />
+                <input type="text" id="input-username" className="form-control form-control-alternative" placeholder="Username" defaultValue={profileInfo.name} disabled={!editAccount} />
               </div>
             </div>
             <div className="col-lg-6">
@@ -163,13 +171,13 @@ const Profile = (props) => {
             <div className="col-lg-6">
               <div className="form-group">
                 <label className="form-control-label" htmlFor="input-username">City</label>
-                <input type="text" id="input-city" className="form-control form-control-alternative" placeholder="City" defaultValue={profileInfo.city} />
+                <input type="text" id="input-city" className="form-control form-control-alternative" placeholder="City" defaultValue={profileInfo.city} disabled={!editAccount} />
               </div>
             </div>
             <div className="col-lg-6">
               <div className="form-group">
                 <label className="form-control-label" htmlFor="input-username">Profile picture</label>
-                <input type="text" id="input-image" className="form-control form-control-alternative" placeholder="Image Link" defaultValue={profileInfo.profileImage} />
+                <input type="text" id="input-image" className="form-control form-control-alternative" placeholder="Image Link" defaultValue={profileInfo.profileImage} disabled={!editAccount} />
               </div>
             </div>
           </div>
@@ -185,17 +193,20 @@ const Profile = (props) => {
             <div className="col-lg-6">
               <div className="form-group">
                 <label className="form-control-label" htmlFor="input-username">Old password</label>
-                <input type="password" id="old-password" className="form-control form-control-alternative" placeholder="Old Password" />
+                <input type="password" id="old-password" className="form-control form-control-alternative" placeholder="Old Password" disabled={!changePassword} />
               </div>
             </div>
 
             <div className="col-lg-6">
               <div className="form-group">
                 <label className="form-control-label" htmlFor="input-username">Confirm Password</label>
-                <input type="password" id="confirm-password" className="form-control form-control-alternative" placeholder="Confirm Password" />
+                <input type="password" id="confirm-password" className="form-control form-control-alternative" placeholder="Confirm Password" disabled={!changePassword} />
               </div>
             </div>
           </div>
+          <p className="text-danger small">
+            {passError}
+          </p>
           <button
             className={`btn ${changePassword ? "btn-info" : "btn-dark"}`}
             onClick={() => { passwordEdit() }}
