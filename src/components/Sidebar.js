@@ -7,7 +7,7 @@ import '../styles/sidebar.scss';
 
 const Sidebar = () => {
 
-  const [tab, setTab] = useState("history")
+  const [tab, setTab] = useState("feed")
 
   const switchTab = (newTab) => {
     if (newTab !== tab) {

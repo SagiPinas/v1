@@ -66,10 +66,6 @@ const History = () => {
           )
 
       }
-
-
-
-
     </div>
   )
 }

@@ -72,9 +72,6 @@ const Login = () => {
     }
   }
 
-
-
-
   return (
     <div className="main-content">
       <Navbar active="login" />
