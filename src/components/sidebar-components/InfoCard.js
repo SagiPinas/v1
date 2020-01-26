@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import '../../styles/infocard.scss'
 import moment from 'moment'
+import axios from 'axios'
 
 import user from '../../assets/bryce.jpg'
 
@@ -10,6 +11,11 @@ const InfoCard = (props) => {
   const cancelReview = () => {
     document.getElementById('deselectCard').click();
   }
+
+  const [reporteeImage, setImage] = useState("")
+  const [reporteeName, setReporteeName] = useState("")
+  const [profile, setProfilte] = useState(false);
+
 
   return (
     <div className="info-card fade-in-bottom" id={`infocard-${props.data.uid}`}>

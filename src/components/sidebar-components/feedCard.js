@@ -5,6 +5,7 @@ import moment from 'moment';
 import CardSkeleton from './card-skeleton';
 import InfoCard from './InfoCard'
 import Trophy from '../../assets/award.svg'
+import io from 'socket.io-client'
 
 const FeedCard = (props) => {
 
@@ -12,6 +13,17 @@ const FeedCard = (props) => {
   const [listData, setListData] = useState([])
   const [currentCard, setCurrentCard] = useState("")
   const [incidentDetails, setDetails] = useState([])
+
+  const socket = io(`${coreURL}`);
+
+  socket.on("report", () => {
+    setList("loading")
+    axios.get(`${coreURL}/incidents`)
+      .then(res => {
+        setList("render")
+        setListData(res.data);
+      })
+  })
 
   const EmptyFeed = () => {
     return (

@@ -4,7 +4,6 @@ import History from './sidebar-components/history'
 import Settings from './sidebar-components/settings'
 import '../styles/sidebar.scss';
 
-
 const Sidebar = () => {
 
   const [tab, setTab] = useState("feed")
