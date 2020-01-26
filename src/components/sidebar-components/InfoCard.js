@@ -1,20 +1,42 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import '../../styles/infocard.scss'
 import moment from 'moment'
 import axios from 'axios'
-
-import user from '../../assets/bryce.jpg'
-
+import io from 'socket.io-client'
+import { coreURL } from '../Utilities'
 
 const InfoCard = (props) => {
+
+  const socket = io(coreURL)
 
   const cancelReview = () => {
     document.getElementById('deselectCard').click();
   }
 
+  const verifyReport = () => {
+    socket.emit('verifyReport',props.data)
+    alert("Report verfied!");
+    document.getElementById('deselectCard').click();
+  }
+
   const [reporteeImage, setImage] = useState("")
   const [reporteeName, setReporteeName] = useState("")
-  const [profile, setProfilte] = useState(false);
+  const [profile, setProfile] = useState(false)
+
+  useEffect(()=>{
+    axios.get(`https://graph.facebook.com/${props.data.id}`,{
+      params: {
+        fields: "first_name,last_name,profile_pic",
+        access_token: "PAGE_ACCESS_TOKEN_HERE"
+      }
+    }
+    )
+    .then(res=>{
+      setImage(res.data.profile_pic)
+      setReporteeName(`${res.data.first_name} ${res.data.last_name}`)
+      setProfile(true)
+    })
+  },[])
 
 
   return (
@@ -36,8 +58,9 @@ const InfoCard = (props) => {
         <center>
           <div className="reportee-profile mt-1">
             <span>
-              <img src={user} alt="reportee-avatar" className="reportee-img" />
-              Bryce Narciso C. Mercines<br />
+              <img src={reporteeImage} alt="reportee-avatar" className="reportee-img" />
+             {reporteeName}
+              <br />
             </span>
           </div>
         </center>
@@ -53,14 +76,11 @@ const InfoCard = (props) => {
           </div>
         </div>
 
-
-
-
-
-
       </div>
       <div className="info-footer">
-        <button className="btn-verify"><i className="fa fa-check mr-1"></i>Verify</button>
+        <button className="btn-verify"
+          onClick={()=>{ verifyReport(props.data) }}
+        ><i className="fa fa-check mr-1"></i>Verify</button>
         <button className="btn-dismiss"><i className="fa fa-times-circle mr-1"></i>Dismiss</button>
         <button className="btn-cancel"
           onClick={() => { cancelReview() }}

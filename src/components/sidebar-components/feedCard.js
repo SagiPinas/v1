@@ -14,7 +14,7 @@ const FeedCard = (props) => {
   const [currentCard, setCurrentCard] = useState("")
   const [incidentDetails, setDetails] = useState([])
 
-  const socket = io(`${coreURL}`);
+  const socket = io(coreURL);
 
   socket.on("report", () => {
     setList("loading")
