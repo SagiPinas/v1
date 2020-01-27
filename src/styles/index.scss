@@ -3,6 +3,29 @@ body {
  background: #172b4d;
 }
 
+/* width */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgba(131, 152, 248, 0.589);
+  border-radius: 2px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(44, 56, 216, 0.726);
+}
+
+
 *.unselectable {
   -moz-user-select: none;
   -khtml-user-select: none;

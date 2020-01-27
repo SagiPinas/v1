@@ -263,6 +263,26 @@ $shine-gradient: linear-gradient(to right, rgba(238, 238, 238, 0.356),rgba(214, 
     padding: 10px;
     margin-bottom: 10px;
 
+    &.info-card-loader{
+      border: none;
+      background: transparent;
+      display: flex;
+      width: 150px;
+      padding: 0px;
+      height: 30px;
+
+      .dot{
+        width: 40px;
+        height: 40px;
+      }
+
+      .line{
+        margin-left: 20px;
+        margin-top: 18px;
+        width: 90px;
+      }
+    }
+
 
     /* animation */
 

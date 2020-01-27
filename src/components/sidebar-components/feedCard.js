@@ -16,13 +16,17 @@ const FeedCard = (props) => {
 
   const socket = io(coreURL);
 
-  socket.on("report", () => {
+  const refreshFeed = () => {
     setList("loading")
     axios.get(`${coreURL}/incidents`)
       .then(res => {
         setList("render")
         setListData(res.data);
       })
+  }
+
+  socket.on("report", () => {
+    refreshFeed()
   })
 
   const EmptyFeed = () => {
@@ -71,6 +75,7 @@ const FeedCard = (props) => {
     setTimeout(() => {
       setCurrentCard("")
       document.getElementsByClassName("active-card")[0].classList.remove("active-card")
+      refreshFeed();
     }, 550)
   }
 

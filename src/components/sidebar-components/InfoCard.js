@@ -14,34 +14,35 @@ const InfoCard = (props) => {
   }
 
   const verifyReport = () => {
-    socket.emit('verifyReport',props.data)
-    alert("Report verfied!");
+    socket.emit('verifyReport', props.data)
+    setreportStatus("verified")
     document.getElementById('deselectCard').click();
   }
 
   const [reporteeImage, setImage] = useState("")
   const [reporteeName, setReporteeName] = useState("")
   const [profile, setProfile] = useState(false)
+  const [reportStatus, setreportStatus] = useState("")
 
-  useEffect(()=>{
-    axios.get(`https://graph.facebook.com/${props.data.id}`,{
+  useEffect(() => {
+    axios.get(`https://graph.facebook.com/${props.data.id}`, {
       params: {
         fields: "first_name,last_name,profile_pic",
-        access_token: "PAGE_ACCESS_TOKEN_HERE"
+        access_token: "PAGE_ACCESS_TOKEN"
       }
     }
     )
-    .then(res=>{
-      setImage(res.data.profile_pic)
-      setReporteeName(`${res.data.first_name} ${res.data.last_name}`)
-      setProfile(true)
-    })
-  },[])
+      .then(res => {
+        setImage(res.data.profile_pic)
+        setReporteeName(`${res.data.first_name} ${res.data.last_name}`)
+        setProfile(true)
+      })
+  })
 
 
   return (
     <div className="info-card fade-in-bottom" id={`infocard-${props.data.uid}`}>
-      <div className="status-bar"></div>
+      <div className={`status-bar ${reportStatus}`}></div>
       <h3 className="info-title">
         <i className="fa fa-map-marker text-primary mr-2"></i>
         Manila, Philippines
@@ -57,11 +58,22 @@ const InfoCard = (props) => {
 
         <center>
           <div className="reportee-profile mt-1">
-            <span>
-              <img src={reporteeImage} alt="reportee-avatar" className="reportee-img" />
-             {reporteeName}
-              <br />
-            </span>
+            {
+              profile ? (
+                <span>
+                  <img src={reporteeImage} alt="reportee-avatar" className="reportee-img" />
+                  {reporteeName}
+                  <br />
+                </span>
+              ) : (
+                  <div className="skeleton-cards">
+                    <div className="skeleton-card info-card-loader">
+                      <div className="dot"><div /></div>
+                      <div className="line"><div /></div>
+                    </div>
+                  </div>
+                )
+            }
           </div>
         </center>
 
@@ -79,7 +91,7 @@ const InfoCard = (props) => {
       </div>
       <div className="info-footer">
         <button className="btn-verify"
-          onClick={()=>{ verifyReport(props.data) }}
+          onClick={() => { verifyReport(props.data) }}
         ><i className="fa fa-check mr-1"></i>Verify</button>
         <button className="btn-dismiss"><i className="fa fa-times-circle mr-1"></i>Dismiss</button>
         <button className="btn-cancel"
