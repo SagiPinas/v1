@@ -6,33 +6,64 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiYnJ5Y2UwNiIsImEiOiJjazNmbndybm4wMDk3M29wZ2dic
 const Map = (props) => {
 
 
+
   useEffect(() => {
+    let currentLocation = JSON.parse(localStorage.currentLocation);
     const map = new mapboxgl.Map({
       container: document.getElementById("map"),
       style: 'mapbox://styles/bryce06/ck5w2nl700lyp1ip79hnktdrr',
-      center: [5, 34],
-      zoom: 5.5
+      center: [currentLocation.long, currentLocation.lat],
+      zoom: 16
     })
 
-    setTimeout(
-      () => {
-        map.flyTo({
-          center: [
-            -74.5 + (Math.random() - 0.5) * 10,
-            40 + (Math.random() - 0.5) * 10
-          ],
-          essential: true
-        });
-      }, 2000
-    )
-  })
+    function mapTo() {
 
+      var geojson = {
+        type: 'FeatureCollection',
+        features: [{
+          type: 'Incident Location',
+          geometry: {
+            type: 'Point',
+            coordinates: [currentLocation.long, currentLocation.lat]
+          },
+          properties: {
+            title: 'Report Location',
+            description: 'something'
+          }
+        }]
+      }
+
+
+
+      map.flyTo({
+        center: [currentLocation.long, currentLocation.lat],
+        zoom: map.getZoom() + 1,
+        speed: 1.25,
+        curve: 1.1,
+        essential: true
+      });
+
+
+      var el = document.createElement('div');
+      el.className = 'marker-x';
+      el.innerHTML = `
+      <div>
+      <img src="https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png" class="map-marker">
+      <span class="pulse"></span>
+      <span class="pulse"></span>
+      </div>
+      `
+
+      new mapboxgl.Marker(el)
+        .setLngLat(geojson.features[0].geometry.coordinates)
+        .addTo(map);
+    }
+
+    document.getElementById('mapJump').onclick = () => { mapTo() }
+  })
 
   return (
     <div>
-      <div className="inline-block  mt12 ml12 bg-darken75 color-white z1 py6 px12 round-full txt-s txt-bold">
-        <div>{`Longitude: ${5} Latitude: ${34} Zoom: ${5.5}`}</div>
-      </div>
       <div id="map" className="absolute top right left bottom" />
     </div>
   );

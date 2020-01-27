@@ -59,3 +59,63 @@ $sidebar-width: 270px;
   right: 0px;
   display: block;
 }
+
+// map marker
+
+.marker-x {
+  z-index: 1 !important;
+  background-size: cover;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  position: fixed;
+  cursor: pointer;
+}
+
+.map-marker{
+  margin-left: -5px;
+  margin-top: 2px;
+}
+
+
+.pulse {
+  margin:100px;
+  display: block;
+  position: absolute;
+  margin-left: 9px;
+  margin-top: -19px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  z-index: -1;
+  background: rgb(233, 119, 104);
+  cursor: pointer;
+  box-shadow: 4px 500px 10px rgba(204,169,44, 0.4);
+  animation: pulse 2s infinite;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:nth-child(2){
+    animation-delay: 2.5s;
+  }
+
+
+}
+
+@keyframes pulse {
+  0% {
+    -moz-box-shadow: 0 0 0 0 rgba(204,169,44, 0.4);
+    box-shadow: 0 0 0 0px rgba(180, 53, 49, 0.279);
+
+  }
+  70% {
+    -moz-box-shadow: 0 0 0 0px rgba(185, 160, 224, 0);
+    box-shadow: 0 0 0 30px rgba(228, 80, 43, 0.579);
+  }
+  100% {
+      -moz-box-shadow: 0 0 0 200px rgba(185, 160, 224, 0);
+      box-shadow: 0 0 0 80px rgba(180, 49, 49, 0.079);
+  }
+}

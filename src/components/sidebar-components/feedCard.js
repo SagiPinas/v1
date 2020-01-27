@@ -66,8 +66,10 @@ const FeedCard = (props) => {
         currentActiveCard.classList.remove("active-card")
       }
       element.currentTarget.classList.add("active-card")
+      localStorage.currentLocation = JSON.stringify(incidentInfo.location)
       setDetails(incidentInfo)
       setCurrentCard(cardID)
+      document.getElementById('mapJump').click()
     }
   }
 
