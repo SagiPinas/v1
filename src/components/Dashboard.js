@@ -3,6 +3,7 @@ import '../styles/dashboard.scss'
 import Sidebar from './Sidebar';
 import Widgets from './Widgets';
 import Profile from './Profile';
+import Map from './Map';
 
 
 const Dashboard = () => {
@@ -26,8 +27,7 @@ const Dashboard = () => {
       </div>
       {
         profile ? (<Profile />) : (
-          <div id="content-area">
-          </div>
+          <Map />
         )
       }
     </div>

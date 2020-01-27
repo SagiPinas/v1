@@ -50,3 +50,12 @@ $sidebar-width: 270px;
 
 
 }
+
+.mapboxgl-canvas{
+  left: 270px !important;
+  z-index: 1 !important;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  display: block;
+}

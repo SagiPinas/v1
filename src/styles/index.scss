@@ -3,6 +3,12 @@ body {
  background: #172b4d;
 }
 
+input{
+  &:focus{
+    color: #333 !important;
+  }
+}
+
 /* width */
 ::-webkit-scrollbar {
   width: 4px;

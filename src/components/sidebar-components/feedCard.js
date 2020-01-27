@@ -20,8 +20,9 @@ const FeedCard = (props) => {
     setList("loading")
     axios.get(`${coreURL}/incidents`)
       .then(res => {
+        let incidentList = res.data.filter(x => x.status === "unverified")
+        setListData(incidentList);
         setList("render")
-        setListData(res.data);
       })
   }
 
@@ -52,8 +53,9 @@ const FeedCard = (props) => {
   useEffect(() => {
     axios.get(`${coreURL}/incidents`)
       .then(res => {
+        let incidentList = res.data.filter(x => x.status === "unverified")
+        setListData(incidentList);
         setList("render")
-        setListData(res.data);
       })
   }, [])
 
@@ -86,28 +88,26 @@ const FeedCard = (props) => {
         listData.length !== 0 ? (
           listData.map(incident => {
             return (
-              incident.status === "unverified" ? (
-                <div className="card fade-in-bottom"
-                  onClick={(e) => {
-                    (selectCard(e, incident.uid, incident))
-                  }}>
-                  <span className="date">
-                    {moment(incident.timestamp).fromNow()}
-                  </span>
-                  <span
-                    className="reviewers"
-                    title="No. of responders reviewing this incident."
-                  >0</span>
-                  <span className="tag">
-                    <i className="fa fa-bullseye text-danger mr-1"></i>
-                    {incident.type}
-                  </span>
-                  <hr />
-                  <div className="body">
-                    {ellipsis(incident.details, 70)}
-                  </div>
+              <div className="card fade-in-bottom"
+                onClick={(e) => {
+                  (selectCard(e, incident.uid, incident))
+                }}>
+                <span className="date">
+                  {moment(incident.timestamp).fromNow()}
+                </span>
+                <span
+                  className="reviewers"
+                  title="No. of responders reviewing this incident."
+                >0</span>
+                <span className="tag">
+                  <i className="fa fa-bullseye text-danger mr-1"></i>
+                  {incident.type}
+                </span>
+                <hr />
+                <div className="body">
+                  {ellipsis(incident.details, 70)}
                 </div>
-              ) : ""
+              </div>
             )
           })
         ) : (<EmptyFeed />)

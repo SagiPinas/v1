@@ -6,6 +6,7 @@ $shine-gradient: linear-gradient(to right, rgba(238, 238, 238, 0.356),rgba(214, 
   height: 101vh;
   background: #fff;
   width: 270px;
+  z-index: 9;
   position: fixed;
   box-shadow: 0 0 9px rgba(121, 127, 131, 0.246), 0 0 1px rgba(83, 169, 250, 0.39) !important;
 
@@ -62,7 +63,7 @@ $shine-gradient: linear-gradient(to right, rgba(238, 238, 238, 0.356),rgba(214, 
 
       li{
         display: inline;
-        padding: 10px;
+        padding: 8px;
         text-transform: uppercase;
         font-size: 13px;
         color: rgb(156, 154, 154);

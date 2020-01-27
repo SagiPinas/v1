@@ -16,7 +16,9 @@ const InfoCard = (props) => {
   const verifyReport = () => {
     socket.emit('verifyReport', props.data)
     setreportStatus("verified")
-    document.getElementById('deselectCard').click();
+    setTimeout(() => {
+      document.getElementById('deselectCard').click();
+    }, 1500)
   }
 
   const [reporteeImage, setImage] = useState("")
