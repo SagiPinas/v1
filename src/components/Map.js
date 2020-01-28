@@ -17,7 +17,7 @@ const Map = (props) => {
     })
 
     function mapTo() {
-
+      let currentLocation = JSON.parse(localStorage.currentLocation);
       var geojson = {
         type: 'FeatureCollection',
         features: [{
