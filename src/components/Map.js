@@ -1,5 +1,10 @@
 import React, { useEffect } from 'react'
+import '../styles/geocoder.scss'
 import mapboxgl from 'mapbox-gl'
+import Directions from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions';
+
+
+
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiYnJ5Y2UwNiIsImEiOiJjazNmbndybm4wMDk3M29wZ2dicjlmb29iIn0.NVknKG525ZpQVmIAbFiqfw';
 
@@ -13,10 +18,21 @@ const Map = (props) => {
 
     const map = new mapboxgl.Map({
       container: document.getElementById("map"),
-      style: 'mapbox://styles/bryce06/ck5w2nl700lyp1ip79hnktdrr',
+      style: 'mapbox://styles/bryce06/ck6ui8pey276f1imq6n2cc54s',
       center: [currentLocation.long, currentLocation.lat],
       zoom: 16
     })
+
+
+
+
+    map.addControl(
+      new Directions({
+        accessToken: mapboxgl.accessToken
+      }),
+      'bottom-right'
+    );
+
 
     function mapTo() {
       let currentLocation = JSON.parse(localStorage.currentLocation);
@@ -68,6 +84,8 @@ const Map = (props) => {
     }
 
     document.getElementById('mapJump').onclick = () => { mapTo() }
+
+
   })
 
   return (
