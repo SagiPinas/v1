@@ -68,6 +68,7 @@ const FeedCard = (props) => {
       element.currentTarget.classList.add("active-card")
       setDetails(incidentInfo)
       setCurrentCard(cardID)
+      localStorage.currentIncident = JSON.stringify(incidentInfo);
       localStorage.currentLocation = JSON.stringify(incidentInfo.location)
       document.getElementById('mapJump').click()
     }

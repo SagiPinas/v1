@@ -9,6 +9,8 @@ const Map = (props) => {
 
   useEffect(() => {
     let currentLocation = JSON.parse(localStorage.currentLocation);
+    let currentIncident = JSON.parse(localStorage.currentIncident)
+
     const map = new mapboxgl.Map({
       container: document.getElementById("map"),
       style: 'mapbox://styles/bryce06/ck5w2nl700lyp1ip79hnktdrr',
@@ -47,16 +49,22 @@ const Map = (props) => {
       var el = document.createElement('div');
       el.className = 'marker-x';
       el.innerHTML = `
-      <div>
+      <div id="${currentIncident.uid}">
       <img src="https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png" class="map-marker">
       <span class="pulse"></span>
       <span class="pulse"></span>
       </div>
       `
 
-      new mapboxgl.Marker(el)
-        .setLngLat(geojson.features[0].geometry.coordinates)
-        .addTo(map);
+      let mapMarker = new mapboxgl.Marker(el)
+      mapMarker.setLngLat(geojson.features[0].geometry.coordinates)
+      mapMarker.addTo(map);
+
+      // let checkMarkerInstance = document.querySelector(`#${currentIncident.uid}`);
+      // if (!document.contains(checkMarkerInstance)) {
+      // mapMarker.addTo(map);
+      // }
+
     }
 
     document.getElementById('mapJump').onclick = () => { mapTo() }
