@@ -65,7 +65,7 @@ const Map = (props) => {
       var el = document.createElement('div');
       el.className = 'marker-x';
       el.innerHTML = `
-      <div id="${currentIncident.uid}">
+      <div class="marker-${currentIncident.uid}">
       <img src="https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png" class="map-marker">
       <span class="pulse"></span>
       <span class="pulse"></span>

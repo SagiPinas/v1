@@ -59,6 +59,15 @@ const FeedCard = (props) => {
       })
   }, [])
 
+  const removeMarkers = () => {
+    let currentIncidentID = JSON.parse(localStorage.currentIncident).uid;
+    let makers = document.querySelectorAll(`.marker-${currentIncidentID}`);
+
+    makers.forEach(marker => {
+      marker.remove();
+    })
+  }
+
   const selectCard = (element, cardID, incidentInfo) => {
     if (cardID !== currentCard) {
       let currentActiveCard = document.getElementsByClassName("active-card")[0]
@@ -80,6 +89,7 @@ const FeedCard = (props) => {
     setTimeout(() => {
       setCurrentCard("")
       document.getElementsByClassName("active-card")[0].classList.remove("active-card")
+      removeMarkers();
       refreshFeed();
     }, 550)
   }
