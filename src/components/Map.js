@@ -11,8 +11,16 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiYnJ5Y2UwNiIsImEiOiJjazNmbndybm4wMDk3M29wZ2dic
 const Map = (props) => {
 
 
-
   useEffect(() => {
+
+    if(!localStorage.currentLocation){
+      localStorage.currentLocation = JSON.stringify({long:0, lat: 0})
+    }
+
+    if(!localStorage.currentIncident){
+      localStorage.currentIncident = JSON.stringify({uid: 0})
+    }
+
     let currentLocation = JSON.parse(localStorage.currentLocation);
     let currentIncident = JSON.parse(localStorage.currentIncident)
 
