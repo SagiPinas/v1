@@ -59,20 +59,14 @@ const FeedCard = (props) => {
       })
   }, [])
 
-  const removeMarkers = () => {
-    let currentIncidentID = JSON.parse(localStorage.currentIncident).uid;
-    let makers = document.querySelectorAll(`.marker-${currentIncidentID}`);
 
-    makers.forEach(marker => {
-      marker.remove();
-    })
-  }
 
   const selectCard = (element, cardID, incidentInfo) => {
     if (cardID !== currentCard) {
       let currentActiveCard = document.getElementsByClassName("active-card")[0]
       if (document.contains(currentActiveCard)) {
         currentActiveCard.classList.remove("active-card")
+        deleteMarkers()
       }
       element.currentTarget.classList.add("active-card")
       setDetails(incidentInfo)
@@ -83,13 +77,25 @@ const FeedCard = (props) => {
     }
   }
 
+
+  const deleteMarkers = () => {
+    let currentIncidentID = JSON.parse(localStorage.currentIncident).uid;
+    let markers = document.getElementsByClassName(`marker-${currentIncidentID}`);
+
+    for (var i = 0; i < markers.length; i++) {
+      markers[i].remove();
+      console.log('removig marker:', currentIncidentID)
+    }
+
+  }
+
   const deSelectCard = () => {
     let infoCardID = `infocard-${incidentDetails.uid}`;
+    deleteMarkers()
     document.getElementById(infoCardID).classList.replace("fade-in-bottom", "fade-out-bottom")
     setTimeout(() => {
       setCurrentCard("")
       document.getElementsByClassName("active-card")[0].classList.remove("active-card")
-      removeMarkers();
       refreshFeed();
     }, 550)
   }

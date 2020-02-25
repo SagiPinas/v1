@@ -13,16 +13,16 @@ const Map = (props) => {
 
   useEffect(() => {
 
-    if(!localStorage.currentLocation){
-      localStorage.currentLocation = JSON.stringify({long:0, lat: 0})
+    if (!localStorage.currentLocation) {
+      localStorage.currentLocation = JSON.stringify({ long: 121.001433, lat: 14.507936 })
     }
 
-    if(!localStorage.currentIncident){
-      localStorage.currentIncident = JSON.stringify({uid: 0})
+    if (!localStorage.currentIncident) {
+      localStorage.currentIncident = JSON.stringify({ uid: 0 })
     }
 
     let currentLocation = JSON.parse(localStorage.currentLocation);
-    let currentIncident = JSON.parse(localStorage.currentIncident)
+    // let currentIncident = JSON.parse(localStorage.currentIncident)
 
     const map = new mapboxgl.Map({
       container: document.getElementById("map"),
@@ -73,7 +73,7 @@ const Map = (props) => {
       var el = document.createElement('div');
       el.className = 'marker-x';
       el.innerHTML = `
-      <div class="marker-${currentIncident.uid}">
+      <div class="marker-${JSON.parse(localStorage.currentIncident).uid}">
       <img src="https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png" class="map-marker">
       <span class="pulse"></span>
       <span class="pulse"></span>
