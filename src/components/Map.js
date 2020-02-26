@@ -84,10 +84,6 @@ const Map = (props) => {
       mapMarker.setLngLat(geojson.features[0].geometry.coordinates)
       mapMarker.addTo(map);
 
-      // let checkMarkerInstance = document.querySelector(`#${currentIncident.uid}`);
-      // if (!document.contains(checkMarkerInstance)) {
-      // mapMarker.addTo(map);
-      // }
 
     }
 
