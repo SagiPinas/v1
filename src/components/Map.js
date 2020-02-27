@@ -42,22 +42,33 @@ const Map = (props) => {
     );
 
 
+    const mapDir = new Directions({
+      accessToken: mapboxgl.accessToken
+    })
+
+    const resetRoutes = () => {
+      mapDir.removeRoutes();
+    }
+
+
+
     function mapTo() {
       let currentLocation = JSON.parse(localStorage.currentLocation);
-      var geojson = {
-        type: 'FeatureCollection',
-        features: [{
-          type: 'Incident Location',
-          geometry: {
-            type: 'Point',
-            coordinates: [currentLocation.long, currentLocation.lat]
-          },
-          properties: {
-            title: 'Report Location',
-            description: 'something'
-          }
-        }]
-      }
+
+      // var geojson = {
+      //   type: 'FeatureCollection',
+      //   features: [{
+      //     type: 'Incident Location',
+      //     geometry: {
+      //       type: 'Point',
+      //       coordinates: [currentLocation.long, currentLocation.lat]
+      //     },
+      //     properties: {
+      //       title: 'Report Location',
+      //       description: 'something'
+      //     }
+      //   }]
+      // }
 
 
 
@@ -70,24 +81,31 @@ const Map = (props) => {
       });
 
 
-      var el = document.createElement('div');
-      el.className = 'marker-x';
-      el.innerHTML = `
-      <div class="marker-${JSON.parse(localStorage.currentIncident).uid}">
-      <img src="https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png" class="map-marker">
-      <span class="pulse"></span>
-      <span class="pulse"></span>
-      </div>
-      `
 
-      let mapMarker = new mapboxgl.Marker(el)
-      mapMarker.setLngLat(geojson.features[0].geometry.coordinates)
-      mapMarker.addTo(map);
+      mapDir.setOrigin(`121.001433,14.507936`)
+      mapDir.setDestination(`${currentLocation.long}, ${currentLocation.lat}`)
+
+
+      // var el = document.createElement('div');
+      // el.className = 'marker-x';
+      // el.innerHTML = `
+      // <div class="marker-${JSON.parse(localStorage.currentIncident).uid}">
+      // <img src="https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png" class="map-marker">
+      // <span class="pulse"></span>
+      // <span class="pulse"></span>
+      // </div>
+      // `
+
+      // let mapMarker = new mapboxgl.Marker(el)
+      // mapMarker.setLngLat(geojson.features[0].geometry.coordinates)
+      // mapMarker.addTo(map);
 
 
     }
 
     document.getElementById('mapJump').onclick = () => { mapTo() }
+    document.getElementById('removeRoutes').onclick = () => { resetRoutes() }
+
 
 
   })

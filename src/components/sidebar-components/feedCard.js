@@ -87,6 +87,10 @@ const FeedCard = (props) => {
       console.log('removig marker:', currentIncidentID)
     }
 
+    // remove drawn route
+
+    document.getElementById('removeRoutes').click()
+
   }
 
   const deSelectCard = () => {
