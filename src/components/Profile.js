@@ -100,7 +100,7 @@ const Profile = (props) => {
     return (
       <div>
         <input className="search-bar" placeholder="Search History" />
-        <div className="table-responsive border">
+        <div className="table-responsive">
           <table className="table align-items-center table-flush">
             <thead className="thead-light">
               <tr>

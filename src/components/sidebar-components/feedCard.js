@@ -5,7 +5,9 @@ import moment from 'moment';
 import CardSkeleton from './card-skeleton';
 import InfoCard from './InfoCard'
 import Trophy from '../../assets/award.svg'
+import sound from '../../assets/deduction.mp3'
 import io from 'socket.io-client'
+
 
 const FeedCard = (props) => {
 
@@ -27,6 +29,12 @@ const FeedCard = (props) => {
   }
 
   socket.on("report", () => {
+    if (localStorage.sound === "true") {
+      let notifSound = document.getElementById('tone');
+      notifSound.pause();
+      notifSound.currentTime = 0;
+      notifSound.play();
+    }
     refreshFeed()
   })
 
@@ -107,6 +115,9 @@ const FeedCard = (props) => {
   return (
     <div>
       <button className="d-none" id="deselectCard" onClick={() => { deSelectCard() }} />
+      <audio className="d-none" id="tone" controls>
+        <source src={sound} type="audio/mpeg" />
+      </audio>
       {list === "render" ? (
         listData.length !== 0 ? (
           listData.map(incident => {
