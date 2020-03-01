@@ -172,7 +172,7 @@
   z-index:1;
   }
   .directions-control.directions-control-directions {
-    background:rgba(0,0,0,0.75);
+    background:rgba(0,0,0,0.95);
     margin: 7px 0 0;
     color:#fff;
     top:0;
@@ -322,6 +322,7 @@
     display:inline;
     font-size:inherit;
     line-height:inherit;
+    color: rgb(255, 166, 0);
     }
   .mapbox-directions-route-summary span {
     color:rgba(255,255,255,0.5);

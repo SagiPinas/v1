@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import FeedCard from './sidebar-components/feedCard'
 import History from './sidebar-components/history'
 import Settings from './sidebar-components/settings'
+import zigzag from "../assets/osc.svg"
 import '../styles/sidebar.scss';
 
 const Sidebar = () => {
@@ -27,7 +28,10 @@ const Sidebar = () => {
           <div></div>
         </div>
         <strong>SagiPinas</strong>
-        <span className="menu"><i className="fa fa-bars"></i></span>
+        <span className="menu">
+          <img src={zigzag} alt="zag" id="active-line" />
+          <div id="inactive-line">--</div>
+        </span>
       </div>
       <div className="tab-menu">
         <ul>

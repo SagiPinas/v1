@@ -14,6 +14,8 @@ const InfoCard = (props) => {
   }
 
   const verifyReport = () => {
+    props.data.responder = JSON.parse(localStorage.user).id;
+    console.log(props.data)
     socket.emit('verifyReport', props.data)
     setreportStatus("verified")
     setTimeout(() => {

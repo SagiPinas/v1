@@ -49,6 +49,17 @@ $shine-gradient: linear-gradient(to right, rgba(238, 238, 238, 0.356),rgba(214, 
       padding: 0px 5px;
       cursor: pointer;
     }
+
+    img{
+      width: 25px;
+      display: none;
+    }
+
+    #inactive-line{
+      display: block;
+      padding: 0.6px 6.5px;
+      letter-spacing: -1px;
+    }
   }
 
   .tab-menu{

@@ -38,6 +38,16 @@ const FeedCard = (props) => {
     refreshFeed()
   })
 
+  socket.on("activity", () => {
+    document.getElementById('inactive-line').style.display = "none";
+    document.getElementById('active-line').style.display = "block";
+
+    setTimeout(() => {
+      document.getElementById('inactive-line').style.display = "block";
+      document.getElementById('active-line').style.display = "none";
+    }, 3000)
+  })
+
   const EmptyFeed = () => {
     return (
       <div className="fade-in-bottom">
