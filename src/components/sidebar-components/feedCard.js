@@ -28,6 +28,29 @@ const FeedCard = (props) => {
       })
   }
 
+  const cancelReport = (report_id) => {
+
+    try {
+      let currentIncident = JSON.parse(localStorage.currentIncident);
+      let cardActive = document.contains(document.getElementById(`infocard-${report_id}`))
+      let cancelBtn = document.querySelector('.btn-cancel');
+
+      if (currentIncident.uid === report_id && cardActive && cancelBtn !== null) {
+        console.log('Report cancelled!')
+        cancelBtn.click();
+      }
+
+    }
+
+    catch{
+      console.log('cancel: report cancellation failed')
+    }
+
+    finally {
+      console.log('cancel: report resolved')
+    }
+  }
+
   socket.on("report", () => {
     if (localStorage.sound === "true") {
       let notifSound = document.getElementById('tone');
@@ -36,6 +59,10 @@ const FeedCard = (props) => {
       notifSound.play();
     }
     refreshFeed()
+  })
+
+  socket.on("cancel_report", (data) => {
+    cancelReport(data["report_id"]);
   })
 
   socket.on("activity", () => {
@@ -97,13 +124,13 @@ const FeedCard = (props) => {
 
 
   const deleteMarkers = () => {
-    let currentIncidentID = JSON.parse(localStorage.currentIncident).uid;
-    let markers = document.getElementsByClassName(`marker-${currentIncidentID}`);
+    // let currentIncidentID = JSON.parse(localStorage.currentIncident).uid;
+    // let markers = document.getElementsByClassName(`marker-${currentIncidentID}`);
 
-    for (var i = 0; i < markers.length; i++) {
-      markers[i].remove();
-      console.log('removig marker:', currentIncidentID)
-    }
+    // for (var i = 0; i < markers.length; i++) {
+    //   markers[i].remove();
+    //   console.log('removig marker:', currentIncidentID)
+    // }
 
     // remove drawn route
 
@@ -114,10 +141,14 @@ const FeedCard = (props) => {
   const deSelectCard = () => {
     let infoCardID = `infocard-${incidentDetails.uid}`;
     deleteMarkers()
-    document.getElementById(infoCardID).classList.replace("fade-in-bottom", "fade-out-bottom")
+    if (document.contains(document.getElementById(infoCardID))) {
+      document.getElementById(infoCardID).classList.replace("fade-in-bottom", "fade-out-bottom")
+    }
     setTimeout(() => {
       setCurrentCard("")
-      document.getElementsByClassName("active-card")[0].classList.remove("active-card")
+      if (document.contains(document.getElementsByClassName("active-card")[0])) {
+        document.getElementsByClassName("active-card")[0].classList.remove("active-card")
+      }
       refreshFeed();
     }, 550)
   }

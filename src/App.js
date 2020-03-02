@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import "./styles/argon.css"
 import "./styles/animations.scss"
+import "toastify-js/src/toastify.css"
 import "./styles/index.scss"
 import Login from './components/Login'
 import Signup from './components/Signup'
