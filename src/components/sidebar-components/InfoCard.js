@@ -3,7 +3,7 @@ import '../../styles/infocard.scss'
 import moment from 'moment'
 import axios from 'axios'
 import io from 'socket.io-client'
-import { coreURL } from '../Utilities'
+import { coreURL, toast } from '../Utilities'
 
 const InfoCard = (props) => {
 
@@ -18,6 +18,7 @@ const InfoCard = (props) => {
     console.log(props.data)
     socket.emit('verifyReport', props.data)
     setreportStatus("verified")
+    toast("Report Verified!", "success")
     setTimeout(() => {
       document.getElementById('deselectCard').click();
     }, 1500)
@@ -41,7 +42,7 @@ const InfoCard = (props) => {
         setReporteeName(`${res.data.first_name} ${res.data.last_name}`)
         setProfile(true)
       })
-  })
+  }, [props])
 
 
   return (

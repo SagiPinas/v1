@@ -24,3 +24,29 @@ export const guid = () => {
   });
 }
 
+
+export const toast = (msg, type) => {
+  let bg = `linear-gradient(to right, #00b09b, #96c93d)`;
+
+  switch (type) {
+    case 'success':
+      bg = `linear-gradient(to right, #11998e, #38ef7d)`
+      break;
+    case 'error':
+      bg = `linear-gradient(to right, #c31432, #240b36)`
+      break;
+    case 'alert':
+      bg = `linear-gradient(to right, #FF512F,#F09819)`;
+      break;
+    default:
+  }
+
+  Toastify({
+    text: msg,
+    backgroundColor: bg,
+    gravity: "top",
+    position: "right"
+  }).showToast();
+
+}
+

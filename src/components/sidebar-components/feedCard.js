@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
-import { coreURL, ellipsis } from '../Utilities'
+import { coreURL, ellipsis, toast } from '../Utilities'
 import moment from 'moment';
 import CardSkeleton from './card-skeleton';
 import InfoCard from './InfoCard'
@@ -58,6 +58,11 @@ const FeedCard = (props) => {
       notifSound.currentTime = 0;
       notifSound.play();
     }
+
+    if (localStorage.toast === "true") {
+      toast('New incident report!', 'alert')
+    }
+
     refreshFeed()
   })
 
