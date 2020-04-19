@@ -1,5 +1,5 @@
 
-# SagiPinas Web
+# v1
 
 > Frontend web application of the SagiPinas Platform
 
