@@ -5,8 +5,13 @@ import moment from 'moment';
 import CardSkeleton from './card-skeleton';
 import InfoCard from './InfoCard'
 import Trophy from '../../assets/award.svg'
-import sound from '../../assets/deduction.mp3'
 import io from 'socket.io-client'
+
+
+const socket = io(coreURL);
+const processedReports = []
+const cancelledReports = []
+
 
 
 const FeedCard = (props) => {
@@ -16,7 +21,15 @@ const FeedCard = (props) => {
   const [currentCard, setCurrentCard] = useState("")
   const [incidentDetails, setDetails] = useState([])
 
-  const socket = io(coreURL);
+  const notifySound = () => {
+    if (localStorage.sound === "true") {
+      let notifSound = document.getElementById('tone');
+      notifSound.pause();
+      notifSound.currentTime = 0;
+      notifSound.play();
+    }
+  }
+
 
   const refreshFeed = () => {
     setList("loading")
@@ -29,41 +42,43 @@ const FeedCard = (props) => {
   }
 
   const cancelReport = (report_id) => {
+    if (!cancelledReports.includes(report_id)) {
+      try {
+        let currentIncident = JSON.parse(localStorage.currentIncident);
+        let cardActive = document.contains(document.getElementById(`infocard-${report_id}`))
+        let cancelBtn = document.querySelector('.btn-cancel');
 
-    try {
-      let currentIncident = JSON.parse(localStorage.currentIncident);
-      let cardActive = document.contains(document.getElementById(`infocard-${report_id}`))
-      let cancelBtn = document.querySelector('.btn-cancel');
+        if (currentIncident.uid === report_id && cardActive && cancelBtn !== null) {
+          console.log('Report cancelled!')
+          cancelBtn.click();
+        }
 
-      if (currentIncident.uid === report_id && cardActive && cancelBtn !== null) {
-        console.log('Report cancelled!')
-        cancelBtn.click();
       }
 
-    }
+      catch{
+        console.log('cancel: report cancellation failed')
+      }
 
-    catch{
-      console.log('cancel: report cancellation failed')
-    }
-
-    finally {
-      console.log('cancel: report resolved')
+      finally {
+        console.log('cancel: report resolved')
+      }
+      toast("The user has cancelled the report!", "error")
+      notifySound()
+      cancelledReports.push(report_id);
     }
   }
 
-  socket.on("report", () => {
-    if (localStorage.sound === "true") {
-      let notifSound = document.getElementById('tone');
-      notifSound.pause();
-      notifSound.currentTime = 0;
-      notifSound.play();
-    }
 
-    if (localStorage.toast === "true") {
-      toast('New incident report!', 'alert')
-    }
+  socket.on("report", (data) => {
+    if (!processedReports.includes(data.uid)) {
+      notifySound()
+      if (localStorage.toast === "true") {
+        toast('New incident report!', 'alert')
+      }
 
-    refreshFeed()
+      refreshFeed()
+      processedReports.push(data.uid)
+    }
   })
 
   socket.on("cancel_report", (data) => {
@@ -161,9 +176,6 @@ const FeedCard = (props) => {
   return (
     <div>
       <button className="d-none" id="deselectCard" onClick={() => { deSelectCard() }} />
-      <audio className="d-none" id="tone" controls>
-        <source src={sound} type="audio/mpeg" />
-      </audio>
       {list === "render" ? (
         listData.length !== 0 ? (
           listData.map(incident => {

@@ -4,6 +4,8 @@ import History from './sidebar-components/history'
 import Settings from './sidebar-components/settings'
 import zigzag from "../assets/osc.svg"
 import '../styles/sidebar.scss';
+import sound from '../assets/deduction.mp3'
+
 
 const Sidebar = () => {
 
@@ -23,6 +25,9 @@ const Sidebar = () => {
     <div id="sidebar">
       <div id="gradient-loader">
       </div>
+      <audio className="d-none" id="tone" controls>
+        <source src={sound} type="audio/mpeg" />
+      </audio>
       <div className="sidebar-title">
         <div className="brand">
           <div id="sidebar-logo">

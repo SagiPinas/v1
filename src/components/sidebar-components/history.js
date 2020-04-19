@@ -44,8 +44,8 @@ const History = () => {
                   <span className="date">
                     {moment(history.timestamp).format('l')}
                   </span>
-                  <span className="status">
-                    <i className="fa fa-circle mr-1" />{history.status}
+                  <span className={`status ${history.status}`}>
+                    <i className={`fa ${history.status === 'cancelled' ? 'fa-ban' : 'fa-circle'} mr-1`} />{history.status}
                   </span>
                   <span className="tag">
                     <i className="fa fa-bars text-primary mr-1"></i>
