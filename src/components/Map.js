@@ -89,10 +89,10 @@ const Map = (props) => {
       // var el = document.createElement('div');
       // el.className = 'marker-x';
       // el.innerHTML = `
-      // <div class="marker-${JSON.parse(localStorage.currentIncident).uid}">
-      // <img src="https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png" class="map-marker">
-      // <span class="pulse"></span>
-      // <span class="pulse"></span>
+      // <div classNamemarker-${JSON.parse(localStorage.currentIncident).uid}">
+      // <img src="https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png" classNamemap-marker">
+      // <span classNamepulse"></span>
+      // <span classNamepulse"></span>
       // </div>
       // `
 

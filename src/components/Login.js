@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import "../styles/login.scss"
 
 import Navbar from "./Navbar";
-import googleLogo from '../assets/google.svg';
 import { Link } from 'react-router-dom';
 import Footer from './Footer'
 import axios from 'axios'
 import { coreURL, validateEmail } from './Utilities'
 import Nprogress from 'nprogress'
+import GoogleLogin from 'react-google-login';
+
 
 const Login = () => {
 
@@ -72,6 +73,12 @@ const Login = () => {
     }
   }
 
+
+  const responseGoogle = (response) => {
+    console.log(response);
+  }
+
+
   return (
     <div className="main-content">
       <Navbar active="login" />
@@ -90,16 +97,20 @@ const Login = () => {
               <div className="card-header bg-transparent pb-5">
                 <div className="text-muted text-center mt-2 mb-3"><small>Sign in with</small></div>
                 <div className="btn-wrapper text-center">
-                  <button className="btn btn-neutral btn-icon">
-                    <span className="btn-inner--icon"><img src={googleLogo} alt="googleLogo" /></span>
-                    <span className="btn-inner--text">Google</span>
-                  </button>
+
+
+                  <GoogleLogin
+                    clientId="451403226679-qhc12ctq9lfvqk3mo6sdv3hmigo8rt0l.apps.googleusercontent.com"
+                    onSuccess={responseGoogle}
+                    isSignedIn={true}
+                  />
+
                 </div>
               </div>
               <div className="card-body px-lg-5 py-lg-4">
                 <div className="text-center text-muted mb-4">
                   <small>Or sign in with credentials</small>
-                  <p class="text-success small">
+                  <p className="text-success small">
                     {localStorage.flag}
                   </p>
                 </div>
