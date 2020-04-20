@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import '../styles/profile.scss'
-import axios from 'axios';
-import { coreURL } from './Utilities';
-import moment from 'moment';
+// import axios from 'axios';
+// import { coreURL } from './Utilities';
+// import moment from 'moment';
 import loader from '../assets/loading.gif'
 import defaultImg from '../assets/default-avatar.png'
 import noHistory from '../assets/2081871.svg'
@@ -10,9 +10,8 @@ import noHistory from '../assets/2081871.svg'
 
 const Profile = (props) => {
 
-  const [profileTab, setProfileTab] = useState("loading")
+  const [profileTab, setProfileTab] = useState("settings")
   const [profileInfo, setProfileInfo] = useState([])
-  const [history, setHistory] = useState([])
   const [editAccount, setEditing] = useState(false)
   const [changePassword, setChangePass] = useState(false)
   const [passError, setPassError] = useState("");
@@ -22,32 +21,14 @@ const Profile = (props) => {
 
 
 
-  const loadHistory = () => {
-    let user = JSON.parse(localStorage.user);
-    setProfileTab('loading')
-    axios.get(`${coreURL}/public/responder/?responderId=${user.id}`)
-      .then(res => {
-        if (res.data.status === "success") {
-          setProfileInfo(res.data.profile)
-          setHistory(res.data.history)
-          setProfileTab('history')
-        } else {
-          alert("there was a problem loading your profile")
-        }
-      })
-  }
+
 
   useEffect(() => {
-    loadHistory();
   }, [])
 
   const switchTabs = (newTab) => {
     if (newTab !== profileTab) {
-      if (newTab === "history") {
-        loadHistory();
-      } else {
-        setProfileTab(newTab);
-      }
+      setProfileTab(newTab);
     }
   }
 
@@ -96,49 +77,6 @@ const Profile = (props) => {
 
 
 
-  const ActivityHistory = () => {
-    return (
-      <div>
-        <input className="search-bar" placeholder="Search History" />
-        <div className="table-responsive">
-          <table className="table align-items-center table-flush">
-            <thead className="thead-light">
-              <tr>
-                <th scope="col">No.</th>
-                <th scope="col">Type</th>
-                <th scope="col">Date Reported</th>
-                <th scope="col">Date Verified</th>
-                <th scope="col">Status</th>
-                <th scope="col">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-
-              {
-                history.map((incident, index) => {
-                  return (
-                    <tr>
-                      <th scope="row">{index + 1}</th>
-                      <th scope="row"><span className="text-type">
-                        {incident.type}
-                      </span></th>
-                      <td>{moment(incident.timestamp).format('l')}</td>
-                      <td>{"..."}</td>
-                      <td><strong className="text-success text-uppercase">{incident.status}</strong></td>
-                      <td><button className="btn btn-sm btn-outline-primary">
-                        <i className="fa fa-ellipsis-h mr-1" /> Details
-                  </button></td>
-                    </tr>
-                  )
-                })
-              }
-
-            </tbody>
-          </table>
-        </div>
-      </div>
-    )
-  }
 
   const EmptyProfile = () => {
     return (
@@ -253,7 +191,7 @@ const Profile = (props) => {
                       </div>
                       <div>
                         <span className="heading">
-                          {history.length}
+                          0
                         </span>
                         <span className="description account-snippet">Responses</span>
                       </div>
@@ -287,16 +225,10 @@ const Profile = (props) => {
                 <div className="row align-items-center">
                   <div className="col-5">
                     <h3 className="mb-0">
-                      {(profileTab === "history" || profileTab === "loading") ?
-                        ("Activity History") : ("Account Settings")
-                      }
+                      Account Overview
                     </h3>
                   </div>
                   <ul className="account-tabs pt-2">
-                    <li
-                      className={(profileTab === "history" || profileTab === "loading") ? "active" : ""}
-                      onClick={() => { switchTabs("history") }}
-                    >History</li>
                     <li
                       className={profileTab === "settings" ? "active" : ""}
                       onClick={() => { switchTabs("settings") }}
@@ -307,9 +239,7 @@ const Profile = (props) => {
               </div>
               <div className="card-body">
                 {profileTab === "loading" ? <Loading /> : ""}
-                {profileTab === "history" && history.length !== 0 ? <ActivityHistory /> : ""}
                 {profileTab === "settings" ? <AccountSettings /> : ""}
-                {profileTab === "history" && history.length === 0 ? <EmptyProfile /> : ""}
               </div>
             </div>
           </div>

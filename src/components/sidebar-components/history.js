@@ -3,6 +3,7 @@ import { coreURL, ellipsis } from '../Utilities';
 import axios from 'axios';
 import CardSkeleton from './card-skeleton'
 import moment from 'moment'
+import Fuse from 'fuse.js'
 
 const History = () => {
 
@@ -26,10 +27,54 @@ const History = () => {
     )
   }
 
+  const searchOptions = {
+    isCaseSensitive: false,
+    findAllMatches: false,
+    includeMatches: false,
+    includeScore: false,
+    useExtendedSearch: false,
+    minMatchCharLength: 2,
+    shouldSort: true,
+    threshold: 0.6,
+    location: 0,
+    distance: 100,
+    keys: [
+      "status",
+      "type",
+      "details"
+    ]
+  };
+
+
+  const searchHistory = (pattern) => {
+    setTabState("loading")
+    let user = JSON.parse(localStorage.user);
+    axios.get(`${coreURL}/public/responder/?responderId=${user.id}`)
+      .then(res => {
+        if (pattern.trim() !== "") {
+          const fuse = new Fuse(res.data.history, searchOptions);
+          let result = fuse.search(pattern).map(data => data.item);
+          setHistoryData(result)
+        } else {
+          setHistoryData(res.data.history)
+        }
+        setTabState('render')
+      })
+
+  }
+
 
   return (
     <div className="history">
-      <input placeholder="Search History" id="sidebar-history-search" />
+      <input
+        placeholder="Search History"
+        id="sidebar-history-search"
+        onKeyUp={e => {
+          if (e.keyCode === 13) {
+            searchHistory(e.target.value)
+          }
+        }}
+      />
       <hr className="mb-3" />
 
       {
