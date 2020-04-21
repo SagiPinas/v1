@@ -5,13 +5,15 @@ import '../styles/profile.scss'
 // import moment from 'moment';
 import loader from '../assets/loading.gif'
 import defaultImg from '../assets/default-avatar.png'
-import noHistory from '../assets/2081871.svg'
+// import noHistory from '../assets/2081871.svg'
+import { GoogleLogout } from 'react-google-login';
+
 
 
 const Profile = (props) => {
 
   const [profileTab, setProfileTab] = useState("settings")
-  const [profileInfo, setProfileInfo] = useState([])
+  const [profileInfo, setProfileInfo] = useState({})
   const [editAccount, setEditing] = useState(false)
   const [changePassword, setChangePass] = useState(false)
   const [passError, setPassError] = useState("");
@@ -19,11 +21,9 @@ const Profile = (props) => {
 
   const userData = JSON.parse(localStorage.user)
 
-
-
-
-
   useEffect(() => {
+    const userData = JSON.parse(localStorage.user)
+    setProfileInfo(userData)
   }, [])
 
   const switchTabs = (newTab) => {
@@ -78,15 +78,15 @@ const Profile = (props) => {
 
 
 
-  const EmptyProfile = () => {
-    return (
-      <div className="no-history fade-in-bottom">
-        <center>
-          <img src={noHistory} alt="no-data" />
-          <p className="mt-3">No data to show.</p>
-        </center>
-      </div>)
-  }
+  // const EmptyProfile = () => {
+  //   return (
+  //     <div className="no-history fade-in-bottom">
+  //       <center>
+  //         <img src={noHistory} alt="no-data" />
+  //         <p className="mt-3">No data to show.</p>
+  //       </center>
+  //     </div>)
+  // }
 
   const AccountSettings = () => {
     return (
@@ -174,7 +174,7 @@ const Profile = (props) => {
               <div className="row justify-content-center">
                 <div className="col-lg-3 order-lg-2">
                   <div className="card-profile-image">
-                    <img src={userData.profileImg ? userData.profileImg : defaultImg}
+                    <img src={userData.avatar ? userData.avatar : defaultImg}
                       alt="profile" className="profile-image" />
                   </div>
                 </div>
@@ -214,6 +214,12 @@ const Profile = (props) => {
                   >
                     Log out
                   </button>
+                  <GoogleLogout
+                    clientId="451403226679-qhc12ctq9lfvqk3mo6sdv3hmigo8rt0l.apps.googleusercontent.com"
+                    buttonText="Logout"
+                    onLogoutSuccess={logout}
+                  >
+                  </GoogleLogout>
                 </div>
               </div>
             </div>

@@ -51,6 +51,8 @@ const FeedCard = (props) => {
         if (currentIncident.uid === report_id && cardActive && cancelBtn !== null) {
           console.log('Report cancelled!')
           cancelBtn.click();
+        } else {
+          refreshFeed()
         }
 
       }
@@ -75,9 +77,8 @@ const FeedCard = (props) => {
       if (localStorage.toast === "true") {
         toast('New incident report!', 'alert')
       }
-
-      refreshFeed()
       processedReports.push(data.uid)
+      refreshFeed()
     }
   })
 

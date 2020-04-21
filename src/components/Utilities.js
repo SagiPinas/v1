@@ -1,4 +1,6 @@
 import Toastify from 'toastify-js'
+import sha1 from 'sha1'
+import axios from 'axios'
 
 
 export const coreURL = 'https://sagipinasv1.herokuapp.com';
@@ -40,13 +42,79 @@ export const toast = (msg, type) => {
       break;
     default:
   }
-
   Toastify({
     text: msg,
     backgroundColor: bg,
     gravity: "top",
     position: "right"
   }).showToast();
+}
 
+export const authSSO = (data) => {
+
+  console.log(data);
+
+  let email = data.email
+  let password = sha1(data.email + data.googleId);
+
+  axios(
+    {
+      method: 'post',
+      url: `${coreURL}/login`,
+      data: {
+        email: email,
+        password: password,
+      }
+    }
+  )
+    .then(res => {
+      if (res.data.status === "success") {
+        localStorage.user = JSON.stringify(res.data.userData);
+        window.location.href = "/dashboard"
+      } else {
+        toast('Creating Account...', 'success')
+        axios(
+          {
+            method: 'post',
+            url: `${coreURL}/signup`,
+            data: {
+              email: data.email,
+              name: data.name,
+              password: password,
+              avatar: data.imageUrl,
+              city: '-'
+            }
+          }
+        )
+          .then(res => {
+            if (res.data.status === "success") {
+              let newUserData = {
+                id: res.data.userId,
+                email: data.email,
+                name: data.name,
+                avatar: data.imageUrl,
+                city: '-'
+              }
+
+              localStorage.user = JSON.stringify(newUserData);
+              window.location.href = "/dashboard"
+            } else {
+              toast('Sign up Error: Server Failed to respond!', 'error');
+            }
+          })
+
+          .catch(err => {
+            console.log(err)
+            toast('Server Failed to respond!', 'error');
+          })
+      }
+    })
+
+    .catch(err => {
+      if (err) {
+        console.log(err)
+        toast('Server Failed to respond!', 'error');
+      }
+    })
 }
 

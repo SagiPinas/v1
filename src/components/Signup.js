@@ -65,7 +65,6 @@ const Signup = () => {
       registerError("Please provide a proper email address.")
       setLoading(false)
     }
-
   }
 
   window.onkeyup = (e) => {

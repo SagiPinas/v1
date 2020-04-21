@@ -5,7 +5,7 @@ import Navbar from "./Navbar";
 import { Link } from 'react-router-dom';
 import Footer from './Footer'
 import axios from 'axios'
-import { coreURL, validateEmail } from './Utilities'
+import { coreURL, validateEmail, authSSO } from './Utilities'
 import Nprogress from 'nprogress'
 import GoogleLogin from 'react-google-login';
 
@@ -75,7 +75,7 @@ const Login = () => {
 
 
   const responseGoogle = (response) => {
-    console.log(response);
+    authSSO(response.profileObj)
   }
 
 
@@ -103,6 +103,7 @@ const Login = () => {
                     clientId="451403226679-qhc12ctq9lfvqk3mo6sdv3hmigo8rt0l.apps.googleusercontent.com"
                     onSuccess={responseGoogle}
                     isSignedIn={true}
+                    buttonText="Google"
                   />
 
                 </div>
