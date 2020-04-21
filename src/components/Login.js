@@ -75,6 +75,7 @@ const Login = () => {
 
 
   const responseGoogle = (response) => {
+    Nprogress.start();
     authSSO(response.profileObj)
   }
 

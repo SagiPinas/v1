@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import googleLogo from '../assets/google.svg'
 import Navbar from './Navbar'
 import Footer from './Footer'
-import { coreURL, validateEmail } from './Utilities'
+import { coreURL, validateEmail, authSSO } from './Utilities'
 import Nprogress from 'nprogress'
 import axios from 'axios'
+import GoogleLogin from 'react-google-login';
 
 const Signup = () => {
 
@@ -17,6 +17,12 @@ const Signup = () => {
     setLoading(false)
     setError(message)
   }
+
+  const responseGoogle = (response) => {
+    Nprogress.start();
+    authSSO(response.profileObj)
+  }
+
 
   const register = () => {
     setLoading(true)
@@ -103,11 +109,15 @@ const Signup = () => {
             <div className="card bg-secondary shadow border-0">
               <div className="card-header bg-transparent pb-5">
                 <div className="text-muted text-center mt-2 mb-4"><small>Sign up with</small></div>
-                <div className="text-center">
-                  <button className="btn btn-neutral btn-icon">
-                    <span className="btn-inner--icon"><img src={googleLogo} alt="googleLogo" /></span>
-                    <span className="btn-inner--text">Google</span>
-                  </button>
+                <div className="btn-wrapper text-center">
+
+                  <GoogleLogin
+                    clientId="451403226679-qhc12ctq9lfvqk3mo6sdv3hmigo8rt0l.apps.googleusercontent.com"
+                    onSuccess={responseGoogle}
+                    isSignedIn={true}
+                    buttonText="Google"
+                  />
+
                 </div>
               </div>
               <div className="card-body px-lg-5 py-lg-4">
