@@ -1,16 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
-import { coreURL, ellipsis, toast } from '../Utilities'
+import { coreURL, ellipsis } from '../Utilities'
 import moment from 'moment';
 import CardSkeleton from './card-skeleton';
 import InfoCard from './InfoCard'
 import Trophy from '../../assets/award.svg'
-import io from 'socket.io-client'
 
-
-const socket = io(coreURL);
-const processedReports = []
-const cancelledReports = []
 
 
 
@@ -21,80 +16,20 @@ const FeedCard = (props) => {
   const [currentCard, setCurrentCard] = useState("")
   const [incidentDetails, setDetails] = useState([])
 
-  const notifySound = () => {
-    if (localStorage.sound === "true") {
-      let notifSound = document.getElementById('tone');
-      notifSound.pause();
-      notifSound.currentTime = 0;
-      notifSound.play();
+
+
+  const updateFeed = () => {
+    if (props.activeTab) {
+      setList("loading")
+      axios.get(`${coreURL}/incidents`)
+        .then(res => {
+          let incidentList = res.data.filter(x => x.status === "unverified")
+          setListData(incidentList);
+          setList("render")
+        })
     }
   }
 
-
-  const refreshFeed = () => {
-    setList("loading")
-    axios.get(`${coreURL}/incidents`)
-      .then(res => {
-        let incidentList = res.data.filter(x => x.status === "unverified")
-        setListData(incidentList);
-        setList("render")
-      })
-  }
-
-  const cancelReport = (report_id) => {
-    if (!cancelledReports.includes(report_id)) {
-      try {
-        let currentIncident = JSON.parse(localStorage.currentIncident);
-        let cardActive = document.contains(document.getElementById(`infocard-${report_id}`))
-        let cancelBtn = document.querySelector('.btn-cancel');
-
-        if (currentIncident.uid === report_id && cardActive && cancelBtn !== null) {
-          console.log('Report cancelled!')
-          cancelBtn.click();
-        } else {
-          refreshFeed()
-        }
-
-      }
-
-      catch{
-        console.log('cancel: report cancellation failed')
-      }
-
-      finally {
-        console.log('cancel: report resolved')
-      }
-      toast("The user has cancelled the report!", "error")
-      notifySound()
-      cancelledReports.push(report_id);
-    }
-  }
-
-
-  socket.on("report", (data) => {
-    if (!processedReports.includes(data.uid)) {
-      notifySound()
-      if (localStorage.toast === "true") {
-        toast('New incident report!', 'alert')
-      }
-      processedReports.push(data.uid)
-      refreshFeed()
-    }
-  })
-
-  socket.on("cancel_report", (data) => {
-    cancelReport(data["report_id"]);
-  })
-
-  socket.on("activity", () => {
-    document.getElementById('inactive-line').style.display = "none";
-    document.getElementById('active-line').style.display = "block";
-
-    setTimeout(() => {
-      document.getElementById('inactive-line').style.display = "block";
-      document.getElementById('active-line').style.display = "none";
-    }, 3000)
-  })
 
   const EmptyFeed = () => {
     return (
@@ -170,13 +105,14 @@ const FeedCard = (props) => {
       if (document.contains(document.getElementsByClassName("active-card")[0])) {
         document.getElementsByClassName("active-card")[0].classList.remove("active-card")
       }
-      refreshFeed();
+      updateFeed();
     }, 550)
   }
 
   return (
     <div>
-      <button className="d-none" id="deselectCard" onClick={() => { deSelectCard() }} />
+      <button className="d-none" id="deselectCard" onClick={deSelectCard} />
+      <button className="d-none" id="update-feed" onClick={updateFeed} />
       {list === "render" ? (
         listData.length !== 0 ? (
           listData.map(incident => {

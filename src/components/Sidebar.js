@@ -5,6 +5,14 @@ import Settings from './sidebar-components/settings'
 import zigzag from "../assets/osc.svg"
 import '../styles/sidebar.scss';
 import sound from '../assets/deduction.mp3'
+import io from 'socket.io-client'
+import { coreURL, toast, notifySound } from './Utilities'
+
+
+
+const socket = io(coreURL);
+const processedReports = []
+const cancelledReports = []
 
 
 const Sidebar = () => {
@@ -20,6 +28,68 @@ const Sidebar = () => {
       setTab(newTab);
     }
   }
+
+
+  const refreshFeed = () => {
+    if (document.contains(document.getElementById('update-feed'))) {
+      document.getElementById('update-feed').click()
+    }
+  }
+
+  const cancelReport = (report_id) => {
+    if (!cancelledReports.includes(report_id)) {
+      try {
+        let currentIncident = JSON.parse(localStorage.currentIncident);
+        let cardActive = document.contains(document.getElementById(`infocard-${report_id}`))
+        let cancelBtn = document.querySelector('.btn-cancel');
+
+        if (currentIncident.uid === report_id && cardActive && cancelBtn !== null) {
+          console.log('Report cancelled!')
+          cancelBtn.click();
+        } else {
+          refreshFeed()
+        }
+
+      }
+
+      catch{
+        console.log('cancel: report cancellation failed')
+      }
+
+      finally {
+        console.log('cancel: report resolved')
+      }
+      toast("The user has cancelled the report!", "error")
+      notifySound()
+      cancelledReports.push(report_id);
+    }
+  }
+
+
+  socket.on("report", (data) => {
+    if (!processedReports.includes(data.uid)) {
+      notifySound()
+      if (localStorage.toast === "true") {
+        toast('New incident report!', 'alert')
+      }
+      processedReports.push(data.uid)
+      refreshFeed()
+    }
+  })
+
+  socket.on("cancel_report", (data) => {
+    cancelReport(data["report_id"]);
+  })
+
+  socket.on("activity", () => {
+    document.getElementById('inactive-line').style.display = "none";
+    document.getElementById('active-line').style.display = "block";
+
+    setTimeout(() => {
+      document.getElementById('inactive-line').style.display = "block";
+      document.getElementById('active-line').style.display = "none";
+    }, 3000)
+  })
 
   return (
     <div id="sidebar">
@@ -64,9 +134,9 @@ const Sidebar = () => {
         </ul>
       </div>
       <div className="tab p-2">
-        {(tab === "feed" && <FeedCard />)}
-        {(tab === "history" && <History />)}
-        {(tab === "settings" && <Settings />)}
+        {(tab === "feed" && <FeedCard activeTab={true} />)}
+        {(tab === "history" && <History activeTab={true} />)}
+        {(tab === "settings" && <Settings activeTab={true} />)}
       </div>
     </div>
   )

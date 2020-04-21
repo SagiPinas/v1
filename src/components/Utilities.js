@@ -118,3 +118,13 @@ export const authSSO = (data) => {
     })
 }
 
+export const notifySound = () => {
+  if (localStorage.sound === "true") {
+    let notifSound = document.getElementById('tone');
+    notifSound.pause();
+    notifSound.currentTime = 0;
+    notifSound.play();
+  }
+}
+
+
