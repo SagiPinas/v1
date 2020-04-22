@@ -7,6 +7,7 @@ import "./styles/index.scss"
 import Login from './components/Login'
 import Signup from './components/Signup'
 import Dashboard from './components/Dashboard'
+import Modal from './components/Modal';
 
 const App = () => {
   return (
@@ -26,6 +27,7 @@ const App = () => {
             <Login />
           </Route>
         </Switch>
+        <Modal />
       </div>
     </Router>
   );

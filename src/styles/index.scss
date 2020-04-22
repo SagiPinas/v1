@@ -190,3 +190,24 @@ input{
   box-sizing: border-box;
 }
 
+
+.modal-wrapper{
+  position: fixed;
+  height: 100vh;
+  width: 100%;
+  top: 0px;
+  right: 0px;
+  background: rgba(0,0,0,0.7);
+  z-index: 999;
+  display: none;
+  padding: 20px;
+
+  .modal-card{
+    margin: auto;
+    background: #fff;
+    width: 100%;
+    max-width: 500px;
+    height: 350px;
+    border-radius: 10px;
+  }
+}
