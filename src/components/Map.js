@@ -13,6 +13,10 @@ const Map = (props) => {
 
   useEffect(() => {
 
+    if (!localStorage.originLocation) {
+      localStorage.originLocation = JSON.stringify({ long: 121.001433, lat: 14.507936 })
+    }
+
     if (!localStorage.currentLocation) {
       localStorage.currentLocation = JSON.stringify({ long: 121.001433, lat: 14.507936 })
     }
@@ -54,6 +58,7 @@ const Map = (props) => {
 
     function mapTo() {
       let currentLocation = JSON.parse(localStorage.currentLocation);
+      let originLocation = JSON.parse(localStorage.originLocation);
 
       // var geojson = {
       //   type: 'FeatureCollection',
@@ -82,7 +87,7 @@ const Map = (props) => {
 
 
 
-      mapDir.setOrigin(`121.001433,14.507936`)
+      mapDir.setOrigin(`${originLocation.long}, ${originLocation.lat}`)
       mapDir.setDestination(`${currentLocation.long}, ${currentLocation.lat}`)
 
 

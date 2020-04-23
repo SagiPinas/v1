@@ -20,6 +20,7 @@
     "react-scripts": "^3.4.0",
     "sha1": "^1.1.1",
     "socket.io-client": "^2.3.0",
+    "sweetalert2": "^9.10.12",
     "toastify-js": "^1.7.0"
   },
   "scripts": {

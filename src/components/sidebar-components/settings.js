@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
+import swal from 'sweetalert2';
 
-const Settings = () => {
+const Settings = (props) => {
 
   const [sound, setSound] = useState(true);
   const [toast, setToast] = useState(true);
@@ -24,6 +25,24 @@ const Settings = () => {
     }
   }
 
+  const setPosition = (position) => {
+    let newLocation = {
+      lat: position.coords.latitude,
+      long: position.coords.longitude,
+    }
+
+    localStorage.originLocation = JSON.stringify(newLocation)
+
+    swal.fire({
+      title: "Success",
+      text: "location set successfully!",
+      icon: 'success',
+      showCancelButton: false,
+      showConfirmButton: false,
+      timer: 1200,
+    })
+  }
+
   const toggleToast = () => {
     if (!localStorage.toast || localStorage.toast === "false") {
       setToast(true);
@@ -32,6 +51,40 @@ const Settings = () => {
       setToast(false);
       localStorage.toast = false
     }
+  }
+
+  const displayError = (error) => {
+    var errors = {
+      1: 'Permission denied',
+      2: 'Position unavailable',
+      3: 'Request timeout'
+    };
+    swal.fire("Error!", `Geo Location API : ${errors[error.code]}`, 'error');
+  }
+
+  const requestlocation = () => {
+    swal.fire({
+      title: "Requesting",
+      text: "kindly accept to location prompt to pin down your current location.",
+      icon: "info",
+      showConfirmButton: false,
+      showCancelButton: true,
+      allowOutsideClick: false
+    })
+
+    swal.showLoading()
+
+    if (navigator.geolocation) {
+      var timeoutVal = 10 * 1000 * 1000;
+      navigator.geolocation.getCurrentPosition(
+        setPosition,
+        displayError,
+        { enableHighAccuracy: true, timeout: timeoutVal, maximumAge: 0 }
+      )
+    } else {
+      swal.fire("Error", "GPS is not supported for your device", "error")
+    }
+
   }
 
 
@@ -68,7 +121,7 @@ const Settings = () => {
         <div className="p-2">
           <small className="text-muted">Set your current physical location.</small>
           <input placeholder="Latitude,Longitude" className="mt-2" id="clatlong" />
-          <button className="btn btn-sm btn-primary mt-2">Set using Device</button>
+          <button className="btn btn-sm btn-primary mt-2" onClick={requestlocation}>Set using Device</button>
         </div>
       </div>
 

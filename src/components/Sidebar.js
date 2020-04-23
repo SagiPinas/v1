@@ -91,6 +91,7 @@ const Sidebar = () => {
     }, 3000)
   })
 
+
   return (
     <div id="sidebar">
       <div id="gradient-loader">
