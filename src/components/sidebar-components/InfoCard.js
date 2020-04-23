@@ -98,11 +98,10 @@ const InfoCard = (props) => {
         <button className="btn-verify"
           onClick={() => { verifyReport(props.data) }}
         ><i className="fa fa-check mr-1"></i>Verify</button>
-        <button className="btn-dismiss"><i className="fa fa-times-circle mr-1"></i>Dismiss</button>
         <button className="btn-cancel"
           onClick={() => { cancelReview() }}
         >
-          Cancel
+          Dismiss
         </button>
       </div>
     </div >
