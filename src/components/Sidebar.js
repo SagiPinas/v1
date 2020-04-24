@@ -21,9 +21,9 @@ const Sidebar = (props) => {
 
   const switchTab = (newTab) => {
     if (newTab !== tab) {
-      let isProfile = document.contains(document.getElementById('profile-page'))
-      if (newTab === "feed" && isProfile) {
-        document.getElementById('profileWidget').click();
+      if (newTab === "feed") {
+        props.setProfile(false);
+        props.setDetails(false)
       }
       setTab(newTab);
     }
@@ -135,13 +135,16 @@ const Sidebar = (props) => {
         </ul>
       </div>
       <div className="tab p-2">
+
         {(tab === "feed" && <FeedCard />)}
+
         {(tab === "history" &&
           <History
             setDetails={props.setDetails}
             currentIncident={props.currentIncident}
             setCurrentIncident={props.setCurrentIncident}
             viewDetails={props.viewDetails}
+            setProfile={props.setProfile}
           />
         )}
         {(tab === "settings" && <Settings />)}

@@ -24,6 +24,7 @@ const History = (props) => {
   const openDetails = (data) => {
     props.setCurrentIncident(data)
     props.setDetails(true)
+    props.setProfile(false)
   }
 
 

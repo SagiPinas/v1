@@ -31,6 +31,7 @@ const Dashboard = () => {
         currentIncident={currentIncident}
         setCurrentIncident={setCurrentIncident}
         viewDetails={viewDetails}
+        setProfile={setProfile}
       />
       <div onClick={() => { toggleProfile() }}>
         <Widgets />
