@@ -10,7 +10,7 @@ import Details from './Details'
 const Dashboard = () => {
 
   const [profile, setProfile] = useState(false);
-  const [viewDetails, setDetails] = useState(true);
+  const [viewDetails, setDetails] = useState(false);
   const [currentIncident, setCurrentIncident] = useState({})
 
 
@@ -20,6 +20,7 @@ const Dashboard = () => {
     } else {
       document.getElementById('settings-tab').click();
       setProfile(true)
+      setDetails(false)
     }
   }
 
@@ -36,7 +37,7 @@ const Dashboard = () => {
       </div>
       <Map />
       {profile && (<Profile />)}
-      {viewDetails && (<Details />)}
+      {viewDetails && (<Details data={currentIncident} setDetails={setDetails} />)}
     </div>
   )
 }

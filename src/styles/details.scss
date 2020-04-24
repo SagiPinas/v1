@@ -1,0 +1,57 @@
+
+
+.info-card{
+  &.full-page{
+    position: relative;
+    height: 100%;
+    width: 100%;
+    box-shadow: 0px 1px 24px -5px rgba(0,0,0,0.13);
+
+    .info-title{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    .type-title{
+      margin-top: 0px !important;
+      box-shadow: none;
+      border-bottom: 0.2px solid #ddd;
+      display:  flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+      span{
+        margin: 0px;
+        float: none;
+        display: block;
+        border: 0px;
+      }
+    }
+
+    .event-flow{
+      display:  flex;
+      flex-direction: row;
+      justify-content: center;
+
+      .event-block{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+      }
+    }
+
+    .report-div{
+      margin-bottom: 20px;
+    }
+
+    .info-body{
+      height: 100%;
+    }
+
+    &:hover {
+      height: inherit;
+    }
+  }
+}

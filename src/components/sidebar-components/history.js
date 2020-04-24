@@ -23,7 +23,7 @@ const History = (props) => {
 
   const openDetails = (data) => {
     props.setCurrentIncident(data)
-    props.setDetails(!props.viewDetails)
+    props.setDetails(true)
   }
 
 
@@ -90,7 +90,7 @@ const History = (props) => {
             historyData.map(history => {
               return (
                 <div className="card fade-in-bottom"
-                  onClick={(history) => {
+                  onClick={() => {
                     openDetails(history)
                   }}>
                   <span className="date">
