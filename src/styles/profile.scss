@@ -3,8 +3,9 @@ $active_color:rgb(85, 136, 233);
 
 
 .profile-header{
-  background: linear-gradient(90deg,rgba(10, 16, 112, 0.602),rgba(26, 9, 102, 0.568)), url('../assets/profilebanner.jpg');
+  background: linear-gradient(90deg,rgba(10, 18, 126, 0.89),rgba(35, 9, 148, 0.726)), url('https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX32110658.jpg') fixed no-repeat;
   padding: 70px;
+  background-size: cover;
 }
 
 .profile-page{

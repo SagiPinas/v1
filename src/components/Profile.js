@@ -73,11 +73,6 @@ const Profile = (props) => {
     )
   }
 
-
-
-
-
-
   // const EmptyProfile = () => {
   //   return (
   //     <div className="no-history fade-in-bottom">
@@ -137,8 +132,8 @@ const Profile = (props) => {
 
             <div className="col-lg-6">
               <div className="form-group">
-                <label className="form-control-label" htmlFor="input-username">Confirm Password</label>
-                <input type="password" id="confirm-password" className="form-control form-control-alternative" placeholder="Confirm Password" disabled={!changePassword} />
+                <label className="form-control-label" htmlFor="input-username">New Password</label>
+                <input type="password" id="confirm-password" className="form-control form-control-alternative" placeholder="New Password" disabled={!changePassword} />
               </div>
             </div>
           </div>
