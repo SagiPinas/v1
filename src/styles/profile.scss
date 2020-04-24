@@ -3,9 +3,10 @@ $active_color:rgb(85, 136, 233);
 
 
 .profile-header{
-  background: linear-gradient(90deg,rgba(10, 18, 126, 0.89),rgba(35, 9, 148, 0.726)), url('https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX32110658.jpg') fixed no-repeat;
+  background: linear-gradient(90deg,rgba(6, 15, 116, 0.808),rgba(17, 4, 75, 0.192)), url('../assets/map.png') center fixed no-repeat;
   padding: 70px;
-  background-size: cover;
+  background-size: 101% 100%;
+  background-position-y: -410px;
 }
 
 .profile-page{
