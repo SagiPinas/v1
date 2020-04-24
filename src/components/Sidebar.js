@@ -15,7 +15,7 @@ const processedReports = []
 const cancelledReports = []
 
 
-const Sidebar = () => {
+const Sidebar = (props) => {
 
   const [tab, setTab] = useState("feed")
 
@@ -135,9 +135,16 @@ const Sidebar = () => {
         </ul>
       </div>
       <div className="tab p-2">
-        {(tab === "feed" && <FeedCard activeTab={true} />)}
-        {(tab === "history" && <History activeTab={true} />)}
-        {(tab === "settings" && <Settings activeTab={true} />)}
+        {(tab === "feed" && <FeedCard />)}
+        {(tab === "history" &&
+          <History
+            setDetails={props.setDetails}
+            currentIncident={props.currentIncident}
+            setCurrentIncident={props.setCurrentIncident}
+            viewDetails={props.viewDetails}
+          />
+        )}
+        {(tab === "settings" && <Settings />)}
       </div>
     </div>
   )

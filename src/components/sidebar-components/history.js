@@ -5,7 +5,7 @@ import CardSkeleton from './card-skeleton'
 import moment from 'moment'
 import Fuse from 'fuse.js'
 
-const History = () => {
+const History = (props) => {
 
   const [tabState, setTabState] = useState('loading');
   const [historyData, setHistoryData] = useState([]);
@@ -19,6 +19,12 @@ const History = () => {
         setTabState('render')
       })
   }, [])
+
+
+  const openDetails = (data) => {
+    props.setCurrentIncident(data)
+    props.setDetails(!props.viewDetails)
+  }
 
 
   const EmptyHistory = () => {
@@ -84,7 +90,8 @@ const History = () => {
             historyData.map(history => {
               return (
                 <div className="card fade-in-bottom"
-                  onClick={(e) => {
+                  onClick={(history) => {
+                    openDetails(history)
                   }}>
                   <span className="date">
                     {moment(history.timestamp).format('l')}

@@ -4,11 +4,15 @@ import Sidebar from './Sidebar';
 import Widgets from './Widgets';
 import Profile from './Profile';
 import Map from './Map';
+import Details from './Details'
 
 
 const Dashboard = () => {
 
   const [profile, setProfile] = useState(false);
+  const [viewDetails, setDetails] = useState(true);
+  const [currentIncident, setCurrentIncident] = useState({})
+
 
   const toggleProfile = () => {
     if (profile) {
@@ -21,15 +25,18 @@ const Dashboard = () => {
 
   return (
     <div>
-      <Sidebar />
+      <Sidebar
+        setDetails={setDetails}
+        currentIncident={currentIncident}
+        setCurrentIncident={setCurrentIncident}
+        viewDetails={viewDetails}
+      />
       <div onClick={() => { toggleProfile() }}>
         <Widgets />
       </div>
-      {
-        profile ? (<Profile />) : (
-          <Map />
-        )
-      }
+      <Map />
+      {profile && (<Profile />)}
+      {viewDetails && (<Details />)}
     </div>
   )
 }
