@@ -2,14 +2,32 @@ import React, { useState, useEffect } from 'react'
 import '../styles/profile.scss'
 import '../styles/details.scss'
 import moment from 'moment';
-// import axios from 'axios';
-// import { coreURL } from './Utilities';
-// import moment from 'moment';
+import axios from 'axios';
+import { mapbox_key } from './Utilities';
+import loader from '../assets/loading.gif'
 
 
 
 const Details = (props) => {
+
   const [profile, setProfile] = useState(false)
+  const [supportData, setSupport] = useState([])
+
+
+  useEffect(() => {
+
+    let point = JSON.parse(localStorage.currentLocation)
+
+    axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${point.long},${point.lat}.json`, {
+      params: {
+        access_token: mapbox_key
+      }
+    })
+      .then(res => {
+        setSupport(res.data.features)
+      })
+
+  }, [])
 
 
   return (
@@ -84,10 +102,6 @@ const Details = (props) => {
                               </div>
                             </div>
 
-
-
-
-
                           </div>
                         )
                     }
@@ -97,23 +111,38 @@ const Details = (props) => {
                 <hr className="my-3" />
 
                 <div className="mb-3">
-
-                  <p className="detail-title">
-                    <i className="fa fa-circle mr-1"></i>Report Location
-                  </p>
-                  <div className="report-div">
-                    {props.data.details}
-                  </div>
-
                   <p className="detail-title">
                     <i className="fa fa-circle mr-1"></i>Report Details
                   </p>
                   <div className="report-div">
                     {props.data.details}
                   </div>
-
-
                 </div>
+
+                {
+                  supportData.length !== 0 ? (
+                    supportData.map(details => {
+                      return (
+                        <div className="mb-3">
+                          <p className="detail-title">
+                            <i className="fa fa-circle mr-1"></i>
+                            {`${details.place_type}`}
+                          </p>
+                          <div className="report-div">
+                            {`(${details.text}) , ${details.place_name}`}
+                          </div>
+                        </div>
+                      )
+                    })
+                  ) : (
+                      <center>
+                        <div className="loading-card">
+                          <img src={loader} alt="loader" />
+                          <p>Loading report details...</p>
+                        </div>
+                      </center>
+                    )
+                }
 
               </div>
               <hr />

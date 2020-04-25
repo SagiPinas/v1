@@ -4,6 +4,7 @@ import moment from 'moment'
 import axios from 'axios'
 import io from 'socket.io-client'
 import { coreURL, toast, mapbox_key } from '../Utilities'
+import loader from '../../assets/loading.gif'
 
 const InfoCard = (props) => {
 
@@ -54,7 +55,6 @@ const InfoCard = (props) => {
     })
       .then(res => {
         setSupport(res.data.features)
-        console.log(res.data.features)
       })
 
 
@@ -116,19 +116,28 @@ const InfoCard = (props) => {
         <br />
 
         {
-          supportData.map(details => {
-            return (
-              <div className="mb-3">
-                <p className="detail-title">
-                  <i className="fa fa-circle mr-1"></i>
-                  {`${details.place_type}`}
-                </p>
-                <div className="report-div">
-                  {`(${details.text}) , ${details.place_name}`}
+          supportData.length !== 0 ? (
+            supportData.map(details => {
+              return (
+                <div className="mb-3">
+                  <p className="detail-title">
+                    <i className="fa fa-circle mr-1"></i>
+                    {`${details.place_type}`}
+                  </p>
+                  <div className="report-div">
+                    {`(${details.text}) , ${details.place_name}`}
+                  </div>
                 </div>
-              </div>
+              )
+            })
+          ) : (
+              <center>
+                <div className="loading-card">
+                  <img src={loader} alt="loader" />
+                  <p>Loading report details...</p>
+                </div>
+              </center>
             )
-          })
         }
 
       </div>
