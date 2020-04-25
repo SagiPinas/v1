@@ -2,11 +2,11 @@ import React, { useEffect } from 'react'
 import '../styles/geocoder.scss'
 import mapboxgl from 'mapbox-gl'
 import Directions from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions';
+import { mapbox_key } from '../components/Utilities'
 
 
 
-
-mapboxgl.accessToken = 'pk.eyJ1IjoiYnJ5Y2UwNiIsImEiOiJjazNmbndybm4wMDk3M29wZ2dicjlmb29iIn0.NVknKG525ZpQVmIAbFiqfw';
+mapboxgl.accessToken = mapbox_key;
 
 const Map = (props) => {
 

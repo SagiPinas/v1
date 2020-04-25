@@ -3,7 +3,7 @@ import '../../styles/infocard.scss'
 import moment from 'moment'
 import axios from 'axios'
 import io from 'socket.io-client'
-import { coreURL, toast } from '../Utilities'
+import { coreURL, toast, mapbox_key } from '../Utilities'
 
 const InfoCard = (props) => {
 
@@ -28,8 +28,10 @@ const InfoCard = (props) => {
   const [reporteeName, setReporteeName] = useState("")
   const [profile, setProfile] = useState(false)
   const [reportStatus, setreportStatus] = useState("")
+  const [supportData, setSupport] = useState([])
 
   useEffect(() => {
+
     axios.get(`https://graph.facebook.com/${props.data.id}`, {
       params: {
         fields: "first_name,last_name,profile_pic",
@@ -42,7 +44,21 @@ const InfoCard = (props) => {
         setReporteeName(`${res.data.first_name} ${res.data.last_name}`)
         setProfile(true)
       })
-  }, [props])
+
+    let point = JSON.parse(localStorage.currentLocation)
+
+    axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${point.long},${point.lat}.json`, {
+      params: {
+        access_token: mapbox_key
+      }
+    })
+      .then(res => {
+        setSupport(res.data.features)
+        console.log(res.data.features)
+      })
+
+
+  }, [props, setSupport])
 
 
   return (
@@ -87,11 +103,33 @@ const InfoCard = (props) => {
         <div className="mb-3">
           <p className="detail-title">
             <i className="fa fa-circle mr-1"></i>Report Details
-        </p>
+         </p>
           <div className="report-div">
             {props.data.details}
           </div>
         </div>
+
+        <p className="detail-title">
+          <i className="fa fa-circle mr-1"></i> Location information
+         </p>
+        <hr />
+        <br />
+
+        {
+          supportData.map(details => {
+            return (
+              <div className="mb-3">
+                <p className="detail-title">
+                  <i className="fa fa-circle mr-1"></i>
+                  {`${details.place_type}`}
+                </p>
+                <div className="report-div">
+                  {`(${details.text}) , ${details.place_name}`}
+                </div>
+              </div>
+            )
+          })
+        }
 
       </div>
       <div className="info-footer">

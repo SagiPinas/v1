@@ -4,6 +4,9 @@ import axios from 'axios'
 
 
 export const coreURL = 'https://sagipinasv1.herokuapp.com';
+export const googleMapsAPIKEY = "AIzaSyD5kFZMwUIUDZ25nTtLx0_0G3x1d2GMiCY";
+export const mapbox_key = 'pk.eyJ1IjoiYnJ5Y2UwNiIsImEiOiJjazNmbndybm4wMDk3M29wZ2dicjlmb29iIn0.NVknKG525ZpQVmIAbFiqfw'
+
 
 export const ellipsis = (text, limit) => {
   if (text.length > limit) {
