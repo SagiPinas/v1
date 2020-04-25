@@ -7,6 +7,7 @@ import '../styles/sidebar.scss';
 import sound from '../assets/deduction.mp3'
 import io from 'socket.io-client'
 import { coreURL, toast, notifySound } from './Utilities'
+import InfoCard from '../components/sidebar-components/InfoCard'
 
 
 
@@ -15,7 +16,12 @@ const processedReports = []
 const cancelledReports = []
 
 
+
 const Sidebar = (props) => {
+
+  const [currentCard, setCurrentCard] = useState("");
+  const [currentIncident, setCurrentIncident] = useState({})
+
 
   const [tab, setTab] = useState("feed")
 
@@ -97,75 +103,80 @@ const Sidebar = (props) => {
 
 
   return (
-    <div id="sidebar">
-      <div id="gradient-loader">
-      </div>
-      <audio className="d-none" id="tone" controls>
-        <source src={sound} type="audio/mpeg" />
-      </audio>
-      <div className="sidebar-title">
-        <div className="brand">
-          <div id="sidebar-logo">
-            <div></div>
+    <>
+      <div id="sidebar">
+        <div id="gradient-loader">
+        </div>
+        <audio className="d-none" id="tone" controls>
+          <source src={sound} type="audio/mpeg" />
+        </audio>
+        <div className="sidebar-title">
+          <div className="brand">
+            <div id="sidebar-logo">
+              <div></div>
+            </div>
+            <strong>SagiPinas</strong>
           </div>
-          <strong>SagiPinas</strong>
+
+          <div className="side-buttons">
+            <span className="menu">
+              <img src={zigzag} alt="zag" id="active-line" />
+              <div id="inactive-line">--</div>
+            </span>
+            <span className="menu close-x"
+              onClick={closesidebar}
+            >
+              <i className="fa fa-times" />
+            </span>
+          </div>
         </div>
+        <div className="tab-menu">
+          <ul>
+            <li
+              className={tab === "feed" ? "active" : ""}
+              onClick={() => { switchTab('feed') }}
+            >
+              FEED
+          </li>
+            <li
+              className={tab === "history" ? "active" : ""}
+              onClick={() => { switchTab('history') }}
+            >
+              HISTORY
+          </li>
+            <li
+              className={tab === "settings" ? "active" : ""}
+              onClick={() => { switchTab('settings') }}
+              id="settings-tab"
+            >
+              SETTINGS
+          </li>
+          </ul>
+        </div>
+        <div className="tab p-2">
 
-        <div className="side-buttons">
-          <span className="menu">
-            <img src={zigzag} alt="zag" id="active-line" />
-            <div id="inactive-line">--</div>
-          </span>
-          <span className="menu close-x"
-            onClick={closesidebar}
-          >
-            <i className="fa fa-times" />
-          </span>
+          {(tab === "feed" && <FeedCard
+            setCurrentIncident={setCurrentIncident}
+            currentCard={currentCard}
+            setCurrentCard={setCurrentCard}
+          />)}
+
+          {(tab === "history" &&
+            <History
+              setDetails={props.setDetails}
+              currentIncident={props.currentIncident}
+              setCurrentIncident={props.setCurrentIncident}
+              viewDetails={props.viewDetails}
+              setProfile={props.setProfile}
+            />
+          )}
+          {(tab === "settings" && <Settings />)}
         </div>
       </div>
-      <div className="tab-menu">
-        <ul>
-          <li
-            className={tab === "feed" ? "active" : ""}
-            onClick={() => { switchTab('feed') }}
-          >
-            FEED
-          </li>
-          <li
-            className={tab === "history" ? "active" : ""}
-            onClick={() => { switchTab('history') }}
-          >
-            HISTORY
-          </li>
-          <li
-            className={tab === "settings" ? "active" : ""}
-            onClick={() => { switchTab('settings') }}
-            id="settings-tab"
-          >
-            SETTINGS
-          </li>
-        </ul>
-      </div>
-      <div className="tab p-2">
 
-        {(tab === "feed" && <FeedCard
-          setCurrentIncident={props.setCurrentIncident}
-          currentCard={props.currentCard}
-          setCurrentCard={props.setCurrentCard}
-        />)}
+      {currentCard !== "" ? <InfoCard data={currentIncident} /> : ""}
 
-        {(tab === "history" &&
-          <History
-            setDetails={props.setDetails}
-            currentIncident={props.currentIncident}
-            setCurrentIncident={props.setCurrentIncident}
-            viewDetails={props.viewDetails}
-            setProfile={props.setProfile}
-          />
-        )}
-        {(tab === "settings" && <Settings />)}
-      </div>
-    </div>
+    </>
   )
 }
 

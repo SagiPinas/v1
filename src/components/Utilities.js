@@ -1,6 +1,7 @@
 import Toastify from 'toastify-js'
 import sha1 from 'sha1'
 import axios from 'axios'
+import { is } from '@babel/types';
 
 
 export const coreURL = 'https://sagipinasv1.herokuapp.com';
@@ -129,5 +130,22 @@ export const notifySound = () => {
     notifSound.play();
   }
 }
+
+export const isMobile = () => {
+  if (/Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+export const closeSidebarMobile = () => {
+  if (isMobile()) {
+    document.getElementById('sidebar').style.display = 'none';
+  }
+}
+
+
+
 
 

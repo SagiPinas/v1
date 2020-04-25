@@ -5,7 +5,6 @@ import Widgets from './Widgets';
 import Profile from './Profile';
 import Map from './Map';
 import Details from './Details'
-import InfoCard from './sidebar-components/InfoCard'
 
 
 const Dashboard = () => {
@@ -13,7 +12,6 @@ const Dashboard = () => {
   const [profile, setProfile] = useState(false);
   const [viewDetails, setDetails] = useState(false);
   const [currentIncident, setCurrentIncident] = useState({})
-  const [currentCard, setCurrentCard] = useState("");
 
 
   const toggleProfile = () => {
@@ -41,8 +39,6 @@ const Dashboard = () => {
         setCurrentIncident={setCurrentIncident}
         viewDetails={viewDetails}
         setProfile={setProfile}
-        currentCard={currentCard}
-        setCurrentCard={setCurrentCard}
       />
       <div onClick={() => { toggleProfile() }}>
         <Widgets />
@@ -51,7 +47,6 @@ const Dashboard = () => {
       {profile && (<Profile />)}
       {viewDetails && (<Details data={currentIncident} setDetails={setDetails} />)}
 
-      {currentCard !== "" ? <InfoCard data={currentIncident} /> : ""}
     </div>
   )
 }

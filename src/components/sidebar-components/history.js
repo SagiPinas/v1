@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { coreURL, ellipsis } from '../Utilities';
+import { coreURL, ellipsis, closeSidebarMobile } from '../Utilities';
 import axios from 'axios';
 import CardSkeleton from './card-skeleton'
 import moment from 'moment'
@@ -25,6 +25,7 @@ const History = (props) => {
     props.setCurrentIncident(data)
     props.setDetails(true)
     props.setProfile(false)
+    closeSidebarMobile()
   }
 
 

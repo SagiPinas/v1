@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
-import { coreURL, ellipsis } from '../Utilities'
+import { coreURL, ellipsis, closeSidebarMobile } from '../Utilities'
 import moment from 'moment';
 import CardSkeleton from './card-skeleton';
 import Trophy from '../../assets/award.svg'
@@ -74,6 +74,7 @@ const FeedCard = (props) => {
       localStorage.currentIncident = JSON.stringify(incidentInfo);
       localStorage.currentLocation = JSON.stringify(incidentInfo.location)
       document.getElementById('mapJump').click()
+      closeSidebarMobile()
     }
   }
 
