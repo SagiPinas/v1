@@ -3,7 +3,6 @@ import axios from 'axios';
 import { coreURL, ellipsis } from '../Utilities'
 import moment from 'moment';
 import CardSkeleton from './card-skeleton';
-import InfoCard from './InfoCard'
 import Trophy from '../../assets/award.svg'
 
 
@@ -13,7 +12,6 @@ const FeedCard = (props) => {
 
   const [list, setList] = useState("loading")
   const [listData, setListData] = useState([])
-  const [currentCard, setCurrentCard] = useState("")
   const [incidentDetails, setDetails] = useState([])
 
 
@@ -63,7 +61,7 @@ const FeedCard = (props) => {
 
 
   const selectCard = (element, cardID, incidentInfo) => {
-    if (cardID !== currentCard) {
+    if (cardID !== props.currentCard) {
       let currentActiveCard = document.getElementsByClassName("active-card")[0]
       if (document.contains(currentActiveCard)) {
         currentActiveCard.classList.remove("active-card")
@@ -71,7 +69,8 @@ const FeedCard = (props) => {
       }
       element.currentTarget.classList.add("active-card")
       setDetails(incidentInfo)
-      setCurrentCard(cardID)
+      props.setCurrentIncident(incidentInfo)
+      props.setCurrentCard(cardID)
       localStorage.currentIncident = JSON.stringify(incidentInfo);
       localStorage.currentLocation = JSON.stringify(incidentInfo.location)
       document.getElementById('mapJump').click()
@@ -101,7 +100,7 @@ const FeedCard = (props) => {
       document.getElementById(infoCardID).classList.replace("fade-in-bottom", "fade-out-bottom")
     }
     setTimeout(() => {
-      setCurrentCard("")
+      props.setCurrentCard("")
       if (document.contains(document.getElementsByClassName("active-card")[0])) {
         document.getElementsByClassName("active-card")[0].classList.remove("active-card")
       }
@@ -143,9 +142,6 @@ const FeedCard = (props) => {
       ) : (
           <CardSkeleton count={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]} />
         )}
-
-      {currentCard !== "" ? <InfoCard data={incidentDetails} /> : ""}
-
     </div>
   )
 }

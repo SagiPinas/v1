@@ -381,4 +381,12 @@ $shine-gradient: linear-gradient(to right, rgba(238, 238, 238, 0.356),rgba(214, 
   margin: 20px;
 }
 
+.side-buttons{
+  display: flex;
+
+  .close-x{
+    margin-left: 10px;
+  }
+}
+
 

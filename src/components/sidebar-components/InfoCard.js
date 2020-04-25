@@ -66,10 +66,10 @@ const InfoCard = (props) => {
       <div className={`status-bar ${reportStatus}`}></div>
       <h3 className="info-title">
         <i className="fa fa-map-marker text-primary mr-2"></i>
-        Manila, Philippines
-        </h3>
-      <hr />
-      <div className="px-3 pt-1 pb-1 type-title">
+        {supportData.length !== 0 && (supportData[1].place_name)}
+      </h3>
+
+      <div className="px-3 pt-1 pb-1 type-title border-top">
         <h2 className="type pt-2">
           <i className="fa fa-bullseye text-danger"></i> {props.data.type}
         </h2>

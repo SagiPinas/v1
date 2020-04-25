@@ -1,0 +1,90 @@
+
+
+@media(max-width: 700px){
+
+  .widgets{
+    span{
+      display: none;
+    }
+
+    .user-tab{
+      padding: 2px !important;
+
+      .user-img{
+        margin: 0px;
+      }
+     }
+  }
+
+  #sidebar{
+    display: none;
+    z-index: 99999 !important;
+  }
+
+  .mapboxgl-canvas{
+    left: 0px !important;
+    z-index: 99 !important;
+    position: absolute !important;
+    top: 0px !important;
+    right: 0px !important;
+    display: block;
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+
+
+  .profile-page{
+    margin-left: 0px !important;
+
+    .profile-header{
+      background-size: cover;
+    }
+  }
+
+  .burger, .close-x{
+    display: block;
+  }
+
+
+  .info-card{
+    left: 0px;
+    width: 100%;
+    bottom: 0px;
+  }
+
+  .full-page{
+    .type-title{
+      flex-direction: column !important;
+    }
+
+    .event-flow{
+      flex-direction: column !important;
+    }
+  }
+
+}
+
+
+
+
+// overrides
+
+
+.mapbox-directions-profile {
+  background: #fff;
+  margin: 7px 0 0;
+  padding: 0px;
+  border-radius: 15px;
+  vertical-align: middle;
+  height: 26px;
+}
+.mapbox-directions-component-keyline {
+  box-shadow: 0 0 0 2px rgba(0,0,0,0.1);
+  border-radius: 15px;
+}
+.mapbox-directions-component, .mapbox-directions-component *, .mapbox-directions-component *:after, .mapbox-directions-component *:before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}

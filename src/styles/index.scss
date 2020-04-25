@@ -171,26 +171,6 @@ input{
   100% { transform: rotate(360deg); }
 }
 
-
-.mapbox-directions-profile {
-  background: #fff;
-  margin: 7px 0 0;
-  padding: 0px;
-  border-radius: 15px;
-  vertical-align: middle;
-  height: 30px;
-}
-.mapbox-directions-component-keyline {
-  box-shadow: 0 0 0 2px rgba(0,0,0,0.1);
-  border-radius: 15px;
-}
-.mapbox-directions-component, .mapbox-directions-component *, .mapbox-directions-component *:after, .mapbox-directions-component *:before {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
-
-
 .modal-wrapper{
   position: fixed;
   height: 100vh;

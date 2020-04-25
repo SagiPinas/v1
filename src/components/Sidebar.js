@@ -91,6 +91,10 @@ const Sidebar = (props) => {
     }, 3000)
   })
 
+  const closesidebar = () => {
+    document.getElementById('sidebar').style.display = "none"
+  }
+
 
   return (
     <div id="sidebar">
@@ -106,10 +110,18 @@ const Sidebar = (props) => {
           </div>
           <strong>SagiPinas</strong>
         </div>
-        <span className="menu">
-          <img src={zigzag} alt="zag" id="active-line" />
-          <div id="inactive-line">--</div>
-        </span>
+
+        <div className="side-buttons">
+          <span className="menu">
+            <img src={zigzag} alt="zag" id="active-line" />
+            <div id="inactive-line">--</div>
+          </span>
+          <span className="menu close-x"
+            onClick={closesidebar}
+          >
+            <i className="fa fa-times" />
+          </span>
+        </div>
       </div>
       <div className="tab-menu">
         <ul>
@@ -136,7 +148,11 @@ const Sidebar = (props) => {
       </div>
       <div className="tab p-2">
 
-        {(tab === "feed" && <FeedCard />)}
+        {(tab === "feed" && <FeedCard
+          setCurrentIncident={props.setCurrentIncident}
+          currentCard={props.currentCard}
+          setCurrentCard={props.setCurrentCard}
+        />)}
 
         {(tab === "history" &&
           <History
