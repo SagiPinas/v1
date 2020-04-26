@@ -30,6 +30,8 @@ const Sidebar = (props) => {
       if (newTab === "feed") {
         props.setProfile(false);
         props.setDetails(false)
+      } else {
+        setCurrentCard('')
       }
       setTab(newTab);
     }
