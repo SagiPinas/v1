@@ -153,7 +153,7 @@ const Sidebar = (props) => {
           </li>
           </ul>
         </div>
-        <div className="tab p-2">
+        <div className="tab">
 
           {(tab === "feed" && <FeedCard
             setCurrentIncident={setCurrentIncident}
