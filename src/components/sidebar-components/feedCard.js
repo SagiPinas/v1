@@ -17,15 +17,13 @@ const FeedCard = (props) => {
 
 
   const updateFeed = () => {
-    if (props.activeTab) {
-      setList("loading")
-      axios.get(`${coreURL}/incidents`)
-        .then(res => {
-          let incidentList = res.data.filter(x => x.status === "unverified")
-          setListData(incidentList);
-          setList("render")
-        })
-    }
+    setList("loading")
+    axios.get(`${coreURL}/incidents`)
+      .then(res => {
+        let incidentList = res.data.filter(x => x.status === "unverified")
+        setListData(incidentList);
+        setList("render")
+      })
   }
 
 

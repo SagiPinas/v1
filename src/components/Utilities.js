@@ -1,7 +1,6 @@
 import Toastify from 'toastify-js'
 import sha1 from 'sha1'
 import axios from 'axios'
-import { is } from '@babel/types';
 
 
 export const coreURL = 'https://sagipinasv1.herokuapp.com';
