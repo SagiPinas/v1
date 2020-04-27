@@ -11,8 +11,11 @@ $active_color:rgb(85, 136, 233);
 
 .profile-page{
   background: rgb(240, 246, 255);
-  margin-left: 270px;
+  left: 270px !important;
   min-height: 100vh !important;
+  z-index: 999 !important;
+  position: absolute;
+  width: calc(100%-270px) !important;
 }
 
 .profile-image{

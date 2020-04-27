@@ -144,6 +144,12 @@ export const closeSidebarMobile = () => {
   }
 }
 
+export const openSidebarMobile = () => {
+  if (isMobile()) {
+    document.getElementById('sidebar').style.display = 'block';
+  }
+}
+
 
 
 

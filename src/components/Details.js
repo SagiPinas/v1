@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import '../styles/profile.scss'
 import '../styles/details.scss'
 import moment from 'moment';
 import axios from 'axios';
-import { mapbox_key } from './Utilities';
+import { mapbox_key, openSidebarMobile } from './Utilities';
 import loader from '../assets/loading.gif'
 
 
@@ -31,10 +30,10 @@ const Details = (props) => {
 
 
   return (
-    <div className="profile-page d-block mx-0">
+    <div className="profile-page">
       <div className="container-fluid profile-header">
         <div className="row">
-          <div className="col-lg-7 col-md-10 py-5">
+          <div className=" py-5">
           </div>
         </div>
       </div>
@@ -147,7 +146,10 @@ const Details = (props) => {
               </div>
               <hr />
               <button className="btn btn-dark float-right mb-4"
-                onClick={() => { props.setDetails(false) }}
+                onClick={() => {
+                  props.setDetails(false);
+                  openSidebarMobile()
+                }}
               >
                 Close Details
               </button>

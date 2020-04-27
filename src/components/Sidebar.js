@@ -6,8 +6,11 @@ import zigzag from "../assets/osc.svg"
 import '../styles/sidebar.scss';
 import sound from '../assets/deduction.mp3'
 import io from 'socket.io-client'
-import { coreURL, toast, notifySound } from './Utilities'
+import { coreURL, toast, notifySound, openSidebarMobile } from './Utilities'
 import InfoCard from '../components/sidebar-components/InfoCard'
+import Details from './Details'
+import Profile from './Profile';
+import Widgets from './Widgets';
 
 
 
@@ -21,15 +24,28 @@ const Sidebar = (props) => {
 
   const [currentCard, setCurrentCard] = useState("");
   const [currentIncident, setCurrentIncident] = useState({})
+  const [profile, setProfile] = useState(false);
+  const [viewDetails, setDetails] = useState(false);
 
+
+  const toggleProfile = () => {
+    if (profile) {
+      setProfile(false)
+      openSidebarMobile();
+    } else {
+      document.getElementById('settings-tab').click();
+      setProfile(true)
+      setDetails(false)
+    }
+  }
 
   const [tab, setTab] = useState("feed")
 
   const switchTab = (newTab) => {
     if (newTab !== tab) {
       if (newTab === "feed") {
-        props.setProfile(false);
-        props.setDetails(false)
+        setProfile(false);
+        setDetails(false)
       } else {
         setCurrentCard('')
       }
@@ -50,6 +66,8 @@ const Sidebar = (props) => {
         let currentIncident = JSON.parse(localStorage.currentIncident);
         let cardActive = document.contains(document.getElementById(`infocard-${report_id}`))
         let cancelBtn = document.querySelector('.btn-cancel');
+
+
 
         if (currentIncident.uid === report_id && cardActive && cancelBtn !== null) {
           console.log('Report cancelled!')
@@ -165,18 +183,25 @@ const Sidebar = (props) => {
 
           {(tab === "history" &&
             <History
-              setDetails={props.setDetails}
-              currentIncident={props.currentIncident}
-              setCurrentIncident={props.setCurrentIncident}
-              viewDetails={props.viewDetails}
-              setProfile={props.setProfile}
+              setDetails={setDetails}
+              currentIncident={currentIncident}
+              setCurrentIncident={setCurrentIncident}
+              viewDetails={viewDetails}
+              setProfile={setProfile}
             />
           )}
           {(tab === "settings" && <Settings />)}
         </div>
       </div>
 
+      <div onClick={() => { toggleProfile() }}>
+        <Widgets />
+      </div>
+
       {currentCard !== "" ? <InfoCard data={currentIncident} /> : ""}
+
+      {profile && (<Profile />)}
+      {viewDetails && (<Details data={currentIncident} setDetails={setDetails} />)}
 
     </>
   )

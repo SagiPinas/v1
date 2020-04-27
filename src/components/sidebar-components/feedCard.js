@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
-import { coreURL, ellipsis, closeSidebarMobile } from '../Utilities'
+import { coreURL, ellipsis, closeSidebarMobile, openSidebarMobile } from '../Utilities'
 import moment from 'moment';
 import CardSkeleton from './card-skeleton';
 import Trophy from '../../assets/award.svg'
@@ -78,18 +78,7 @@ const FeedCard = (props) => {
 
 
   const deleteMarkers = () => {
-    // let currentIncidentID = JSON.parse(localStorage.currentIncident).uid;
-    // let markers = document.getElementsByClassName(`marker-${currentIncidentID}`);
-
-    // for (var i = 0; i < markers.length; i++) {
-    //   markers[i].remove();
-    //   console.log('removig marker:', currentIncidentID)
-    // }
-
-    // remove drawn route
-
     document.getElementById('removeRoutes').click()
-
   }
 
   const deSelectCard = () => {
@@ -98,6 +87,8 @@ const FeedCard = (props) => {
     if (document.contains(document.getElementById(infoCardID))) {
       document.getElementById(infoCardID).classList.replace("fade-in-bottom", "fade-out-bottom")
     }
+
+    openSidebarMobile();
     setTimeout(() => {
       props.setCurrentCard("")
       if (document.contains(document.getElementsByClassName("active-card")[0])) {

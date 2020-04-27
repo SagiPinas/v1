@@ -120,8 +120,8 @@ const Settings = (props) => {
         <hr />
         <div className="p-2">
           <small className="text-muted">Set your current physical location.</small>
-          <input placeholder="Latitude,Longitude" className="mt-2" id="clatlong" />
-          <button className="btn btn-sm btn-primary mt-2" onClick={requestlocation}>Set using Device</button>
+          <br />
+          <button className="btn btn-sm btn-primary mt-2" onClick={requestlocation}>Set Location</button>
         </div>
       </div>
 
