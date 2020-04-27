@@ -143,11 +143,6 @@ const Sidebar = (props) => {
               <img src={zigzag} alt="zag" id="active-line" />
               <div id="inactive-line">--</div>
             </span>
-            <span className="menu close-x"
-              onClick={closesidebar}
-            >
-              <i className="fa fa-times" />
-            </span>
           </div>
         </div>
         <div className="tab-menu">
