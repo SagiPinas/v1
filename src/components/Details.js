@@ -39,7 +39,7 @@ const Details = (props) => {
       </div>
       <div className="container-fluid mt--7 px-0 mx-0">
         <div className="container mx-0">
-          <div className="info-card full-page">
+          <div className="info-card full-page ml-3">
             <div className="card-body">
               <div className={`status-bar ${props.data.status}`}></div>
               <div className="px-3 pt-1 pb-1 type-title">
