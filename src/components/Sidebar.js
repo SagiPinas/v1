@@ -117,10 +117,6 @@ const Sidebar = (props) => {
     }, 3000)
   })
 
-  const closesidebar = () => {
-    document.getElementById('sidebar').style.display = "none"
-  }
-
 
   return (
     <>

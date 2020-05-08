@@ -9,6 +9,7 @@ import loader from '../assets/loading.gif'
 
 const Details = (props) => {
 
+  // eslint-disable-next-line
   const [profile, setProfile] = useState(false)
   const [supportData, setSupport] = useState([])
 

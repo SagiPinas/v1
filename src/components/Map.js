@@ -26,7 +26,6 @@ const Map = (props) => {
     }
 
     let currentLocation = JSON.parse(localStorage.currentLocation);
-    let currentIncident = JSON.parse(localStorage.currentIncident)
 
     const map = new mapboxgl.Map({
       container: document.getElementById("map"),
