@@ -1,13 +1,13 @@
-
+[![core-banner](https://mist.now.sh/mist/v1-banner.png)]()
 # v1
+![image](https://forthebadge.com/images/featured/featured-built-with-love.svg)
+> First iteration of the SagiPinas Web application, written in JavaScript.
 
-> Frontend web application of the SagiPinas Platform
-
-## Available Scripts
-
+### Available Scripts
+- Bootstrapped with create-react-app
 In the project directory, you can run:
 
-### `yarn start`
+##### `yarn start`
 
 Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
@@ -15,12 +15,12 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
 
-### `yarn test`
+##### `yarn test`
 
 Launches the test runner in the interactive watch mode.<br />
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `yarn build`
+##### `yarn build`
 
 Builds the app for production to the `build` folder.<br />
 It correctly bundles React in production mode and optimizes the build for the best performance.
@@ -32,3 +32,11 @@ Your app is ready to be deployed!
 
 > Design System is built on top of:
 - Argon Dashboard by Creative Tim: https://github.com/creativetimofficial/argon-dashboard
+> Mapbox
+- https://mapbox.com
+
+
+
+
+
+
