@@ -138,3 +138,20 @@ $sidebar-width: 270px;
 .mapbox-directions-origin, .mapbox-directions-destination{
   display:none;
 }
+
+.directions-icon .directions-icon-reverse{
+  position: absolute !important;
+  right: 0px;
+}
+
+
+.mapbox-directions-inputs button {
+  padding: 0;
+  margin: 0;
+  background-color: #fff;
+  border: none;
+  cursor: pointer;
+  position: absolute !important;
+  margin-left: -67px !important;
+  margin-top: -26px !important;
+}

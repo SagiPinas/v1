@@ -117,6 +117,10 @@ const Sidebar = (props) => {
     }, 3000)
   })
 
+  socket.on("verifyReport", () => {
+    alert('verify detected!')
+  })
+
 
   return (
     <>
