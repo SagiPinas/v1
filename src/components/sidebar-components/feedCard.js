@@ -104,9 +104,12 @@ const FeedCard = (props) => {
       <button className="d-none" id="update-feed" onClick={updateFeed} />
       {list === "render" ? (
         listData.length !== 0 ? (
-          listData.map(incident => {
+          listData.map((incident, index) => {
             return (
-              <div className="card fade-in-bottom"
+              <div
+                className="card fade-in-bottom"
+                key={index}
+                id={`feed-card-${incident.uid}`}
                 onClick={(e) => {
                   (selectCard(e, incident.uid, incident))
                 }}>

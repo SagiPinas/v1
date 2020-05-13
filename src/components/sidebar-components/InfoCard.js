@@ -20,6 +20,7 @@ const InfoCard = (props) => {
     setreportStatus("verified")
     toast("Report Verified!", "success")
     setTimeout(() => {
+      setreportStatus("verified")
       document.getElementById('deselectCard').click();
     }, 1500)
   }

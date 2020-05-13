@@ -150,6 +150,14 @@ export const openSidebarMobile = () => {
   }
 }
 
+export const currentIncident = () => {
+  let data = null;
+  if (localStorage.currentIncident) {
+    data = JSON.parse(localStorage.currentIncident)
+  }
+
+  return data;
+}
 
 
 

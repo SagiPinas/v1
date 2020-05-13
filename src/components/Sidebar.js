@@ -14,9 +14,11 @@ import Widgets from './Widgets';
 
 
 
+
 const socket = io(coreURL);
 const processedReports = []
 const cancelledReports = []
+const verified_reports = []
 
 
 
@@ -63,17 +65,16 @@ const Sidebar = (props) => {
   const cancelReport = (report_id) => {
     if (!cancelledReports.includes(report_id)) {
       try {
-        let currentIncident = JSON.parse(localStorage.currentIncident);
         let cardActive = document.contains(document.getElementById(`infocard-${report_id}`))
         let cancelBtn = document.querySelector('.btn-cancel');
+        let incident = JSON.parse(localStorage.currentIncident);
 
 
-
-        if (currentIncident.uid === report_id && cardActive && cancelBtn !== null) {
+        if (incident.uid === report_id && cardActive && cancelBtn !== null) {
           console.log('Report cancelled!')
           cancelBtn.click();
         } else {
-          refreshFeed()
+          document.getElementById(`feed-card-${report_id}`).style.display = "none"
         }
 
       }
@@ -81,7 +82,6 @@ const Sidebar = (props) => {
       catch{
         console.log('cancel: report cancellation failed')
       }
-
       finally {
         console.log('cancel: report resolved')
       }
@@ -90,6 +90,40 @@ const Sidebar = (props) => {
       cancelledReports.push(report_id);
     }
   }
+
+  const verifyReport = (report_id, responder_id) => {
+    if (!verified_reports.includes(report_id)) {
+      try {
+        let cardActive = document.contains(document.getElementById(`infocard-${report_id}`))
+        let incident = JSON.parse(localStorage.currentIncident);
+        let user = JSON.parse(localStorage.user)
+
+
+        if (incident.uid === report_id && cardActive && responder_id !== user.id) {
+          console.log('Report verfied')
+          toast('Report has been verified by another user', 'success')
+          // setTimeout(() => {
+          document.getElementById('deselectCard').click();
+          // }, 1500)
+        }
+
+
+
+      }
+
+      catch{
+        console.log('veify: report not currently viewed')
+      }
+      finally {
+        console.log('verification: report resolved')
+      }
+      notifySound()
+      verified_reports.push(report_id);
+    }
+  }
+
+
+
 
 
   socket.on("report", (data) => {
@@ -117,8 +151,8 @@ const Sidebar = (props) => {
     }, 3000)
   })
 
-  socket.on("verifyReport", () => {
-    alert('verify detected!')
+  socket.on("verified_report", (data) => {
+    verifyReport(data.uid, data.responder)
   })
 
 

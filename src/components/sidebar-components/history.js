@@ -16,6 +16,7 @@ const History = (props) => {
     axios.get(`${coreURL}/public/responder/?responderId=${user.id}`)
       .then(res => {
         setHistoryData(res.data.history)
+        console.log(res.data.history)
         setTabState('render')
       })
   }, [])
@@ -87,7 +88,7 @@ const History = (props) => {
 
       {
 
-        tabState === "render" ? (
+        tabState === "render" && historyData ? (
           historyData.length !== 0 ? (
             historyData.map(history => {
               return (
