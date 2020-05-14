@@ -44,9 +44,13 @@ const Map = (props) => {
       'bottom-right'
     );
 
+    let originLocation = JSON.parse(localStorage.originLocation);
+
+
 
     const mapDir = new Directions({
-      accessToken: mapboxgl.accessToken
+      accessToken: mapboxgl.accessToken,
+      proximity: [originLocation.long, originLocation.lat]
     })
 
     const resetRoutes = () => {
@@ -80,10 +84,8 @@ const Map = (props) => {
         center: [currentLocation.long, currentLocation.lat],
         zoom: map.getZoom() + 1,
         speed: 1.25,
-        curve: 1.1,
         essential: true
       });
-
 
 
       mapDir.setOrigin(`${originLocation.long}, ${originLocation.lat}`)
@@ -93,12 +95,12 @@ const Map = (props) => {
       // var el = document.createElement('div');
       // el.className = 'marker-x';
       // el.innerHTML = `
-      // <div classNamemarker-${JSON.parse(localStorage.currentIncident).uid}">
-      // <img src="https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png" classNamemap-marker">
-      // <span classNamepulse"></span>
-      // <span classNamepulse"></span>
-      // </div>
-      // `
+      //   <div classNamemarker-${JSON.parse(localStorage.currentIncident).uid}">
+      //   <img src="https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png" classNamemap-marker">
+      //   <span classNamepulse"></span>
+      //   <span classNamepulse"></span>
+      //   </div>
+      //   `
 
       // let mapMarker = new mapboxgl.Marker(el)
       // mapMarker.setLngLat(geojson.features[0].geometry.coordinates)
