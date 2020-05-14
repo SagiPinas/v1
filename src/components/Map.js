@@ -55,14 +55,11 @@ const Map = (props) => {
 
     const resetRoutes = () => {
       mapDir.removeRoutes();
+      map.removeLayer("points").removeSource("points");
     }
 
 
-
-    function mapTo() {
-      let currentLocation = JSON.parse(localStorage.currentLocation);
-      let originLocation = JSON.parse(localStorage.originLocation);
-
+    const addIncidentLayer = () => {
       map.addSource('points', {
         'type': 'geojson',
         'data': {
@@ -98,6 +95,26 @@ const Map = (props) => {
           ]
         }
       })
+    }
+
+
+
+
+    function mapTo() {
+      let currentLocation = JSON.parse(localStorage.currentLocation);
+      let originLocation = JSON.parse(localStorage.originLocation);
+
+      if (map.getLayer("points")) {
+        map.removeLayer("points").removeSource("points");
+
+        addIncidentLayer()
+
+
+      } else {
+
+        addIncidentLayer()
+
+      }
 
 
       var size = 200;
@@ -170,11 +187,6 @@ const Map = (props) => {
         }
       };
 
-
-      map.loadImage("https://i.stack.imgur.com/1QkEM.gif", function (error, image) {
-        if (error) throw error;
-        map.addImage("custom-marker", image);
-      })
 
       // add pulsing dot image
       map.addImage('pulsing-dot', pulsingDot, { pixelRatio: 2 });
