@@ -55,67 +55,79 @@ const Map = (props) => {
 
     const resetRoutes = () => {
       mapDir.removeRoutes();
-      map.removeLayer("points").removeSource("points");
-    }
-
-
-    const addIncidentLayer = () => {
-      map.addSource('points', {
-        'type': 'geojson',
-        'data': {
-          'type': 'FeatureCollection',
-          'features': [
-            {
-              // feature of origin
-              'type': 'Feature',
-              'geometry': {
-                'type': 'Point',
-                'coordinates': [
-                  originLocation.long,
-                  originLocation.lat
-                ]
-              },
-              'properties': {
-                'title': 'Your location',
-                'icon': 'monument'
-              }
-            },
-            {
-              // point of destinations
-              'type': 'Feature',
-              'geometry': {
-                'type': 'Point',
-                'coordinates': [currentLocation.long, currentLocation.lat]
-              },
-              'properties': {
-                'title': 'Incident report location',
-                'icon': 'harbor'
-              }
-            }
-          ]
-        }
+      map.getSource('points').setData({
+        'type': 'FeatureCollection',
+        'features': []
       })
     }
 
 
 
 
+
+
+    map.on('load', () => {
+      map.addSource('points', {
+        'type': 'geojson',
+        'data': {
+          'type': 'FeatureCollection',
+          'features': [
+
+          ]
+        }
+      })
+    })
+
+
     function mapTo() {
       let currentLocation = JSON.parse(localStorage.currentLocation);
       let originLocation = JSON.parse(localStorage.originLocation);
-
-      if (map.getLayer("points")) {
-        map.removeLayer("points").removeSource("points");
-
-        addIncidentLayer()
+      let currentIncident = JSON.parse(localStorage.currentIncident)
 
 
-      } else {
 
-        addIncidentLayer()
+      let incidentLayerData =
 
+      {
+        'type': 'FeatureCollection',
+        'features': [
+          {
+            // feature of origin
+            'type': 'Feature',
+            'geometry': {
+              'type': 'Point',
+              'coordinates': [
+                originLocation.long,
+                originLocation.lat
+              ]
+            },
+            'properties': {
+              'title': 'Your location',
+              'icon': 'monument'
+            }
+          },
+          {
+            // point of destinations
+            'type': 'Feature',
+            'geometry': {
+              'type': 'Point',
+              'coordinates': [currentLocation.long, currentLocation.lat]
+            },
+            'properties': {
+              'title': `[${currentIncident.type.toUpperCase()}]: Incident report location`,
+              'icon': 'harbor'
+            }
+          }
+        ]
       }
 
+
+
+
+
+
+
+      map.getSource('points').setData(incidentLayerData)
 
       var size = 200;
 
