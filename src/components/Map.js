@@ -92,7 +92,6 @@ const Map = (props) => {
         'type': 'FeatureCollection',
         'features': [
           {
-            // feature of origin
             'type': 'Feature',
             'geometry': {
               'type': 'Point',
@@ -107,7 +106,6 @@ const Map = (props) => {
             }
           },
           {
-            // point of destinations
             'type': 'Feature',
             'geometry': {
               'type': 'Point',
@@ -241,10 +239,8 @@ const Map = (props) => {
       };
 
 
-      map.addImage('green-dot', greenDot, { pixelRatio: 2 });
+      map.addImage('green-dot', greenDot, { pixelRatio: 3.5 });
       map.addImage('alert-dot', alertDot, { pixelRatio: 2 });
-
-
 
 
 
@@ -254,10 +250,7 @@ const Map = (props) => {
         'type': 'symbol',
         'source': 'points',
         'layout': {
-          // get the icon name from the source's "icon" property
-          // concatenate the name to get an icon from the style's sprite sheet
           'icon-image': ['get', 'icon'],
-          // get the title name from the source's "title" property
           'text-field': ['get', 'title'],
           'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold'],
           'text-offset': [0, 0.6],
