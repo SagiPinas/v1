@@ -3,7 +3,7 @@ import '../../styles/infocard.scss'
 import moment from 'moment'
 import axios from 'axios'
 import io from 'socket.io-client'
-import { coreURL, toast, mapbox_key } from '../Utilities'
+import { coreURL, toast, googleMapsAPIKEY } from '../Utilities'
 import loader from '../../assets/loading.gif'
 
 const InfoCard = (props) => {
@@ -48,13 +48,14 @@ const InfoCard = (props) => {
 
     let point = JSON.parse(localStorage.currentLocation)
 
-    axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${point.long},${point.lat}.json`, {
+    axios.get(`https://maps.googleapis.com/maps/api/geocode/json?`, {
       params: {
-        access_token: mapbox_key
+        latlng: `${point.lat},${point.long}`,
+        key: googleMapsAPIKEY
       }
     })
       .then(res => {
-        setSupport(res.data.features)
+        setSupport(res.data.results)
       })
 
 
@@ -66,7 +67,7 @@ const InfoCard = (props) => {
       <div className={`status-bar ${reportStatus}`}></div>
       <h3 className="info-title">
         <i className="fa fa-map-marker text-primary mr-2"></i>
-        {supportData.length !== 0 && (supportData[1].place_name)}
+        {supportData.length !== 0 && (supportData[0].formatted_address)}
       </h3>
 
       <div className="px-3 pt-1 pb-1 type-title border-top">
@@ -113,7 +114,6 @@ const InfoCard = (props) => {
           <i className="fa fa-circle mr-1"></i> Location information
          </p>
         <hr />
-        <br />
 
         {
           supportData.length !== 0 ? (
@@ -122,10 +122,10 @@ const InfoCard = (props) => {
                 <div className="mb-3">
                   <p className="detail-title">
                     <i className="fa fa-circle mr-1"></i>
-                    {`${details.place_type}`}
+                    {`${details.types[0]}`}
                   </p>
                   <div className="report-div">
-                    {`(${details.text}) , ${details.place_name}`}
+                    {`${details.formatted_address}, (${details.geometry.location_type})`}
                   </div>
                 </div>
               )

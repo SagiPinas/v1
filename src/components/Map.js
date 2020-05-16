@@ -95,6 +95,17 @@ const Map = (props) => {
             'type': 'Feature',
             'geometry': {
               'type': 'Point',
+              'coordinates': [currentLocation.long, currentLocation.lat]
+            },
+            'properties': {
+              'title': `[${currentIncident.type.toUpperCase()}]: Incident report location`,
+              'icon': 'alert-dot'
+            }
+          },
+          {
+            'type': 'Feature',
+            'geometry': {
+              'type': 'Point',
               'coordinates': [
                 originLocation.long,
                 originLocation.lat
@@ -103,17 +114,6 @@ const Map = (props) => {
             'properties': {
               'title': 'Your location',
               'icon': 'green-dot'
-            }
-          },
-          {
-            'type': 'Feature',
-            'geometry': {
-              'type': 'Point',
-              'coordinates': [currentLocation.long, currentLocation.lat]
-            },
-            'properties': {
-              'title': `[${currentIncident.type.toUpperCase()}]: Incident report location`,
-              'icon': 'alert-dot'
             }
           }
         ]
@@ -262,9 +262,6 @@ const Map = (props) => {
       });
 
 
-
-
-
       map.flyTo({
         center: [currentLocation.long, currentLocation.lat],
         zoom: map.getZoom() + 1,
@@ -276,16 +273,10 @@ const Map = (props) => {
       mapDir.setOrigin(`${originLocation.long}, ${originLocation.lat}`)
       mapDir.setDestination(`${currentLocation.long}, ${currentLocation.lat}`)
 
-
-
-
     }
 
     document.getElementById('mapJump').onclick = () => { mapTo() }
     document.getElementById('removeRoutes').onclick = () => { resetRoutes() }
-
-
-
   })
 
   return (
