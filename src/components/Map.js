@@ -103,7 +103,7 @@ const Map = (props) => {
             },
             'properties': {
               'title': 'Your location',
-              'icon': 'monument'
+              'icon': 'green-dot'
             }
           },
           {
@@ -115,30 +115,25 @@ const Map = (props) => {
             },
             'properties': {
               'title': `[${currentIncident.type.toUpperCase()}]: Incident report location`,
-              'icon': 'harbor'
+              'icon': 'alert-dot'
             }
           }
         ]
       }
 
 
+      if (map.getSource('points')) {
+        map.getSource('points').setData(incidentLayerData)
+      }
 
-
-
-
-
-      map.getSource('points').setData(incidentLayerData)
 
       var size = 200;
 
-      // implementation of CustomLayerInterface to draw a pulsing dot icon on the map
-      // see https://docs.mapbox.com/mapbox-gl-js/api/#customlayerinterface for more info
-      var pulsingDot = {
+      var alertDot = {
         width: size,
         height: size,
         data: new Uint8Array(size * size * 4),
 
-        // get rendering context for the map canvas when layer is added to the map
         onAdd: function () {
           var canvas = document.createElement('canvas');
           canvas.width = this.width;
@@ -146,7 +141,6 @@ const Map = (props) => {
           this.context = canvas.getContext('2d');
         },
 
-        // called once before every frame where the icon will be used
         render: function () {
           var duration = 1000;
           var t = (performance.now() % duration) / duration;
@@ -154,8 +148,6 @@ const Map = (props) => {
           var radius = (size / 2) * 0.3;
           var outerRadius = (size / 2) * 0.7 * t + radius;
           var context = this.context;
-
-          // draw outer circle
           context.clearRect(0, 0, this.width, this.height);
           context.beginPath();
           context.arc(
@@ -167,8 +159,6 @@ const Map = (props) => {
           );
           context.fillStyle = 'rgba(255, 200, 200,' + (1 - t) + ')';
           context.fill();
-
-          // draw inner circle
           context.beginPath();
           context.arc(
             this.width / 2,
@@ -182,8 +172,6 @@ const Map = (props) => {
           context.lineWidth = 2 + 4 * (1 - t);
           context.fill();
           context.stroke();
-
-          // update this image's data with data from the canvas
           this.data = context.getImageData(
             0,
             0,
@@ -191,17 +179,74 @@ const Map = (props) => {
             this.height
           ).data;
 
-          // continuously repaint the map, resulting in the smooth animation of the dot
           map.triggerRepaint();
-
-          // return `true` to let the map know that the image was updated
           return true;
         }
       };
 
 
-      // add pulsing dot image
-      map.addImage('pulsing-dot', pulsingDot, { pixelRatio: 2 });
+      var greenDot = {
+        width: size,
+        height: size,
+        data: new Uint8Array(size * size * 4),
+
+        onAdd: function () {
+          var canvas = document.createElement('canvas');
+          canvas.width = this.width;
+          canvas.height = this.height;
+          this.context = canvas.getContext('2d');
+        },
+
+        render: function () {
+          var duration = 1000;
+          var t = (performance.now() % duration) / duration;
+
+          var radius = (size / 2) * 0.3;
+          var outerRadius = (size / 2) * 0.7 * t + radius;
+          var context = this.context;
+          context.clearRect(0, 0, this.width, this.height);
+          context.beginPath();
+          context.arc(
+            this.width / 2,
+            this.height / 2,
+            outerRadius,
+            0,
+            Math.PI * 2
+          );
+          context.fillStyle = 'rgba(255, 200, 200,' + (1 - t) + ')';
+          context.fill();
+          context.beginPath();
+          context.arc(
+            this.width / 2,
+            this.height / 2,
+            radius,
+            0,
+            Math.PI * 2
+          );
+          context.fillStyle = '#5CD5A7';
+          context.strokeStyle = 'white';
+          context.lineWidth = 2 + 4 * (1 - t);
+          context.fill();
+          context.stroke();
+          this.data = context.getImageData(
+            0,
+            0,
+            this.width,
+            this.height
+          ).data;
+
+          map.triggerRepaint();
+          return true;
+        }
+      };
+
+
+      map.addImage('green-dot', greenDot, { pixelRatio: 2 });
+      map.addImage('alert-dot', alertDot, { pixelRatio: 2 });
+
+
+
+
 
       // try to add map layer
       map.addLayer({
@@ -211,7 +256,7 @@ const Map = (props) => {
         'layout': {
           // get the icon name from the source's "icon" property
           // concatenate the name to get an icon from the style's sprite sheet
-          'icon-image': "pulsing-dot",
+          'icon-image': ['get', 'icon'],
           // get the title name from the source's "title" property
           'text-field': ['get', 'title'],
           'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold'],
