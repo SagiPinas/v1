@@ -19,6 +19,12 @@
 
   .info-title{
     padding: 14px 15px 0px;
+    display: flex;
+
+    i{
+      position: relative;
+      bottom: -2px;
+    }
   }
 
 

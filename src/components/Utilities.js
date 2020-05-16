@@ -159,6 +159,8 @@ export const currentIncident = () => {
   return data;
 }
 
-
+export const normalizeText = (text) => {
+  return text.split("_").join(" ")
+}
 
 

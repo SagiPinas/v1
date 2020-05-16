@@ -3,7 +3,7 @@ import '../../styles/infocard.scss'
 import moment from 'moment'
 import axios from 'axios'
 import io from 'socket.io-client'
-import { coreURL, toast, googleMapsAPIKEY } from '../Utilities'
+import { coreURL, toast, googleMapsAPIKEY, normalizeText } from '../Utilities'
 import loader from '../../assets/loading.gif'
 
 const InfoCard = (props) => {
@@ -122,10 +122,10 @@ const InfoCard = (props) => {
                 <div className="mb-3">
                   <p className="detail-title">
                     <i className="fa fa-circle mr-1"></i>
-                    {`${details.types[0]}`}
+                    {`${normalizeText(details.types[0])}`}
                   </p>
                   <div className="report-div">
-                    {`${details.formatted_address}, (${details.geometry.location_type})`}
+                    {`${details.formatted_address}, (${normalizeText(details.geometry.location_type)})`}
                   </div>
                 </div>
               )
