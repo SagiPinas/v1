@@ -31,7 +31,7 @@ const Map = (props) => {
       container: document.getElementById("map"),
       style: 'mapbox://styles/bryce06/ck6ui8pey276f1imq6n2cc54s',
       center: [currentLocation.long, currentLocation.lat],
-      zoom: 16
+      zoom: 13
     })
 
 
@@ -264,7 +264,7 @@ const Map = (props) => {
 
       map.flyTo({
         center: [currentLocation.long, currentLocation.lat],
-        zoom: map.getZoom() + 1,
+        zoom: map.getZoom() - 1,
         speed: 1.25,
         essential: true
       });
