@@ -21,7 +21,6 @@ const cancelledReports = []
 const verified_reports = []
 
 
-
 const Sidebar = (props) => {
 
   const [currentCard, setCurrentCard] = useState("");
@@ -121,10 +120,6 @@ const Sidebar = (props) => {
       verified_reports.push(report_id);
     }
   }
-
-
-
-
 
   socket.on("report", (data) => {
     if (!processedReports.includes(data.uid)) {

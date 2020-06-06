@@ -25,9 +25,7 @@ const InfoCard = (props) => {
     }, 1500)
   }
 
-  const [reporteeImage, setImage] = useState("")
-  const [reporteeName, setReporteeName] = useState("")
-  const [profile, setProfile] = useState(false)
+  const [reporteeDetails, setReporteeDetails] = useState(null)
   const [reportStatus, setreportStatus] = useState("")
   const [supportData, setSupport] = useState([])
 
@@ -36,14 +34,16 @@ const InfoCard = (props) => {
     axios.get(`https://graph.facebook.com/${props.data.id}`, {
       params: {
         fields: "first_name,last_name,profile_pic",
-        access_token: "PAGE_ACCESS_TOKEN"
+        access_token: process.env.REACT_APP_FACEBOOK_PAGE_ACCESS_TOKEN
       }
     }
     )
       .then(res => {
-        setImage(res.data.profile_pic)
-        setReporteeName(`${res.data.first_name} ${res.data.last_name}`)
-        setProfile(true)
+        let reporteeData = {
+          image: res.data.profile_pic,
+          name: `${res.data.first_name} ${res.data.last_name}`
+        }
+        setReporteeDetails(reporteeData)
       })
 
     let point = JSON.parse(localStorage.currentLocation)
@@ -81,10 +81,10 @@ const InfoCard = (props) => {
         <center>
           <div className="reportee-profile mt-1">
             {
-              profile ? (
+              reporteeDetails ? (
                 <span>
-                  <img src={reporteeImage} alt="reportee-avatar" className="reportee-img" />
-                  {reporteeName}
+                  <img src={reporteeDetails.image} alt="reportee-avatar" className="reportee-img" />
+                  {reporteeDetails.name}
                   <br />
                 </span>
               ) : (

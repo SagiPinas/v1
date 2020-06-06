@@ -12,6 +12,9 @@ const Details = (props) => {
   // eslint-disable-next-line
   const [profile, setProfile] = useState(false)
   const [supportData, setSupport] = useState([])
+  const [reportee, setReportee] = useState(null)
+
+  const Responder = JSON.parse(localStorage.user)
 
 
   useEffect(() => {
@@ -27,7 +30,23 @@ const Details = (props) => {
         setSupport(res.data.features)
       })
 
-  }, [])
+
+    axios.get(`https://graph.facebook.com/${props.data.id}`, {
+      params: {
+        fields: "first_name,last_name,profile_pic",
+        access_token: process.env.REACT_APP_FACEBOOK_PAGE_ACCESS_TOKEN
+      }
+    }
+    )
+      .then(res => {
+        let reporteeData = {
+          image: res.data.profile_pic,
+          name: `${res.data.first_name} ${res.data.last_name}`
+        }
+        setReportee(reporteeData)
+      })
+
+  }, [props.data])
 
 
   return (
@@ -58,53 +77,86 @@ const Details = (props) => {
 
                 <center>
                   <div className="mt-1">
-                    {
-                      profile ? (
-                        <span>
-                          <img src={""} alt="reportee-avatar" className="reportee-img" />
-                          {"Bryce Mercines"}
-                          <br />
-                        </span>
-                      ) : (
-                          <div className="event-flow">
+                    <div className="event-flow">
 
-                            <div>
-                              <p className="text-left"><small>Reportee:</small></p>
-                              <div className="event-block">
-                                <div className="reportee-profile">
-                                  <div className="skeleton-cards">
-                                    <div className="skeleton-card info-card-loader">
-                                      <div className="dot"><div /></div>
-                                      <div className="line"><div /></div>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div>
-                                  <p className="m-3"><i className="fa fa-arrow-right text-primary" /></p>
+                      <div>
+                        <p className="text-left"><small>Reportee:</small></p>
+                        <div className="event-block">
+                          <div className="reportee-profile">
+
+                            {!reportee ? (
+                              <div className="skeleton-cards">
+                                <div className="skeleton-card info-card-loader">
+                                  <div className="dot"><div /></div>
+                                  <div className="line"><div /></div>
                                 </div>
                               </div>
-                            </div>
-
-                            <div>
-                              <p className="text-left"><small>Responder:</small></p>
-                              <div className="event-block">
-                                <div className="reportee-profile">
-                                  <div className="skeleton-cards">
-                                    <div className="skeleton-card info-card-loader">
-                                      <div className="dot"><div /></div>
-                                      <div className="line"><div /></div>
-                                    </div>
-                                  </div>
-                                </div>
-                                {/* <div>
-                                  <p className="my-3 ml-3"><i className="fa fa-arrow-right text-primary" /></p>
-                                </div> */}
-                              </div>
-                            </div>
-
+                            ) : (
+                                <span>
+                                  <img src={reportee.image} alt="reportee-avatar" className="reportee-img" />
+                                  {reportee.name}
+                                  <br />
+                                </span>
+                              )}
                           </div>
-                        )
-                    }
+                          <div>
+                            <p className="m-3"><i className="fa fa-arrow-right text-primary" /></p>
+                          </div>
+                        </div>
+                      </div>
+
+                      {props.data.status === "verified" && (
+                        <div>
+                          <p className="text-left"><small>Responder:</small></p>
+                          <div className="event-block">
+                            <div className="reportee-profile">
+                              {!localStorage.user ? (
+                                <div className="skeleton-cards">
+                                  <div className="skeleton-card info-card-loader">
+                                    <div className="dot"><div /></div>
+                                    <div className="line"><div /></div>
+                                  </div>
+                                </div>
+                              ) : (
+                                  <span>
+                                    <img src={Responder.avatar} alt="reportee-avatar" className="reportee-img" />
+                                    {Responder.name}
+                                    <br />
+                                  </span>
+                                )}
+                            </div>
+                            <div>
+                              <p className="my-3 mx-3"><i className="fa fa-arrow-right text-primary" /></p>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* result block */}
+
+                      <div>
+                        <p className="text-left"><small>Result:</small></p>
+                        <div className="event-block">
+                          <div className={`reportee-profile flow-result ${props.data.status}`}>
+                            {!localStorage.user ? (
+                              <div className="skeleton-cards">
+                                <div className="skeleton-card info-card-loader">
+                                  <div className="dot"><div /></div>
+                                  <div className="line"><div /></div>
+                                </div>
+                              </div>
+                            ) : (
+                                <span>
+                                  <i className={`${props.data.status === "verified" ? "fa fa-check" : "fa fa-banned"} mr-1`} />
+                                  {(props.data.status).toUpperCase()}
+                                  <br />
+                                </span>
+                              )}
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
                   </div>
                 </center>
 

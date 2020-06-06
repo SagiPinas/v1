@@ -6,8 +6,6 @@ import CardSkeleton from './card-skeleton';
 import Trophy from '../../assets/award.svg'
 
 
-
-
 const FeedCard = (props) => {
 
   const [list, setList] = useState("loading")

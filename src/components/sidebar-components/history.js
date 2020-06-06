@@ -16,7 +16,6 @@ const History = (props) => {
     axios.get(`${coreURL}/public/responder/?responderId=${user.id}`)
       .then(res => {
         setHistoryData(res.data.history)
-        console.log(res.data.history)
         setTabState('render')
       })
   }, [])
