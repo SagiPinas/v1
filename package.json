@@ -42,6 +42,16 @@
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
-    ]
+    ],
+     "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SagiPinas/v1"
+  },
+  "author": "Bryce Mercines",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SagiPinas/v1/issues"
+  },
+  "homepage": "https://sagipinas.now.sh"
   }
 }
