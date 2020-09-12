@@ -1,11 +1,15 @@
 [![core-banner](https://mist.now.sh/mist/v1-banner.png)]()
+
 # v1
+
 ![image](https://forthebadge.com/images/featured/featured-built-with-love.svg)
+
 > First iteration of the SagiPinas Web application, written in JavaScript.
 
 ### Available Scripts
+
 - Bootstrapped with create-react-app
-In the project directory, you can run:
+  In the project directory, you can run:
 
 ##### `yarn start`
 
@@ -31,12 +35,7 @@ Your app is ready to be deployed!
 ### Technology
 
 > Design System is built on top of:
+
 - Argon Dashboard by Creative Tim: https://github.com/creativetimofficial/argon-dashboard
-> Mapbox
+  > Mapbox
 - https://mapbox.com
-
-
-
-
-
-

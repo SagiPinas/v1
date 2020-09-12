@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import io from "socket.io-client";
 import axios from "axios";
 import {
   coreURL,
@@ -9,6 +10,8 @@ import {
 import moment from "moment";
 import CardSkeleton from "./card-skeleton";
 import Trophy from "../../assets/award.svg";
+
+const socket = io(coreURL);
 
 const FeedCard = (props) => {
   const [list, setList] = useState("loading");
@@ -23,6 +26,12 @@ const FeedCard = (props) => {
       setList("render");
     });
   };
+
+  socket.on("incidents_feed", (feed) => {
+    // let incidentList = feed.data.filter((x) => x.status === "unverified");
+    // setListData(incidentList);
+    console.log("feed entry");
+  });
 
   const EmptyFeed = () => {
     return (
