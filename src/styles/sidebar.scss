@@ -1,16 +1,21 @@
-$default_bg:#fff;
-$active_color:rgb(85, 136, 233);
-$shine-gradient: linear-gradient(to right, rgba(238, 238, 238, 0.356),rgba(214, 214, 214, 0.835));
+$default_bg: #fff;
+$active_color: rgb(85, 136, 233);
+$shine-gradient: linear-gradient(
+  to right,
+  rgba(238, 238, 238, 0.356),
+  rgba(214, 214, 214, 0.835)
+);
 
-#sidebar{
+#sidebar {
   height: 101vh;
   background: #fff;
   width: 270px;
   z-index: 9;
   position: fixed;
-  box-shadow: 0 0 9px rgba(121, 127, 131, 0.246), 0 0 1px rgba(83, 169, 250, 0.39) !important;
+  box-shadow: 0 0 9px rgba(121, 127, 131, 0.246),
+    0 0 1px rgba(83, 169, 250, 0.39) !important;
 
-  hr{
+  hr {
     margin: 0px;
   }
 
@@ -31,54 +36,53 @@ $shine-gradient: linear-gradient(to right, rgba(238, 238, 238, 0.356),rgba(214, 
     animation-delay: -0.5s;
   }
 
-
-  .sidebar-title{
+  .sidebar-title {
     border-bottom: 0.1px solid #ddd;
     padding: 10px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 
-    .brand{
+    .brand {
       display: flex;
-      strong{
+      strong {
         margin-top: 2.3px;
         margin-left: 3px;
       }
     }
 
-
-
-    .menu{
+    .menu {
       border: 1px solid #ddd;
       border-radius: 2px;
       padding: 0px 5px;
       cursor: pointer;
     }
 
-    img{
+    img {
       width: 25px;
       display: none;
     }
 
-    #inactive-line{
+    #inactive-line {
       display: block;
       padding: 0.6px 6.5px;
       letter-spacing: -1px;
     }
   }
 
-  .tab-menu{
+  .tab-menu {
     overflow: hidden;
 
-    ul{
+    ul {
       list-style: none;
       background: #fff;
-      padding: 9px;
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      padding: 0px;
       box-shadow: -1px 3px 13px 5px rgba(65, 160, 238, 0.24);
 
-
-      li{
+      li {
         display: inline;
         padding: 10px;
         text-transform: uppercase;
@@ -94,13 +98,13 @@ $shine-gradient: linear-gradient(to right, rgba(238, 238, 238, 0.356),rgba(214, 
         -ms-user-select: none;
         user-select: none;
 
-        &:hover{
+        &:hover {
           color: $active_color;
           transition: 0.4s;
         }
 
-        &.active{
-          color:  $active_color;
+        &.active {
+          color: $active_color;
           font-weight: 700;
           border-bottom: 3px solid $active_color;
           cursor: default;
@@ -109,23 +113,30 @@ $shine-gradient: linear-gradient(to right, rgba(238, 238, 238, 0.356),rgba(214, 
       }
     }
   }
-
 }
 
-#gradient-loader{
-  background: linear-gradient(90deg,rgba(56, 24, 219, 0.91),rgb(7, 248, 228)) !important;
+#gradient-loader {
+  background: linear-gradient(
+    90deg,
+    rgba(56, 24, 219, 0.91),
+    rgb(7, 248, 228)
+  ) !important;
   height: 5px;
 }
 
-#sidebar-logo{
+#sidebar-logo {
   height: 25px;
   width: 25px;
   border-radius: 100%;
   display: grid;
-  background: linear-gradient(90deg,rgba(150, 93, 226, 0.91),rgb(41, 144, 212)) !important;
+  background: linear-gradient(
+    90deg,
+    rgba(150, 93, 226, 0.91),
+    rgb(41, 144, 212)
+  ) !important;
 
-  div{
-    background: url('/favicon.png') no-repeat;
+  div {
+    background: url("/favicon.png") no-repeat;
     background-size: cover;
     width: 19.5px;
     height: 19.5px;
@@ -134,56 +145,55 @@ $shine-gradient: linear-gradient(to right, rgba(238, 238, 238, 0.356),rgba(214, 
   }
 }
 
-.tab{
+.tab {
   height: 100vh;
   overflow-y: auto;
   padding: 10px 10px 100px !important;
   margin-top: -12px;
 
-
-
-  .card{
+  .card {
     background: #fff;
     border-radius: 4px;
     height: 100px;
     margin-bottom: 10px;
-    box-shadow: 0 0 9px rgba(121, 127, 131, 0.246), 0 0 1px rgba(151, 205, 236, 0.65) !important;
+    box-shadow: 0 0 9px rgba(121, 127, 131, 0.246),
+      0 0 1px rgba(151, 205, 236, 0.65) !important;
     transition: 0.3s;
     overflow: hidden;
     text-overflow: ellipsis;
     cursor: pointer;
 
-    &:nth-child(1){
-      box-shadow: 0 0 9px rgba(236, 97, 93, 0.637), 0 0 1px rgba(195, 77, 72, 0.835) !important;
+    &:nth-child(1) {
+      box-shadow: 0 0 9px rgba(236, 97, 93, 0.637),
+        0 0 1px rgba(195, 77, 72, 0.835) !important;
     }
 
-    &.active-card{
+    &.active-card {
       border: 2px solid rgba(0, 119, 255, 0.705);
       cursor: default;
     }
 
-
-    &:hover{
-      box-shadow: 0 0 9px rgba(121, 127, 131, 0.746), 0 0 1px rgba(151, 205, 236, 0.65) !important;
+    &:hover {
+      box-shadow: 0 0 9px rgba(121, 127, 131, 0.746),
+        0 0 1px rgba(151, 205, 236, 0.65) !important;
       transition: 0.3s;
     }
 
-
-    .tag{
+    .tag {
       font-weight: 700;
       font-size: 14px;
       text-transform: uppercase;
       padding: 2px 10px;
     }
 
-    .body{
+    .body {
       font-size: 12px;
       padding: 10px;
       padding-bottom: 50px;
       // overflow-y: auto;
     }
 
-    .reviewers{
+    .reviewers {
       position: absolute;
       background: #ddd;
       right: 0px;
@@ -191,7 +201,7 @@ $shine-gradient: linear-gradient(to right, rgba(238, 238, 238, 0.356),rgba(214, 
       padding: 2px 10px;
     }
 
-    .date{
+    .date {
       font-size: 10px;
       background: rgb(218, 231, 248);
       padding: 5px 7px;
@@ -201,31 +211,27 @@ $shine-gradient: linear-gradient(to right, rgba(238, 238, 238, 0.356),rgba(214, 
       right: 5px;
     }
 
-    .status{
+    .status {
       font-size: 12px;
       text-transform: uppercase;
       padding: 5px 7px;
 
-      &.verified{
+      &.verified {
         color: rgba(40, 112, 68, 0.822);
         background: rgb(203, 245, 238);
       }
 
-      &.cancelled{
+      &.cancelled {
         color: rgba(177, 66, 22, 0.904);
         background: rgb(252, 196, 196);
       }
     }
-
-
-
   }
 
-
-  .settings{
+  .settings {
     padding: 20px 5px;
 
-    .title{
+    .title {
       text-transform: uppercase;
       font-size: 13px;
       font-weight: 600;
@@ -233,55 +239,52 @@ $shine-gradient: linear-gradient(to right, rgba(238, 238, 238, 0.356),rgba(214, 
       border-radius: 2px;
     }
 
-    .setting-card{
+    .setting-card {
       margin-bottom: 20px;
 
-      input{
+      input {
         font-size: 12px;
         padding: 5px 10px;
         width: 100%;
         border: 2px solid #ddd;
         outline: none;
 
-        &:focus{
+        &:focus {
           border: 2px solid $active_color;
         }
       }
     }
 
-    ul{
+    ul {
       list-style: none;
       padding-left: 10px;
 
-      li{
+      li {
         font-size: 14px;
         padding-top: 5px;
         color: grey;
         transition: 0.3s;
         cursor: pointer;
 
-        &:hover{
+        &:hover {
           transition: 0.3s;
           color: $active_color;
         }
 
-        &.activated{
+        &.activated {
           color: $active_color;
         }
       }
-
     }
   }
-
 }
 
 // skeleton loading
 
-.skeleton-cards{
+.skeleton-cards {
   overflow: hidden;
 
-
-  .skeleton-card{
+  .skeleton-card {
     width: 100%;
     height: 100px;
     border-radius: 4px;
@@ -290,7 +293,7 @@ $shine-gradient: linear-gradient(to right, rgba(238, 238, 238, 0.356),rgba(214, 
     padding: 10px;
     margin-bottom: 10px;
 
-    &.info-card-loader{
+    &.info-card-loader {
       border: none;
       background: transparent;
       display: flex;
@@ -298,36 +301,39 @@ $shine-gradient: linear-gradient(to right, rgba(238, 238, 238, 0.356),rgba(214, 
       padding: 0px;
       height: 30px;
 
-      .dot{
+      .dot {
         width: 40px;
         height: 40px;
       }
 
-      .line{
+      .line {
         margin-left: 20px;
         margin-top: 18px;
         width: 90px;
       }
     }
 
-
     /* animation */
 
     @keyframes slide {
-      0% {transform:translateX(-100%);}
-      100% {transform:translateX(100%);}
+      0% {
+        transform: translateX(-100%);
+      }
+      100% {
+        transform: translateX(100%);
+      }
     }
 
-    .dot{
+    .dot {
       width: 25px;
       height: 25px;
       background: rgb(231, 230, 230);
       border-radius: 100%;
       overflow: hidden;
 
-      div{
-        content:'';
-        transform:translateX(100%);
+      div {
+        content: "";
+        transform: translateX(100%);
         width: 100%;
         height: 100%;
         position: relative;
@@ -337,7 +343,7 @@ $shine-gradient: linear-gradient(to right, rgba(238, 238, 238, 0.356),rgba(214, 
       }
     }
 
-    .line{
+    .line {
       width: 100%;
       height: 7px;
       margin-top: 8px;
@@ -345,9 +351,9 @@ $shine-gradient: linear-gradient(to right, rgba(238, 238, 238, 0.356),rgba(214, 
       border-radius: 20px;
       overflow: hidden;
 
-      div{
-        content:'';
-        transform:translateX(100%);
+      div {
+        content: "";
+        transform: translateX(100%);
         width: 100%;
         height: 10px;
         position: relative;
@@ -359,7 +365,7 @@ $shine-gradient: linear-gradient(to right, rgba(238, 238, 238, 0.356),rgba(214, 
   }
 }
 
-#sidebar-history-search{
+#sidebar-history-search {
   margin-bottom: 10px;
   padding: 5px 20px;
   border-radius: 20px;
@@ -368,25 +374,23 @@ $shine-gradient: linear-gradient(to right, rgba(238, 238, 238, 0.356),rgba(214, 
   width: 100%;
   transition: 0.3s;
 
-  &:focus{
+  &:focus {
     border: 2px solid $active_color;
     transition: 0.3s;
   }
 }
 
-.trophy{
-  padding-top: 50px;
-  width: 80%;
+.trophy {
+  padding-top: 120px;
+  width: 55%;
   opacity: 0.9;
   margin: 20px;
 }
 
-.side-buttons{
+.side-buttons {
   display: flex;
 
-  .close-x{
+  .close-x {
     margin-left: 10px;
   }
 }
-
-
