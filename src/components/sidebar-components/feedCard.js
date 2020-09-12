@@ -10,6 +10,7 @@ import {
 import moment from "moment";
 import CardSkeleton from "./card-skeleton";
 import Trophy from "../../assets/award.svg";
+import { useDebounce } from "use-lodash-debounce";
 
 const socket = io(coreURL);
 
@@ -17,14 +18,17 @@ const FeedCard = (props) => {
   const [list, setList] = useState("loading");
   const [listData, setListData] = useState([]);
   const [incidentDetails, setDetails] = useState([]);
+  const [updateFeedCount, setUpdateCount] = useState(0);
+  const debouncedUpdateData = useDebounce(updateFeedCount, 600);
 
   const updateFeed = () => {
-    setList("loading");
-    axios.get(`${coreURL}/incidents`).then((res) => {
-      let incidentList = res.data.filter((x) => x.status === "unverified");
-      setListData(incidentList);
-      setList("render");
-    });
+    // axios.get(`${coreURL}/incidents`).then((res) => {
+    //   let incidentList = res.data.filter((x) => x.status === "unverified");
+    //   setListData(incidentList);
+    //   setList("render");
+    // });
+
+    setUpdateCount(updateFeedCount + 1);
   };
 
   socket.on("incidents_feed", (feed) => {
@@ -54,12 +58,13 @@ const FeedCard = (props) => {
   };
 
   useEffect(() => {
+    setList("loading");
     axios.get(`${coreURL}/incidents`).then((res) => {
       let incidentList = res.data.filter((x) => x.status === "unverified");
       setListData(incidentList);
       setList("render");
     });
-  }, []);
+  }, [debouncedUpdateData]);
 
   const selectCard = (element, cardID, incidentInfo) => {
     if (cardID !== props.currentCard) {

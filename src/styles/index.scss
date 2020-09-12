@@ -1,12 +1,10 @@
-
-
 body {
- background: #172b4d;
- font-family: Arial, Helvetica, sans-serif;
+  background: #172b4d;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-input{
-  &:focus{
+input {
+  &:focus {
     color: #333 !important;
   }
 }
@@ -33,7 +31,6 @@ input{
   background: rgba(44, 56, 216, 0.726);
 }
 
-
 *.unselectable {
   -moz-user-select: none;
   -khtml-user-select: none;
@@ -42,56 +39,58 @@ input{
   user-select: none;
 }
 
-.card-profile-image img, .shadow {
+.card-profile-image img,
+.shadow {
   box-shadow: none !important;
 }
 
-
 .bg-gradient-primary {
-  background: linear-gradient(rgba(52,22,199,.51) 10%,rgba(23, 34, 189, 0.28)),url(../assets/map.png) !important;
+  background: linear-gradient(
+      rgba(52, 22, 199, 0.51) 10%,
+      rgba(23, 34, 189, 0.28)
+    ),
+    url(../assets/map.png) !important;
   background-size: cover !important;
   margin-top: -1px;
 }
-
 
 .navbar-horizontal .navbar-brand img {
   height: 45px;
 }
 
-.btn-group-sm>.btn, .btn-sm {
-  padding: .25rem .5rem;
-  font-size: .875rem;
+.btn-group-sm > .btn,
+.btn-sm {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
   line-height: 1.5;
-  border-radius: .155rem;
+  border-radius: 0.155rem;
 }
 
 // .input-group-alternative{
 //   border: 2px solid rgb(32, 29, 184);
 // }
 
-.navbar-brand{
+.navbar-brand {
   text-transform: none !important;
   font-size: 20px !important;
   font-weight: 350 !important;
   color: #fff !important;
 
-  img{
+  img {
     margin-top: -9px;
   }
 
-  span{
+  span {
     color: rgb(233, 182, 17);
   }
 }
 
-.nav-link{
-
-
+.nav-link {
   border-radius: 0px !important;
   padding: 9px 8px !important;
-  &.active{
-  color:  rgb(51, 236, 236) !important;
-  border-bottom: 3px solid rgb(51, 236, 236) !important;
+  &.active {
+    color: rgb(51, 236, 236) !important;
+    border-bottom: 3px solid rgb(51, 236, 236) !important;
   }
 }
 
@@ -122,11 +121,11 @@ input{
   width: 100px;
   height: 100%;
   box-shadow: 0 0 10px rgb(12, 237, 245), 0 0 5px rgb(34, 215, 221);
-  opacity: 1.0;
+  opacity: 1;
 
   -webkit-transform: rotate(3deg) translate(0px, -4px);
-      -ms-transform: rotate(3deg) translate(0px, -4px);
-          transform: rotate(3deg) translate(0px, -4px);
+  -ms-transform: rotate(3deg) translate(0px, -4px);
+  transform: rotate(3deg) translate(0px, -4px);
 }
 
 /* Remove these to get rid of the spinner */
@@ -149,7 +148,7 @@ input{
   border-radius: 50%;
 
   -webkit-animation: nprogress-spinner 400ms linear infinite;
-          animation: nprogress-spinner 400ms linear infinite;
+  animation: nprogress-spinner 400ms linear infinite;
 }
 
 .nprogress-custom-parent {
@@ -163,15 +162,23 @@ input{
 }
 
 @-webkit-keyframes nprogress-spinner {
-  0%   { -webkit-transform: rotate(0deg); }
-  100% { -webkit-transform: rotate(360deg); }
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
 }
 @keyframes nprogress-spinner {
-  0%   { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
-.modal-wrapper{
+.modal-wrapper {
   position: fixed;
   height: 100vh;
   width: 100%;
@@ -182,7 +189,7 @@ input{
   display: none;
   padding: 20px;
 
-  .modal-card{
+  .modal-card {
     margin: auto;
     background: #fff;
     width: 100%;
@@ -192,3 +199,6 @@ input{
   }
 }
 
+button:disabled {
+  opacity: 0.4;
+}

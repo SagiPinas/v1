@@ -13,7 +13,13 @@ const InfoCard = (props) => {
     document.getElementById("deselectCard").click();
   };
 
+  const [reporteeDetails, setReporteeDetails] = useState(null);
+  const [reportStatus, setreportStatus] = useState("");
+  const [supportData, setSupport] = useState([]);
+  const [verifiying, setVerifying] = useState(false);
+
   const verifyReport = () => {
+    setVerifying(true);
     props.data.responder = JSON.parse(localStorage.user).id;
     socket.emit("verifyReport", props.data);
     setreportStatus("verified");
@@ -23,10 +29,6 @@ const InfoCard = (props) => {
       document.getElementById("deselectCard").click();
     }, 1500);
   };
-
-  const [reporteeDetails, setReporteeDetails] = useState(null);
-  const [reportStatus, setreportStatus] = useState("");
-  const [supportData, setSupport] = useState([]);
 
   useEffect(() => {
     axios
@@ -145,6 +147,7 @@ const InfoCard = (props) => {
           onClick={() => {
             verifyReport(props.data);
           }}
+          disabled={verifiying}
         >
           <i className="fa fa-check mr-1"></i>Verify
         </button>

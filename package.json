@@ -21,7 +21,8 @@
     "sha1": "^1.1.1",
     "socket.io-client": "^2.3.0",
     "sweetalert2": "^9.10.12",
-    "toastify-js": "^1.7.0"
+    "toastify-js": "^1.7.0",
+    "use-lodash-debounce": "^1.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
