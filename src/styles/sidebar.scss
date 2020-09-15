@@ -10,10 +10,9 @@ $shine-gradient: linear-gradient(
   height: 101vh;
   background: #fff;
   width: 270px;
-  z-index: 9;
+  z-index: 999999 !important;
   position: fixed;
-  box-shadow: 0 0 9px rgba(121, 127, 131, 0.246),
-    0 0 1px rgba(83, 169, 250, 0.39) !important;
+  box-shadow: 9px 2px 12px -4px rgba(117, 138, 184, 0.158) !important;
 
   hr {
     margin: 0px;
