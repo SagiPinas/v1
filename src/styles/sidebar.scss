@@ -235,12 +235,13 @@ $shine-gradient: linear-gradient(
       text-transform: uppercase;
       font-size: 13px;
       font-weight: 600;
-      padding: 5px;
+      padding: 5px 10px;
       border-radius: 2px;
     }
 
     .setting-card {
       margin-bottom: 20px;
+      background: rgb(255, 255, 255);
 
       input {
         font-size: 12px;
@@ -392,5 +393,72 @@ $shine-gradient: linear-gradient(
 
   .close-x {
     margin-left: 10px;
+  }
+}
+
+.setting-menu-card {
+  width: 100%;
+  height: 80px;
+  background: linear-gradient(to right, rgb(5, 26, 70), rgba(3, 25, 66, 0.795)),
+    url("https://png.pngtree.com/thumb_back/fh260/background/20190828/pngtree-dark-vector-abstract-background-image_302715.jpg");
+  background-size: cover;
+
+  border-radius: 5px;
+  margin: 10px 0px;
+  box-sizing: border-box;
+  color: #fff;
+  display: flex;
+  padding: 17px 20px;
+  cursor: pointer;
+
+  box-shadow: 0 0 9px rgba(121, 127, 131, 0.746),
+    0 0 1px rgba(151, 205, 236, 0.65) !important;
+  transition: 0.3s;
+
+  .icon-wrapper {
+    display: grid;
+    $size: 45px;
+    height: $size;
+    width: $size;
+    border: 1px solid rgba(228, 229, 226, 0.349);
+    border-radius: $size;
+    i {
+      font-size: 20px;
+      margin: auto;
+      opacity: 0.5;
+      transition: 0.3s;
+    }
+    transition: 0.3s;
+  }
+
+  span {
+    font-size: 19px;
+    position: relative;
+    bottom: -10px;
+    left: 10px;
+    font-weight: 100;
+    transition: 0.3s;
+  }
+
+  &:hover {
+    box-shadow: 0 0 9px rgba(20, 6, 99, 0.746), 0 0 1px rgba(4, 14, 102, 0.849) !important;
+    transition: 0.3s;
+
+    .icon-wrapper {
+      border-color: rgb(47, 255, 203);
+      i {
+        opacity: 1;
+        transition: 0.3s;
+      }
+    }
+
+    span {
+      font-size: 19px;
+      position: relative;
+      bottom: -10px;
+      left: 10px;
+      font-weight: 100;
+      color: rgb(47, 255, 203);
+    }
   }
 }

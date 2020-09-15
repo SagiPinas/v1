@@ -1,5 +1,4 @@
-
-.info-card{
+.info-card {
   position: fixed;
   z-index: 999;
   background: #fff;
@@ -12,22 +11,22 @@
   transition: 0.5s;
   overflow: hidden;
 
-  &:hover{
+  &:hover {
     height: 400px;
     transition: 0.5s;
   }
 
-  .info-title{
+  .info-title {
     padding: 14px 15px 0px;
     display: flex;
 
-    i{
+    i {
       position: relative;
       bottom: -2px;
     }
   }
 
-  .status-bar{
+  .status-bar {
     width: 100%;
     height: 8px;
     position: absolute;
@@ -35,15 +34,15 @@
     left: 0px;
     background: linear-gradient(to right, #cb2d3e, #efaa3a);
 
-    &.verified{
+    &.verified {
       background: linear-gradient(to right, #11998e, #38ef7d);
     }
   }
 
-  .type-title{
+  .type-title {
     box-shadow: -14px 11px 36px -14px #e0dcdc;
 
-    span{
+    span {
       float: right;
       margin-top: -38px;
       font-size: 13px;
@@ -51,27 +50,26 @@
       border: 1px solid #ddd;
     }
 
-    h2{
+    h2 {
       text-transform: uppercase;
     }
   }
 
-  .info-body{
+  .info-body {
     height: 380px;
     width: 100%;
     padding: 10px 30px 150px;
     overflow-y: auto;
   }
 
-  .reportee-profile{
+  .reportee-profile {
     padding: 10px 20px;
     background: #f5f7fda8;
     border-radius: 3px;
     border: 1px solid rgb(200, 218, 250);
     display: inline-block;
 
-
-    .reportee-img{
+    .reportee-img {
       width: 40px;
       height: 40px;
       border-radius: 100%;
@@ -80,14 +78,14 @@
     }
   }
 
-  .detail-title{
+  .detail-title {
     text-transform: uppercase;
     font-weight: 600;
     font-size: 13px;
     color: rgb(36, 103, 148);
   }
 
-  .report-div{
+  .report-div {
     padding: 10px 20px;
     background: #f5f7fda8;
     border-radius: 3px;
@@ -95,53 +93,62 @@
     font-size: 13px;
   }
 
-  .info-footer{
+  .info-footer {
     position: absolute;
     background: #fff;
     width: 100%;
     border-top: 1px solid #ddd;
     bottom: 0px;
 
-    button{
+    button {
       border: 0px;
       padding: 5px 15px;
-      background: blue;
       color: #fff;
       border-radius: 2px;
-      margin: 10px;
+      margin: 10px 10px 10px 0px;
       float: right;
       cursor: pointer;
       outline: none;
+      transition: 0.3s;
 
-      &.btn-verify{
+      &.btn-verify {
         background: linear-gradient(to right, #00b09b, #96c93d);
       }
 
-      &.btn-dismiss{
+      &.btn-dismiss {
         background: linear-gradient(to right, #cb2d3e, #ef5e3a);
       }
 
-      &.btn-cancel{
+      &.btn-def {
+        background: linear-gradient(to right, #b9bebe, #d1e2f3);
+      }
+
+      &.btn-cancel {
         background: #000;
+      }
+
+      &:hover {
+        box-shadow: -14px 11px 36px -14px #000000;
+        transition: 0.3s;
       }
     }
   }
 }
 
-.flow-result{
- padding: 18px 20px !important;
+.flow-result {
+  padding: 18px 20px !important;
 
- &.verified{
-   $accent: #48ad9c;
-   color: $accent !important;
-   background: #e1f5e9 !important;
-   border-color: $accent;
- }
+  &.verified {
+    $accent: #48ad9c;
+    color: $accent !important;
+    background: #e1f5e9 !important;
+    border-color: $accent;
+  }
 
- &.cancelled{
-  $accent: #d35858;
-  color: $accent !important;
-  background: #f8e1e3 !important;
-  border-color: $accent;
-}
+  &.cancelled {
+    $accent: #d35858;
+    color: $accent !important;
+    background: #f8e1e3 !important;
+    border-color: $accent;
+  }
 }

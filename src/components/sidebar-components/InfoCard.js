@@ -159,6 +159,15 @@ const InfoCard = (props) => {
         >
           Dismiss
         </button>
+
+        {/* <button
+          className="btn-cancel"
+          onClick={() => {
+            cancelReview();
+          }}
+        >
+          <i className="fa fa-crosshairs" /> Explore
+        </button> */}
       </div>
     </div>
   );
