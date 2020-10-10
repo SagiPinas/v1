@@ -152,7 +152,7 @@ const Sidebar = (props) => {
             <div id="sidebar-logo">
               <div></div>
             </div>
-            <strong>SagiPinas</strong>
+            <strong>SagiPinas | v1</strong>
           </div>
 
           <div className="side-buttons">

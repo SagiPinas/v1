@@ -202,3 +202,15 @@ input {
 button:disabled {
   opacity: 0.4;
 }
+
+.under-construction {
+  background: #fff;
+  height: 100vh;
+  width: 100%;
+  display: grid;
+
+  h1 {
+    margin: auto;
+    font-weight: 100;
+  }
+}
